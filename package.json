@@ -1,0 +1,18 @@
+{
+  "name": "travel-app",
+  "version": "1.0.0",
+  "description": "A travel app that obtains a desired trip location and date from the user. Then displays the weather and an image of the location using information obtained from external APIs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.2",
+    "webpack": "^5.54.0",
+    "webpack-cli": "^4.8.0"
+  }
+}
