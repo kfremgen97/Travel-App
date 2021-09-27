@@ -3,4 +3,4 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import '../scss/main.scss';
 
 // JS imports
-import './controller/homeController';
+import './controllers/homeController';

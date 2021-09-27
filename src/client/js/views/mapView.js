@@ -1,6 +1,6 @@
 // Imports
 import { Loader } from '@googlemaps/js-api-loader';
-import * as resourceConstants from '../service/privateResourceConstants';
+import * as resourceConstants from '../services/privateResourceConstants';
 
 // Map view
 class MapView {

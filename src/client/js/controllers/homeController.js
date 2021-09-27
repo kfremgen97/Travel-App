@@ -1,5 +1,5 @@
 // Imports
-import mapView from '../view/mapView';
+import mapView from '../views/mapView';
 
 // Load the map
 mapView.loadMap();
