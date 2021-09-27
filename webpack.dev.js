@@ -1,8 +1,9 @@
 // Imports
+const path = require('path');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const path = require('path');
-const loader = require('sass-loader');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // Webpack config
 module.exports = {
@@ -14,7 +15,7 @@ module.exports = {
   // Each key value pair represents the point where to start the application bundling process.
   // Key = name of entry point , value = entry point file
   entry: {
-    index: path.resolve(__dirname, 'src/client/index.js')
+    index: path.resolve(__dirname, 'src/client/js/index.js')
   },
   // The output property tells webpack where to emit the bundles it creates
   // and how to name these files.
@@ -23,7 +24,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     // File output
     // Specify [name] inside square brackets, tells webpack to use the key in the entry point as the name for the output file
-    file: '[name].js'
+    filename: '[name].js'
   },
   // The devServer object , uses webpack with a development server that provides live reloading.
   // This should be used for development only.
@@ -36,15 +37,14 @@ module.exports = {
     // (by default 'public' directory).
     static: {
       directory: path.resolve(__dirname, 'dist'),
+    },
       // The devMiddleWare object, this handles webpack assets on the server
       devMiddleware: {
         // If true, the option will instruct the module to write files
         // to the configured location on disk as specified in your webpack config file
         // Writes to the output directory
         writeToDisk: true,
-      }
-    },
-
+      },
   },
   // These options determine how the different types of modules within a project will be treated.
   module: {
@@ -76,21 +76,33 @@ module.exports = {
     // Create an instance of the plugin
     // By default, this plugin will remove all files inside webpack's output.path directory
     // as well as all unused webpack assets after every successful rebuild.
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin.CleanWebpackPlugin(),
     // This plugin that simplifies creation of HTML files to serve your webpack bundles
     new HtmlWebpackPlugin({
       // Specify which bundle to include or hook up to the html page
       // The string represents the chunk name which is specified as the key in the entry object
       chunks: 'index',
       // Specify [name] inside square brackets, tells webpack to use the key in the entry point as the name for the output file
-      filename: '[name].js',
+      filename: '[name].html',
       // Html file to sue as template
-      template: path.resolve(__dirname, 'src/client/[name].html'),
+      template: path.resolve(__dirname, 'src/client/index.html'),
     }),
     // This plugin extracts CSS into separate files. 
     // Below we pass in an object with the filename property specifying the file to extarct the css into
     new MiniCssExtractPlugin({
-      filename: '[name].js'
+      filename: '[name].css'
     }),
+    // Copies individual files or entire directories, which already exist, to the build directory.
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          // file or directory to copy
+          from: path.resolve(__dirname, 'src/client/assets'),
+          // directory to copy into
+          to: path.resolve(__dirname, 'dist/assets'),
+        }
+      ]
+    })
+
   ]
 };

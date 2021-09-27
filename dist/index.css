@@ -1,0 +1,61 @@
+/*!********************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/client/scss/main.scss ***!
+  \********************************************************************************************************************/
+/* all elements */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+/* root */
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+/* body */
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #343a40;
+  line-height: 1.6;
+}
+
+/* grid */
+.container {
+  display: grid;
+  grid-template-columns: 30vw repeat(3, 1fr);
+  grid-template-rows: min-content repeat(3, minmax(min-content, 1fr));
+  grid-template-areas: "header header header header" "sidebar main main main" "sidebar main main main" "sidebar main main main";
+  min-height: 100vh;
+}
+
+/* header */
+.header {
+  grid-area: header;
+}
+
+/* sidebar */
+.sidebar {
+  grid-area: sidebar;
+}
+
+/* set the main content */
+.main {
+  grid-area: main;
+}
+
+/* map area */
+.map-area {
+  height: 100%;
+}
+
+/* .map */
+.map {
+  height: 100%;
+  width: 100%;
+}

@@ -4,7 +4,8 @@
   "description": "A travel app that obtains a desired trip location and date from the user. Then displays the weather and an image of the location using information obtained from external APIs.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack-dev": "webpack serve --config webpack.dev.js --hot"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "babel": "^6.23.0",
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^6.3.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
