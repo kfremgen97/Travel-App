@@ -6,3 +6,8 @@ node_modules
 
 # environment
 .env 
+# resource constants
+src/client/js/service/privateResourceConstants.js
+
+# distribution folder
+dist
