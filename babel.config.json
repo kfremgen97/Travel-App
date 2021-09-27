@@ -1,8 +1,10 @@
+// Babel config 
 {
   "presets": [
-
+    // @babel/env preset transiples ecms6 and up to ecms 5
+    "@babel/preset-env"
   ],
   "plugins": [
-    
+
   ]
 }
