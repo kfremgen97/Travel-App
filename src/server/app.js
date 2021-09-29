@@ -31,7 +31,6 @@ app.get('/', (req, res) => {
 // Geonames route
 app.get('/api/location', (req, res) => {
   const url = `http://api.geonames.org/searchJSON?q=${encodeURIComponent(req.query.location)}&maxRows=10&username=${process.env.GEONAMES_USERNAME}`;
-  console.log(url);
   fetch(url)
     .then((response) => {
       if (!response.ok) throw new Error('Unable to get location information');
@@ -40,6 +39,32 @@ app.get('/api/location', (req, res) => {
     .then((data) => {
       console.log(data);
       if (data?.status?.message) throw new Error(data.status.message);
+      res.send(data);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.send({
+        error: error.message,
+      });
+    });
+});
+
+// Weatherbit route
+app.get('/api/weather', (req, res) => {
+  // Create the query date
+  // const date = new Date(req.query.date);
+  // console.log(date.toDateString());
+
+  const url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHERBIT_API_KEY}&lat=${req.query.lat}&lon=-${req.query.lon}`;
+  fetch(url)
+    .then((response) => {
+      console.log(response.message);
+      if (!response.ok) throw new Error('Unable to get location weather');
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      if (data.error) throw new Error(data.error);
       res.send(data);
     })
     .catch((error) => {
