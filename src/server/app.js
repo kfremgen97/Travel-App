@@ -51,20 +51,35 @@ app.get('/api/location', (req, res) => {
 
 // Weatherbit route
 app.get('/api/weather', (req, res) => {
-  // Create the query date
-  // const date = new Date(req.query.date);
-  // console.log(date.toDateString());
-
   const url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHERBIT_API_KEY}&lat=${req.query.lat}&lon=-${req.query.lon}`;
   fetch(url)
     .then((response) => {
-      console.log(response.message);
       if (!response.ok) throw new Error('Unable to get location weather');
       return response.json();
     })
     .then((data) => {
       console.log(data);
       if (data.error) throw new Error(data.error);
+      res.send(data);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.send({
+        error: error.message,
+      });
+    });
+});
+
+// Pixabay route
+app.get('/api/photo', (req, res) => {
+  const url = `https://pixabay.com/api?key=${process.env.PIXABAY_API_KEY}&q=${encodeURIComponent(req.query.location)}`;
+  fetch(url)
+    .then((response) => {
+      if (!response.ok) throw new Error('Unable to get location photo');
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
       res.send(data);
     })
     .catch((error) => {
