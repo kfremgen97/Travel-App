@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
+const fetch = require('node-fetch');
 
 // Configure enviornment variables
 dotenv.config();
@@ -25,6 +26,27 @@ app.get('/', (req, res) => {
     application: 'Travel App',
     description: 'A travel app that obtains a desired trip location and date from the user. Then displays the weather and an image of the location using information obtained from external APIs.',
   });
+});
+
+// Geonames route
+app.get('/api/location', (req, res) => {
+  const url = `http://api.geonames.org/searchJSON?q=${req.query.location}&maxRows=10&username=${process.env.GEONAMES_USERNAME}`;
+  fetch(url)
+    .then((response) => {
+      if (!response.ok) throw new Error('Unable to get location information');
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      if (data?.status?.message) throw new Error(data.status.message);
+      res.send(data);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.send({
+        error: error.message,
+      });
+    });
 });
 
 // Binds and listens for connections on the specified host and port
