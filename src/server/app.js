@@ -30,7 +30,8 @@ app.get('/', (req, res) => {
 
 // Geonames route
 app.get('/api/location', (req, res) => {
-  const url = `http://api.geonames.org/searchJSON?q=${req.query.location}&maxRows=10&username=${process.env.GEONAMES_USERNAME}`;
+  const url = `http://api.geonames.org/searchJSON?q=${encodeURIComponent(req.query.location)}&maxRows=10&username=${process.env.GEONAMES_USERNAME}`;
+  console.log(url);
   fetch(url)
     .then((response) => {
       if (!response.ok) throw new Error('Unable to get location information');
