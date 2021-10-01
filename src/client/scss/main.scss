@@ -1,16 +1,17 @@
 // Abstract styles
-@import './abstract/variables.scss';
+@import './abstract/variables';
 // Base imports
-@import './base/_base.scss';
-@import './base/typography.scss';
-@import './base/utilities.scss';
-@import './base/animations.scss';
+@import './base/base';
+@import './base/typography';
+@import './base/utilities';
+@import './base/animations';
 // Layout imports
-@import './layout/grid.scss';
-@import './layout/header.scss';
-@import './layout/sidebar.scss';
-@import './layout/main.scss';
+@import './layout/grid';
+@import './layout/header';
+@import './layout/sidebar';
+@import './layout/main';
 // Page imports
-@import './pages/home.scss';
+@import './pages/home';
 // Components
-@import './components/map.scss';
+@import './components/logo';
+@import './components/map';

@@ -53,6 +53,7 @@ module.exports = {
       {
         // The test property identifies which file or files should be transformed.
         test: /.js$/,
+        // Exclude node modules
         exclude: /node_modules/,
         // The use property indicates which loader should be used to do the transforming.
         use: [

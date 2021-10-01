@@ -1,0 +1,18 @@
+/* margin right */ 
+
+.mr {
+  /*margin right small*/
+  &--small {
+    margin-right: 1rem;
+  }
+
+  /*margin right medium*/
+  &--medium {
+    margin-right: 2rem;
+  }
+
+  /*margin right large*/
+  &--large {
+    margin-right: 4rem;
+  }
+}

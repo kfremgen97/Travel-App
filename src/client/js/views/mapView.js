@@ -1,6 +1,5 @@
 // Imports
 import { Loader } from '@googlemaps/js-api-loader';
-import * as resourceConstants from '../services/privateResourceConstants';
 
 // Map view
 class MapView {
@@ -10,7 +9,7 @@ class MapView {
     this.mapView = document.querySelector('#map');
     // Map loader object
     this.loader = new Loader({
-      apiKey: `${resourceConstants.MAP_API}`,
+      apiKey: '',
       version: 'weekly',
     });
     // map object

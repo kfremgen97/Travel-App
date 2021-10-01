@@ -3,4 +3,19 @@
 .header {
   // Set the grid area
   grid-area: header;
+  // Add padding
+  padding: 2rem;
+  // Set th background color
+  background-color: $black;
+  // Add opacity to be 95%
+  opacity: 95%;
+  // Set the bottom border
+  border-bottom: .2rem solid $grey-light;
+  // Set the display to a flex
+  display: flex;
+  // Set the flex direction to row
+  flex-direction: row;
+  // Align the items on the cross axis in the center
+  align-items: center;
+;
 }
