@@ -3,4 +3,8 @@
 .sidebar {
   // Set the grid area
   grid-area: sidebar;
+  // Add padding
+  padding: 2rem;
+  // Set the background color
+  background-color: $black;
 }

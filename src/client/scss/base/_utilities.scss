@@ -16,3 +16,22 @@
     margin-right: 4rem;
   }
 }
+
+/* margin bottom */ 
+
+.mb {
+  /*margin bottom small*/
+  &--small {
+    margin-bottom: 1rem;
+  }
+
+  /*margin bottom medium*/
+  &--medium {
+    margin-bottom: 2rem;
+  }
+
+  /*margin bottom large*/
+  &--large {
+    margin-bottom: 4rem;
+  }
+}

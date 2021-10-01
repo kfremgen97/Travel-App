@@ -1,0 +1,40 @@
+/* button */ 
+
+.button {
+  // Set the font properties
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  // Set the padding
+  padding: 1rem 3rem;
+  // Set the border properties
+  border: none;
+  border-radius: .5rem;
+  // Set the cursor
+  cursor: pointer;
+  // Set the transition of all proeprties to .2 seconds
+  transition: all .2s;
+  
+  /* button primary */ 
+  &--primary {
+    // Set the colors
+    color: $grey-light;
+    background-color: $primary;
+
+    /* button primary states */ 
+    &:hover,
+    &:active {
+      background-color: $primary-dark;
+
+    }
+
+    &:focus {
+      outline-color: $primary-light;
+    }
+  }
+
+  /* button trip */ 
+  &--trip {
+    align-self: center;
+  }
+}

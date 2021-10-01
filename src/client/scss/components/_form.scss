@@ -1,0 +1,38 @@
+/* form */ 
+
+.form {
+
+  display: flex;
+  flex-direction: column;
+
+  /* form input */ 
+  &__input {
+    // Set the font style
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: $grey-dark;
+    background-color: $grey-light;
+    // Add padding of .5 vertical and 1.5 horizontal
+    padding: .5rem 1.5rem;
+    // Remove the border and add a radius
+    border: none;
+    border-radius: .5rem;
+    // Set the transition for all properties to .2 seconds
+    transition: all .2s;
+
+    /* form input states */ 
+    &:focus:invalid {
+      outline-color: $error
+    }
+
+    &:focus:valid {
+      outline-color: $primary;
+    }
+
+    /* form input placeholder */
+    &::placeholder {
+      color: $grey-dark;
+    }
+  } 
+}
