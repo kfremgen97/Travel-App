@@ -28,6 +28,13 @@ app.get('/', (req, res) => {
   });
 });
 
+// Goggle maps api key
+app.get('/api/key', (req, res) => {
+  // Get the request params keyName
+  const { keyName } = req.query;
+  if (keyName === 'map') res.send({ description: 'Google map api key', key: process.env.GOOGLE_MAP_API_KEY });
+});
+
 // Geonames route
 app.get('/api/location', (req, res) => {
   const url = `http://api.geonames.org/searchJSON?q=${encodeURIComponent(req.query.location)}&maxRows=10&username=${process.env.GEONAMES_USERNAME}`;
