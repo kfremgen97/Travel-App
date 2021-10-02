@@ -16,12 +16,17 @@ body {
   // Set the font weight
   font-weight: 500;
 
-  /* heading 1*/ 
+  /* heading 1 */ 
   &--1 {
     font-size: 4rem;
   }
 
-  /*heading white*/ 
+  /* heading 3 */ 
+  &--3 {
+    font-size: 2.5rem;
+  }
+  
+  /* heading white */ 
   &--white {
     color: $grey-light;
   }

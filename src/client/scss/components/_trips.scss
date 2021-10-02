@@ -1,0 +1,49 @@
+/* trips */ 
+
+.trips {
+  // Remove list styles
+  list-style: none;
+
+    /* trips item */
+
+  &__item {
+    // Set the font color
+    color: $grey-light;
+    // Set the background color
+    background-color: $grey-dark;
+    border-radius: .5rem;
+    // Add padding
+    padding: 1rem;
+    // Set the display to flex with a direction of column
+    display: flex;
+    flex-direction: column;
+
+    /* not the last li in the list */
+
+    &:not(:last-of-type) {
+      // Add a bottom margin
+      margin-bottom: 2rem;
+    }
+  }
+
+  /* trips detail */ 
+
+  &__detail {
+    // Set the display toa  flex with a direction of row
+      display: flex;
+      // Align the items on the cross axis in the center
+      align-items: center;
+  }
+
+  /* trips label */
+
+  &__label{
+    // The size properties
+    height: 1.6rem;
+    width: 1.6rem;
+    // Set teh color
+    fill: $primary;
+    // Add a margin to the right
+    margin-right: .5rem;
+  }
+}
