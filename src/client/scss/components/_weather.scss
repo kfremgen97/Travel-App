@@ -1,0 +1,52 @@
+/* weather */ 
+
+.weather {
+
+  // Remove list styles and set the voerflow to scroll
+  list-style: none;
+  overflow: scroll;
+
+  /* weather info */ 
+
+  &__info {
+    // Ste the font and backgground color
+    color: $grey-light;
+    background-color: $grey-dark;
+    // Add .5 rem broder radius and 1 rem of padding 
+    border-radius: .5rem;
+    padding: 1rem;
+    // Create a 1 column by x rows
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-auto-rows: min-content;
+    // Set the grid gap to .5rem horizontal and 1 rem vertical
+    grid-gap: .5rem 1rem;
+
+
+  /* not the last weather info */ 
+
+  &:not(:last-of-type) {
+    margin-bottom: 1rem;
+  }
+}
+    /* weather label */ 
+
+    &__label {
+      // Set the display to inline block
+      display: inline-block;
+      // Set the size properties
+      height:2rem;
+      width: 2rem;
+      // Change the color to the primary
+      fill: $primary;
+    }
+
+    /* weather value */ 
+
+    &__value {
+      // Set the display to inline block
+      display: inline-block;
+
+    }
+
+}

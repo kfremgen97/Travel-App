@@ -1,41 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!-- head -->
-  <head>
-    <!-- meta data -->
-    <meta charset="UTF-8">
-    <meta name="viewport"  content="width=device-width,initial-scale=1.0">
-    <!-- title -->
-    <title>Travel App</title>
-    <!-- icon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/icon/favicon-32x32.png"> <!-- 16 -->
-    <link rel="icon" type="image/png" sizes="16x16" href="./assets/icon/favicon-16x16.png"> <!-- 32 -->
-    <link rel="apple-touch-icon" sizes="180x180" href="./assets/icon/apple-touch-icon.png"> <!-- apple -->
-    <link rel="manifest" href="./assets/icon/site.webmanifest"> <!-- android -->
-    <!-- links -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-  </head>
-  <!-- body -->
-  <body class="container">
-      <!-- header -->
-      <header class="header">
-        <svg class="logo logo--heading mr--small">
-          <use href="./assets/sprite/regular.svg#globe"></use>
-        </svg>
-        <h1 class="heading heading--1 heading--white">Travel App</h1>
-      </header>
-      <!-- sidebar -->
-      <aside class="sidebar">
-        <!-- trip form-->
-        <form class="form form--trip mb--large">
+
+<!-- head -->
+<head>
+  <!-- meta data -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <!-- title -->
+  <title>Travel App</title>
+  <!-- icon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/icon/favicon-32x32.png"> <!-- 16 -->
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/icon/favicon-16x16.png"> <!-- 32 -->
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/icon/apple-touch-icon.png"> <!-- apple -->
+  <link rel="manifest" href="./assets/icon/site.webmanifest"> <!-- android -->
+  <!-- links -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+
+<!-- body -->
+<body class="container">
+  <!-- header -->
+  <header class="header">
+    <svg class="logo logo--heading mr--small">
+      <use href="./assets/sprite/regular.svg#globe"></use>
+    </svg>
+    <h1 class="heading heading--1 heading--white">Travel App</h1>
+  </header>
+  <!-- sidebar -->
+  <aside class="sidebar">
+
+    <!-- 
+          Sidebar form display 
+    -->
+
+    <!-- trip form-->
+    <!-- <form class="form form--trip mb--large">
           <input type="text" id="location" class="form__input form__input--location mb--small" placeholder="location..." required>
           <input type="date" id="date" class="form__input form__input--date mb--medium" required>
           <button class="button button--primary button--trip">Submit</button>
-        </form>
-        <!-- trips -->
-        <h3 class="heading heading--3 heading--white mb--medium">Trips</h3>
+        </form> -->
+    <!-- trips -->
+    <!-- <h3 class="heading heading--3 heading--white mb--medium">Trips</h3>
         <ul class="trips">
           <li class="trips__item">
             <div class="trips__detail">
@@ -97,16 +104,128 @@
               <span class="trips__value">5/19/27</span>
             </div>
           </li>
-        </ul>
+        </ul>  -->
 
-      </aside>
-      <!-- main -->
-      <main class="main main--home">
-        <!-- map area -->
-        <section class="map-area">
-          <div id="map" class="map">
-          </div>
-        </section>
-      </main>
+    <!-- 
+          sidebar trip display
+    -->
+    <button class="button button--back">
+    <svg>
+      <use href="./assets/sprite/regular.svg#arrow-left"></use>
+    </svg>
+    </button>
+    <h3 class="heading heading--3 heading--white">Trip</h3>
+      <div class="trip">
+        <svg class="trip__label">
+          <use href="./assets/sprite/regular.svg#info"></use>
+        </svg>
+        <span class="trip__value">New York, USA</span>
+        <svg class="trip__label">
+          <use href="./assets/sprite/regular.svg#location"></use>
+        </svg>
+        <span class="trip__value">15.00 lon, -3.75 lat</span>
+        <svg class="trip__label">
+          <use href="./assets/sprite/regular.svg#calendar"></use>
+        </svg>
+        <span class="trip__value">5/19/27</span>
+      </div>
 
-  </body>
+      <h3 class="heading heading--3 heading--white">Weather</h3>
+      <ul class="weather">
+        <li class="weather__info">
+        <svg class="weather__label">
+          <use href="./assets/sprite/regular.svg#calendar"></use>
+        </svg>
+        <span class="weather__value">5/4/22</span>
+        <svg class="weather__label">
+          <use href="./assets/sprite/regular.svg#info"></use>
+        </svg>
+        <span class="weather__value">partly cloudy</span>
+        <svg class="weather__label">
+          <use href="./assets/sprite/regular.svg#temperature-high"></use>
+        </svg>
+        <span class="weather__value">75&#176</span>
+      </li>
+      <li class="weather__info">
+        <svg class="weather__label">
+          <use href="./assets/sprite/regular.svg#calendar"></use>
+        </svg>
+        <span class="weather__value">5/4/22</span>
+        <svg class="weather__label">
+          <use href="./assets/sprite/regular.svg#info"></use>
+        </svg>
+        <span class="weather__value">partly cloudy</span>
+        <svg class="weather__label">
+          <use href="./assets/sprite/regular.svg#temperature-high"></use>
+        </svg>
+        <span class="weather__value">75&#176</span>
+      </li>
+      <li class="weather__info">
+        <svg class="weather__label">
+          <use href="./assets/sprite/regular.svg#calendar"></use>
+        </svg>
+        <span class="weather__value">5/4/22</span>
+        <svg class="weather__label">
+          <use href="./assets/sprite/regular.svg#info"></use>
+        </svg>
+        <span class="weather__value">partly cloudy</span>
+        <svg class="weather__label">
+          <use href="./assets/sprite/regular.svg#temperature-high"></use>
+        </svg>
+        <span class="weather__value">75&#176</span>
+      </li>
+      <li class="weather__info">
+        <svg class="weather__label">
+          <use href="./assets/sprite/regular.svg#calendar"></use>
+        </svg>
+        <span class="weather__value">5/4/22</span>
+        <svg class="weather__label">
+          <use href="./assets/sprite/regular.svg#info"></use>
+        </svg>
+        <span class="weather__value">partly cloudy</span>
+        <svg class="weather__label">
+          <use href="./assets/sprite/regular.svg#temperature-high"></use>
+        </svg>
+        <span class="weather__value">75&#176</span>
+      </li>
+      <li class="weather__info">
+        <svg class="weather__label">
+          <use href="./assets/sprite/regular.svg#calendar"></use>
+        </svg>
+        <span class="weather__value">5/4/22</span>
+        <svg class="weather__label">
+          <use href="./assets/sprite/regular.svg#info"></use>
+        </svg>
+        <span class="weather__value">partly cloudy</span>
+        <svg class="weather__label">
+          <use href="./assets/sprite/regular.svg#temperature-high"></use>
+        </svg>
+        <span class="weather__value">75&#176</span>
+      </li>
+      <li class="weather__info">
+        <svg class="weather__label">
+          <use href="./assets/sprite/regular.svg#calendar"></use>
+        </svg>
+        <span class="weather__value">5/4/22</span>
+        <svg class="weather__label">
+          <use href="./assets/sprite/regular.svg#info"></use>
+        </svg>
+        <span class="weather__value">partly cloudy</span>
+        <svg class="weather__label">
+          <use href="./assets/sprite/regular.svg#temperature-high"></use>
+        </svg>
+        <span class="weather__value">75&#176</span>
+      </li>
+    </ul>
+  </aside>
+  <!-- main -->
+  <main class="main main--home">
+    <!-- map area -->
+    <section class="map-area">
+      <div id="map" class="map">
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>

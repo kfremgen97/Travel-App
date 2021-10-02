@@ -5,12 +5,12 @@
   display: grid;
   // Create a 4 by 4 grid
   grid-template-columns: 30vw repeat(3,1fr);
-  grid-template-rows: min-content repeat(3,minmax(min-content,1fr));
+  grid-template-rows: min-content repeat(3,1fr);
   // Set the grid areas
   grid-template-areas: 'header header header header'
                         'sidebar main main main'
                         'sidebar main main main'
                         'sidebar main main main';
-  // Set the min height of the grid
-  min-height: 100vh;
+  // Set the height of the grid
+  height: 100vh;
 }

@@ -25,10 +25,38 @@
     &:hover,
     &:active {
       background-color: $primary-dark;
-
     }
 
     &:focus {
+      outline-color: $primary-light;
+    }
+  }
+
+  /* button back */ 
+  &--back {
+    // Set the padding
+    padding: 0;
+    // Set the background to transparent
+    background-color: transparent;
+    // Align and justify the button in its grid cell in the center
+    align-self: flex-start;
+    justify-self: flex-start;
+
+    /* svg on the back button */ 
+    svg {
+      height: 2rem;
+      width: 2rem;
+      fill: $primary;
+    }
+
+
+    /* button back states */ 
+    &:hover svg,
+    &:active svg{
+      fill: $primary-dark;
+    }
+
+    &:focus{
       outline-color: $primary-light;
     }
   }

@@ -1,10 +1,16 @@
 /* sidebar */ 
 
 .sidebar {
+  overflow: hidden;
   // Set the grid area
   grid-area: sidebar;
   // Add padding
   padding: 2rem;
   // Set the background color
   background-color: $black;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4,min-content) 1fr;
+  grid-gap: 3rem;
 }

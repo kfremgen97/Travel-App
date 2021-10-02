@@ -38,6 +38,7 @@
   /* trips label */
 
   &__label{
+    display: inline-block;
     // The size properties
     height: 1.6rem;
     width: 1.6rem;
@@ -45,5 +46,10 @@
     fill: $primary;
     // Add a margin to the right
     margin-right: .5rem;
+  }
+
+  /* trips value */ 
+  &__value {
+    display: inline-block;
   }
 }
