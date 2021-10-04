@@ -1,6 +1,11 @@
 /* button */ 
 
 .button {
+  // Set the display to flex
+  display: flex;
+  // Center the elements on the main and cross axis
+  align-items: center;
+  justify-content: center;
   // Set the font properties
   font-family: inherit;
   font-size: inherit;
@@ -16,6 +21,7 @@
   transition: all .2s;
   
   /* button primary */ 
+
   &--primary {
     // Set the colors
     color: $grey-light;
@@ -32,7 +38,21 @@
     }
   }
 
+  /* loading button */ 
+
+  &--loading {
+    svg {
+      display: inline-block;
+      height: 1.6rem;
+      width: 1.6rem;
+      fill: $grey-light;
+      // Set the animation
+      animation: spinnerAnimation 2s infinite linear;
+    }
+  }
+
   /* button back */ 
+
   &--back {
     // Set the padding
     padding: 0;
@@ -44,13 +64,14 @@
 
     /* svg on the back button */ 
     svg {
+      display: inline-block;
       height: 2rem;
       width: 2rem;
       fill: $primary;
     }
 
-
     /* button back states */ 
+
     &:hover svg,
     &:active svg{
       fill: $primary-dark;
@@ -59,10 +80,5 @@
     &:focus{
       outline-color: $primary-light;
     }
-  }
-
-  /* button trip */ 
-  &--trip {
-    align-self: center;
   }
 }

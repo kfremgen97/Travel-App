@@ -1,0 +1,12 @@
+/* spinner animation */ 
+
+@keyframes spinnerAnimation {
+  // Rotate the element 0 degrees at 0%
+  0% {
+    transform: rotate(0deg);
+  }
+  // Rotate the element at 360 degrees at 100%
+  100% {
+   transform: rotate(360deg);
+  }
+}
