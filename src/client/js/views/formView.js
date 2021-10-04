@@ -54,7 +54,7 @@ class FormView {
   }
 }
 
-// Export a single isntance of MapView
+// Export a single instance
 // Remember this will only load once no matter how matter times you import,
 // there will only be one instance with a live conenction to all imports
 export default new FormView();
