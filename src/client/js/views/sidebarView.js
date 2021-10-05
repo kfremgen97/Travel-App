@@ -4,6 +4,7 @@ class SidebarView {
   constructor() {
     this.sidebarMaster = document.querySelector('.sidebar__master');
     this.sidebarDetail = document.querySelector('.sidebar__detail');
+    this.backButton = document.querySelector('.button--back');
   }
 
   // Show the detail view
@@ -20,6 +21,15 @@ class SidebarView {
     this.sidebarDetail.classList.add('hidden');
     // Show the master view
     this.sidebarMaster.classList.remove('hidden');
+  }
+
+  // Add button back publisher
+  addBackPublisher(handler) {
+    this.backButton.addEventListener('click', (event) => {
+      // Prevent default
+      event.preventDefault();
+      handler();
+    });
   }
 }
 

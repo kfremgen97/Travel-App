@@ -28,5 +28,11 @@ const tripsHandler = function() {
   sidebarView.showDetailView();
 };
 
+const backHandler = function() {
+  // Show master view
+  sidebarView.showMasterView();
+};
+
+sidebarView.addBackPublisher(backHandler);
 formView.addFormPublisher(formHandler);
 tripsViews.addTripsPublisher(tripsHandler);
