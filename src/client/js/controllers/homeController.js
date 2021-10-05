@@ -1,4 +1,5 @@
 // Imports
+import sidebarView from '../views/sidebarView';
 import formView from '../views/formView';
 import tripsViews from '../views/tripsViews';
 import mapView from '../views/mapView';
@@ -22,4 +23,10 @@ const formHandler = function (formData) {
   }, 2000);
 };
 
+const tripsHandler = function() {
+  // Show detail view
+  sidebarView.showDetailView();
+};
+
 formView.addFormPublisher(formHandler);
+tripsViews.addTripsPublisher(tripsHandler);
