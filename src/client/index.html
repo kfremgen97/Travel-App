@@ -2,6 +2,7 @@
 <html lang="en">
 
 <!-- head -->
+
 <head>
   <!-- meta data -->
   <meta charset="UTF-8">
@@ -20,6 +21,7 @@
 </head>
 
 <!-- body -->
+
 <body class="container">
   <!-- header -->
   <header class="header">
@@ -30,91 +32,93 @@
   </header>
   <!-- sidebar -->
   <aside class="sidebar">
-
     <!-- 
-          Sidebar form display 
+          Sidebar master display 
     -->
-
-    <!-- trip form-->
-    <form class="form form--trip">
-          <input type="text" id="location" class="form__input form__input--location mb--small"  name="location" placeholder="location..." required>
-          <input type="date" id="date" class="form__input form__input--date mb--small" name="date"required>
-          <button class="button button--primary button--trip">Submit</button>
-        </form> 
-    <!-- trips -->
-    <h3 class="heading heading--3 heading--white">Trips</h3>
-        <ul class="trips">
-          <li class="trips__item">
-            <div class="trips__detail">
-              <svg class="trips__label">
-                <use href="./assets/sprite/regular.svg#info"></use>
-              </svg>
-              <span class="trips__value">New York, USA</span>
-            </div>
-            <div class="trips__detail">
-              <svg class="trips__label">
-                <use href="./assets/sprite/regular.svg#location"></use>
-              </svg>
-              <span class="trips__value">15.00 lon, -3.75 lat</span>
-            </div>
-            <div class="trips__detail">
-              <svg class="trips__label">
-                <use href="./assets/sprite/regular.svg#calendar"></use>
-              </svg>
-              <span class="trips__value">5/19/27</span>
-            </div>
-          </li>
-          <li class="trips__item">
-            <div class="trips__detail">
-              <svg class="trips__label">
-                <use href="./assets/sprite/regular.svg#info"></use>
-              </svg>
-              <span class="trips__value">New York, USA</span>
-            </div>
-            <div class="trips__detail">
-              <svg class="trips__label">
-                <use href="./assets/sprite/regular.svg#location"></use>
-              </svg>
-              <span class="trips__value">15.00 lon, -3.75 lat</span>
-            </div>
-            <div class="trips__detail">
-              <svg class="trips__label">
-                <use href="./assets/sprite/regular.svg#calendar"></use>
-              </svg>
-              <span class="trips__value">5/19/27</span>
-            </div>
-          </li>
-            <li class="trips__item">
-              <div class="trips__detail">
-                <svg class="trips__label">
-                  <use href="./assets/sprite/regular.svg#info"></use>
-                </svg>
-                <span class="trips__value">New York, USA</span>
-              </div>
-              <div class="trips__detail">
-                <svg class="trips__label">
-                  <use href="./assets/sprite/regular.svg#location"></use>
-                </svg>
-                <span class="trips__value">15.00 lon, -3.75 lat</span>
-              </div>
-              <div class="trips__detail">
-                <svg class="trips__label">
-                  <use href="./assets/sprite/regular.svg#calendar"></use>
-                </svg>
-                <span class="trips__value">5/19/27</span>
-              </div>
-            </li>
-        </ul> 
-
+    <div class="sidebar__master">
+      <!-- trip form-->
+      <form class="form form--trip">
+        <input type="text" id="location" class="form__input form__input--location mb--small" name="location"
+          placeholder="location..." required>
+        <input type="date" id="date" class="form__input form__input--date mb--small" name="date" required>
+        <button class="button button--primary button--trip">Submit</button>
+      </form>
+      <!-- trips -->
+      <h3 class="heading heading--3 heading--white">Trips</h3>
+      <ul class="trips">
+        <li class="trips__item">
+          <div class="trips__detail">
+            <svg class="trips__label">
+              <use href="./assets/sprite/regular.svg#info"></use>
+            </svg>
+            <span class="trips__value">New York, USA</span>
+          </div>
+          <div class="trips__detail">
+            <svg class="trips__label">
+              <use href="./assets/sprite/regular.svg#location"></use>
+            </svg>
+            <span class="trips__value">15.00 lon, -3.75 lat</span>
+          </div>
+          <div class="trips__detail">
+            <svg class="trips__label">
+              <use href="./assets/sprite/regular.svg#calendar"></use>
+            </svg>
+            <span class="trips__value">5/19/27</span>
+          </div>
+        </li>
+        <li class="trips__item">
+          <div class="trips__detail">
+            <svg class="trips__label">
+              <use href="./assets/sprite/regular.svg#info"></use>
+            </svg>
+            <span class="trips__value">New York, USA</span>
+          </div>
+          <div class="trips__detail">
+            <svg class="trips__label">
+              <use href="./assets/sprite/regular.svg#location"></use>
+            </svg>
+            <span class="trips__value">15.00 lon, -3.75 lat</span>
+          </div>
+          <div class="trips__detail">
+            <svg class="trips__label">
+              <use href="./assets/sprite/regular.svg#calendar"></use>
+            </svg>
+            <span class="trips__value">5/19/27</span>
+          </div>
+        </li>
+        <li class="trips__item">
+          <div class="trips__detail">
+            <svg class="trips__label">
+              <use href="./assets/sprite/regular.svg#info"></use>
+            </svg>
+            <span class="trips__value">New York, USA</span>
+          </div>
+          <div class="trips__detail">
+            <svg class="trips__label">
+              <use href="./assets/sprite/regular.svg#location"></use>
+            </svg>
+            <span class="trips__value">15.00 lon, -3.75 lat</span>
+          </div>
+          <div class="trips__detail">
+            <svg class="trips__label">
+              <use href="./assets/sprite/regular.svg#calendar"></use>
+            </svg>
+            <span class="trips__value">5/19/27</span>
+          </div>
+        </li>
+      </ul>
+    </div>
     <!-- 
-          sidebar trip display
+          sidebar detail  display
     -->
-     <!-- <button class="button button--back">
-    <svg>
-      <use href="./assets/sprite/regular.svg#arrow-left"></use>
-    </svg>
-    </button>
-    <h3 class="heading heading--3 heading--white">Trip</h3>
+    <div class="sidebar__detail hidden">
+      <button class="button button--back">
+        <svg>
+          <use href="./assets/sprite/regular.svg#arrow-left"></use>
+        </svg>
+      </button>
+      <img class="photo photo--trip" src="./assets/img/placeholder.png">
+      <!-- <h3 class="heading heading--3 heading--white">Trip</h3> -->
       <div class="trip">
         <svg class="trip__label">
           <use href="./assets/sprite/regular.svg#info"></use>
@@ -133,90 +137,91 @@
       <h3 class="heading heading--3 heading--white">Weather</h3>
       <ul class="weather">
         <li class="weather__info">
-        <svg class="weather__label">
-          <use href="./assets/sprite/regular.svg#calendar"></use>
-        </svg>
-        <span class="weather__value">5/4/22</span>
-        <svg class="weather__label">
-          <use href="./assets/sprite/regular.svg#info"></use>
-        </svg>
-        <span class="weather__value">partly cloudy</span>
-        <svg class="weather__label">
-          <use href="./assets/sprite/regular.svg#temperature-high"></use>
-        </svg>
-        <span class="weather__value">75&#176</span>
-      </li>
-      <li class="weather__info">
-        <svg class="weather__label">
-          <use href="./assets/sprite/regular.svg#calendar"></use>
-        </svg>
-        <span class="weather__value">5/4/22</span>
-        <svg class="weather__label">
-          <use href="./assets/sprite/regular.svg#info"></use>
-        </svg>
-        <span class="weather__value">partly cloudy</span>
-        <svg class="weather__label">
-          <use href="./assets/sprite/regular.svg#temperature-high"></use>
-        </svg>
-        <span class="weather__value">75&#176</span>
-      </li>
-      <li class="weather__info">
-        <svg class="weather__label">
-          <use href="./assets/sprite/regular.svg#calendar"></use>
-        </svg>
-        <span class="weather__value">5/4/22</span>
-        <svg class="weather__label">
-          <use href="./assets/sprite/regular.svg#info"></use>
-        </svg>
-        <span class="weather__value">partly cloudy</span>
-        <svg class="weather__label">
-          <use href="./assets/sprite/regular.svg#temperature-high"></use>
-        </svg>
-        <span class="weather__value">75&#176</span>
-      </li>
-      <li class="weather__info">
-        <svg class="weather__label">
-          <use href="./assets/sprite/regular.svg#calendar"></use>
-        </svg>
-        <span class="weather__value">5/4/22</span>
-        <svg class="weather__label">
-          <use href="./assets/sprite/regular.svg#info"></use>
-        </svg>
-        <span class="weather__value">partly cloudy</span>
-        <svg class="weather__label">
-          <use href="./assets/sprite/regular.svg#temperature-high"></use>
-        </svg>
-        <span class="weather__value">75&#176</span>
-      </li>
-      <li class="weather__info">
-        <svg class="weather__label">
-          <use href="./assets/sprite/regular.svg#calendar"></use>
-        </svg>
-        <span class="weather__value">5/4/22</span>
-        <svg class="weather__label">
-          <use href="./assets/sprite/regular.svg#info"></use>
-        </svg>
-        <span class="weather__value">partly cloudy</span>
-        <svg class="weather__label">
-          <use href="./assets/sprite/regular.svg#temperature-high"></use>
-        </svg>
-        <span class="weather__value">75&#176</span>
-      </li>
-      <li class="weather__info">
-        <svg class="weather__label">
-          <use href="./assets/sprite/regular.svg#calendar"></use>
-        </svg>
-        <span class="weather__value">5/4/22</span>
-        <svg class="weather__label">
-          <use href="./assets/sprite/regular.svg#info"></use>
-        </svg>
-        <span class="weather__value">partly cloudy</span>
-        <svg class="weather__label">
-          <use href="./assets/sprite/regular.svg#temperature-high"></use>
-        </svg>
-        <span class="weather__value">75&#176</span>
-      </li>
-    </ul> -->
+          <svg class="weather__label">
+            <use href="./assets/sprite/regular.svg#calendar"></use>
+          </svg>
+          <span class="weather__value">5/4/22</span>
+          <svg class="weather__label">
+            <use href="./assets/sprite/regular.svg#info"></use>
+          </svg>
+          <span class="weather__value">partly cloudy</span>
+          <svg class="weather__label">
+            <use href="./assets/sprite/regular.svg#temperature-high"></use>
+          </svg>
+          <span class="weather__value">75&#176</span>
+        </li>
+        <li class="weather__info">
+          <svg class="weather__label">
+            <use href="./assets/sprite/regular.svg#calendar"></use>
+          </svg>
+          <span class="weather__value">5/4/22</span>
+          <svg class="weather__label">
+            <use href="./assets/sprite/regular.svg#info"></use>
+          </svg>
+          <span class="weather__value">partly cloudy</span>
+          <svg class="weather__label">
+            <use href="./assets/sprite/regular.svg#temperature-high"></use>
+          </svg>
+          <span class="weather__value">75&#176</span>
+        </li>
+        <li class="weather__info">
+          <svg class="weather__label">
+            <use href="./assets/sprite/regular.svg#calendar"></use>
+          </svg>
+          <span class="weather__value">5/4/22</span>
+          <svg class="weather__label">
+            <use href="./assets/sprite/regular.svg#info"></use>
+          </svg>
+          <span class="weather__value">partly cloudy</span>
+          <svg class="weather__label">
+            <use href="./assets/sprite/regular.svg#temperature-high"></use>
+          </svg>
+          <span class="weather__value">75&#176</span>
+        </li>
+        <li class="weather__info">
+          <svg class="weather__label">
+            <use href="./assets/sprite/regular.svg#calendar"></use>
+          </svg>
+          <span class="weather__value">5/4/22</span>
+          <svg class="weather__label">
+            <use href="./assets/sprite/regular.svg#info"></use>
+          </svg>
+          <span class="weather__value">partly cloudy</span>
+          <svg class="weather__label">
+            <use href="./assets/sprite/regular.svg#temperature-high"></use>
+          </svg>
+          <span class="weather__value">75&#176</span>
+        </li>
+        <li class="weather__info">
+          <svg class="weather__label">
+            <use href="./assets/sprite/regular.svg#calendar"></use>
+          </svg>
+          <span class="weather__value">5/4/22</span>
+          <svg class="weather__label">
+            <use href="./assets/sprite/regular.svg#info"></use>
+          </svg>
+          <span class="weather__value">partly cloudy</span>
+          <svg class="weather__label">
+            <use href="./assets/sprite/regular.svg#temperature-high"></use>
+          </svg>
+          <span class="weather__value">75&#176</span>
+        </li>
+        <li class="weather__info">
+          <svg class="weather__label">
+            <use href="./assets/sprite/regular.svg#calendar"></use>
+          </svg>
+          <span class="weather__value">5/4/22</span>
+          <svg class="weather__label">
+            <use href="./assets/sprite/regular.svg#info"></use>
+          </svg>
+          <span class="weather__value">partly cloudy</span>
+          <svg class="weather__label">
+            <use href="./assets/sprite/regular.svg#temperature-high"></use>
+          </svg>
+          <span class="weather__value">75&#176</span>
+        </li>
+      </ul>
+    </div>
   </aside>
   <!-- main -->
   <main class="main main--home">
@@ -228,4 +233,5 @@
   </main>
 
 </body>
+
 </html>

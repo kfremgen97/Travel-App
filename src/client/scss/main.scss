@@ -3,7 +3,6 @@
 // Base imports
 @import './base/base';
 @import './base/typography';
-@import './base/utilities';
 @import './base/animations';
 // Layout imports
 @import './layout/grid';
@@ -21,3 +20,5 @@
 @import './components/weather';
 @import './components/photo';
 @import './components/map';
+// Utility import
+@import './base/utilities';

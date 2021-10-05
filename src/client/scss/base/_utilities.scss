@@ -1,3 +1,9 @@
+/* align */ 
+
+.align--center {
+  text-align: center;
+}
+
 /* margin right */ 
 
 .mr {
@@ -34,4 +40,10 @@
   &--large {
     margin-bottom: 4rem;
   }
+}
+
+/* hidden class */ 
+
+.hidden {
+  display: none;
 }

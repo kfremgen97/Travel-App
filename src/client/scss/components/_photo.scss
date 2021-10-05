@@ -1,0 +1,17 @@
+/* photo */ 
+
+.photo {
+  // Set the border properties
+  border: .2rem solid $primary;
+  border-radius: .5rem;
+  // Set the size proeprties
+  height: 20rem;
+  width: 20rem;
+
+  /* photo trip */ 
+  &--trip {
+  // Center the item on the vertical and horizontal axis in its cell
+  justify-self: center;
+  align-self: center;
+  }
+}
