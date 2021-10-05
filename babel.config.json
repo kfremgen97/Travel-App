@@ -5,6 +5,7 @@
     "@babel/preset-env"
   ],
   "plugins": [
-
+    // Used for polyfilling things such as promises
+    "@babel/plugin-transform-runtime"
   ]
 }
