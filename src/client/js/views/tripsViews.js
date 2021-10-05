@@ -34,11 +34,11 @@ class TripsView {
           </li>
     `;
 
-    // Add trip
+    // Add trip to trips
     this.trips.insertAdjacentHTML('afterbegin', tripString);
   }
 
-  // Add trips publisher
+  // Trips click publisher
   addTripsPublisher(handler) {
     this.trips.addEventListener('click', (event) => {
       // Prevent default

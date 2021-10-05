@@ -7,17 +7,21 @@
 /* margin right */ 
 
 .mr {
-  /*margin right small*/
+
+  /* margin right small */
+
   &--small {
     margin-right: 1rem;
   }
 
-  /*margin right medium*/
+  /* margin right medium */
+
   &--medium {
     margin-right: 2rem;
   }
 
-  /*margin right large*/
+  /* margin right large */
+
   &--large {
     margin-right: 4rem;
   }
@@ -26,17 +30,20 @@
 /* margin bottom */ 
 
 .mb {
-  /*margin bottom small*/
+  /* margin bottom small */
+  
   &--small {
     margin-bottom: 1rem;
   }
 
-  /*margin bottom medium*/
+  /* margin bottom medium */
+
   &--medium {
     margin-bottom: 2rem;
   }
 
-  /*margin bottom large*/
+  /* margin bottom large */
+
   &--large {
     margin-bottom: 4rem;
   }

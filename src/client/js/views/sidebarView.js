@@ -23,11 +23,12 @@ class SidebarView {
     this.sidebarMaster.classList.remove('hidden');
   }
 
-  // Add button back publisher
+  // Back button click publisher
   addBackPublisher(handler) {
     this.backButton.addEventListener('click', (event) => {
       // Prevent default
       event.preventDefault();
+      // Call the handler
       handler();
     });
   }

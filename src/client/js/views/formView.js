@@ -8,12 +8,13 @@ class FormView {
     this.submitButton = document.querySelector('.button--trip');
   }
 
+  // Clear the form inputs
   clearInputs() {
-    // Clear form inputs
     this.locationInput.value = '';
     this.dateInput.value = '';
   }
 
+  // Show spinner in button
   renderSpinner() {
     // Disable the button
     this.submitButton.disabled = true;
@@ -31,6 +32,7 @@ class FormView {
     this.submitButton.insertAdjacentHTML('afterbegin', spinnerString);
   }
 
+  // Show submit in button
   renderSubmit() {
     // Enable the button
     this.submitButton.disabled = false;
@@ -49,6 +51,7 @@ class FormView {
       event.preventDefault();
       // Create the form data object
       const formData = new FormData(this.form);
+      // Call the handler with the form data
       handler(formData);
     });
   }

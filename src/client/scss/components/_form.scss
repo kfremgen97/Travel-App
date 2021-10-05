@@ -6,6 +6,7 @@
   flex-direction: column;
 
   /* form input */ 
+
   &__input {
     // Set the font style
     font-family: inherit;
@@ -22,6 +23,7 @@
     transition: all .2s;
 
     /* form input states */ 
+    
     &:focus:invalid {
       outline-color: $error
     }
@@ -31,6 +33,7 @@
     }
 
     /* form input placeholder */
+
     &::placeholder {
       color: $grey-dark;
     }
