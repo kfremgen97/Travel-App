@@ -11,6 +11,7 @@
     /* trips item */
 
   &__item {
+    cursor: pointer;
     // Set the font color
     color: $grey-light;
     // Set the background color
@@ -18,9 +19,13 @@
     border-radius: .5rem;
     // Add padding
     padding: 1rem;
-    // Set the display to flex with a direction of column
-    display: flex;
-    flex-direction: column;
+    // Set the display to 2 column by 3 row grid
+    display: grid;
+    grid-template-columns: 1fr min-content;
+    grid-template-rows: repeat(3,min-content);
+    // Set the gap to 1rem
+    grid-gap: 1rem;
+
 
     /* not the last li in the list */
 
@@ -53,7 +58,25 @@
   }
 
   /* trips value */ 
+
   &__value {
     display: inline-block;
+  }
+
+  /* trips arrow */ 
+
+  &__arrow {
+    // Set the display to block
+    display: block;
+    // Set the size properties
+    height: 2rem;
+    width: 2rem;
+    // Set the color to primary
+    fill: $primary;
+    // Set the grid row and colum place
+    grid-column: 2/-1;
+    grid-row: 1/-1;
+    // Align the element in the vertical axis in the center
+    align-self: center;
   }
 }
