@@ -56,9 +56,31 @@ app.get('/api/location', (req, res) => {
     });
 });
 
-// Weatherbit route
-app.get('/api/weather', (req, res) => {
-  const url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHERBIT_API_KEY}&lat=${req.query.lat}&lon=-${req.query.lon}`;
+// Weatherbit current route
+app.get('/api/weather/current', (req, res) => {
+  const url = `https://api.weatherbit.io/v2.0/current?key=${process.env.WEATHERBIT_API_KEY}&lat=${req.query.lat}&lon=${req.query.lon}`;
+  fetch(url)
+    .then((response) => {
+      console.log(response.status);
+      if (!response.ok) throw new Error('Unable to get location weather');
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      if (data.error) throw new Error(data.error);
+      res.send(data);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.send({
+        error: error.message,
+      });
+    });
+});
+
+// Weatherbit future route
+app.get('/api/weather/future', (req, res) => {
+  const url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHERBIT_API_KEY}&lat=${req.query.lat}&lon=${req.query.lon}`;
   fetch(url)
     .then((response) => {
       if (!response.ok) throw new Error('Unable to get location weather');
