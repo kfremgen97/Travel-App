@@ -4,7 +4,8 @@ import formView from '../views/formView';
 import tripsViews from '../views/tripsViews';
 import mapView from '../views/mapView';
 import getLocationInfo from '../services/locationService';
-import TripModel from '../models/tripModel';
+import { getCurrentWeather, getFutureWeather } from '../services/weatherService';
+import dateChecker from '../utilities/dateChecker';
 
 // Load the map
 mapView.loadMap();
@@ -14,8 +15,8 @@ const formHandler = async function (formData) {
   const locationString = formData.get('location');
   // Get the date from the form data
   const dateString = formData.get('date');
-  // Declare a trip
-  let trip;
+  // Declare and initialize an emptry trip
+  const trip = {};
 
   try {
     // Render the spinner
@@ -25,26 +26,66 @@ const formHandler = async function (formData) {
     if (!locationString) throw new Error('Invalid location');
     // Check if dateString is null
     if (!dateString) throw new Error('Invalid date');
+    // Add the date property
+    trip.date = new Date(dateString.replace('-', '/'));
 
     // Call the location service
     const locationInfo = await getLocationInfo(locationString);
-    // Create the trip
-    trip = new TripModel(locationInfo.name, locationInfo.countryName, locationInfo.countryCode,
-      locationInfo.lat, locationInfo.lng);
+    // Add the properties
+    trip.name = locationInfo.name;
+    trip.countryName = locationInfo.countryName;
+    trip.countryCode = locationInfo.countryCode;
+    trip.coordinates = {
+      lat: locationInfo.lat,
+      lng: locationInfo.lng,
+    };
+
+    // Based on the date call either the current weather api or future weather api
+    const daysAway = dateChecker(trip.date);
+    if (daysAway < 7) {
+      // Get the current weather
+      const { data: weatherInfo } = await getCurrentWeather(trip.coordinates.lat, trip.coordinates.lng);
+      // Add the properties
+      trip.weather = [];
+      trip.weather[0] = {
+        temp: weatherInfo[0].temp,
+        description: weatherInfo[0].weather.description,
+        date: new Date(weatherInfo[0].datetime.replaceAll('-', '/')),
+      };
+    } else {
+      const { data: weatherInfo } = await getFutureWeather(trip.coordinates.lat, trip.coordinates.lng);
+      // Add the properties
+      trip.weather = [];
+      // Loop through the weatherInfo
+      weatherInfo.forEach((weather) => {
+        trip.weather.push({
+          temp: weather.temp,
+          description: weather.weather.description,
+          date: new Date(weather.datetime.replaceAll('-', '/')),
+        });
+      });
+    }
+
     console.log(trip);
+    // Clear the inputs
+    formView.clearInputs();
     // Render submit
     formView.renderSubmit();
   } catch (error) {
     console.error(error);
+    // Clear the inputs
+    formView.clearInputs();
+    // Render submit
+    formView.renderSubmit();
   }
 };
 
-const tripsHandler = function() {
+const tripsHandler = function () {
   // Show detail view
   sidebarView.showDetailView();
 };
 
-const backHandler = function() {
+const backHandler = function () {
   // Show master view
   sidebarView.showMasterView();
 };

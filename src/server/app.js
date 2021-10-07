@@ -58,7 +58,7 @@ app.get('/api/location', (req, res) => {
 
 // Weatherbit current route
 app.get('/api/weather/current', (req, res) => {
-  const url = `https://api.weatherbit.io/v2.0/current?key=${process.env.WEATHERBIT_API_KEY}&lat=${req.query.lat}&lon=${req.query.lon}`;
+  const url = `https://api.weatherbit.io/v2.0/current?key=${process.env.WEATHERBIT_API_KEY}&lat=${req.query.lat}&lon=${req.query.lng}`;
   fetch(url)
     .then((response) => {
       console.log(response.status);
@@ -80,7 +80,7 @@ app.get('/api/weather/current', (req, res) => {
 
 // Weatherbit future route
 app.get('/api/weather/future', (req, res) => {
-  const url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHERBIT_API_KEY}&lat=${req.query.lat}&lon=${req.query.lon}`;
+  const url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHERBIT_API_KEY}&lat=${req.query.lat}&lon=${req.query.lng}`;
   fetch(url)
     .then((response) => {
       if (!response.ok) throw new Error('Unable to get location weather');

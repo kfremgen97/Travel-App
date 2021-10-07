@@ -22,7 +22,7 @@ const getLocationInfo = function (location) {
       if (data.error) throw new Error(data.error);
       // Check if the data has geonames
       if (!(data.geonames?.length > 0)) throw new Error('Unable to get location');
-      // Return tthe first geoname object
+      // Return the first geoname object
       return data.geonames[0];
     })
     .catch((error) => {
