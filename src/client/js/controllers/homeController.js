@@ -5,6 +5,7 @@ import tripsViews from '../views/tripsViews';
 import mapView from '../views/mapView';
 import getLocationInfo from '../services/locationService';
 import { getCurrentWeather, getFutureWeather } from '../services/weatherService';
+import getPhotoInfo from '../services/photoService';
 import dateChecker from '../utilities/dateChecker';
 
 // Load the map
@@ -29,7 +30,7 @@ const formHandler = async function (formData) {
     // Add the date property
     trip.date = new Date(dateString.replace('-', '/'));
 
-    // Call the location service
+    // Gte the location
     const locationInfo = await getLocationInfo(locationString);
     // Add the properties
     trip.name = locationInfo.name;
@@ -44,7 +45,8 @@ const formHandler = async function (formData) {
     const daysAway = dateChecker(trip.date);
     if (daysAway < 7) {
       // Get the current weather
-      const { data: weatherInfo } = await getCurrentWeather(trip.coordinates.lat, trip.coordinates.lng);
+      const { data: weatherInfo } = await getCurrentWeather(trip.coordinates.lat,
+        trip.coordinates.lng);
       // Add the properties
       trip.weather = [];
       trip.weather[0] = {
@@ -53,7 +55,9 @@ const formHandler = async function (formData) {
         date: new Date(weatherInfo[0].datetime.replaceAll('-', '/')),
       };
     } else {
-      const { data: weatherInfo } = await getFutureWeather(trip.coordinates.lat, trip.coordinates.lng);
+      // Get the future weather
+      const { data: weatherInfo } = await getFutureWeather(trip.coordinates.lat,
+        trip.coordinates.lng);
       // Add the properties
       trip.weather = [];
       // Loop through the weatherInfo
@@ -66,6 +70,10 @@ const formHandler = async function (formData) {
       });
     }
 
+    // Get the photo info
+    const { hits: photoInfo } = await getPhotoInfo(trip.name);
+    // Add the properties
+    trip.imageURL = photoInfo[0].largeImageURL;
     console.log(trip);
     // Clear the inputs
     formView.clearInputs();

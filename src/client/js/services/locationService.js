@@ -32,4 +32,5 @@ const getLocationInfo = function (location) {
     });
 };
 
+// Default export
 export default getLocationInfo;
