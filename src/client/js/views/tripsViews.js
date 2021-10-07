@@ -6,36 +6,43 @@ class TripsView {
   }
 
   // Add a trip
-  addTrip() {
+  updateTrips(trips) {
     // Trip string
-    const tripString = `
-    <li class="trips__item">
-            <div class="trips__detail">
-              <svg class="trips__label">
-                <use href="./assets/sprite/regular.svg#info"></use>
-              </svg>
-              <span class="trips__value">New York, USA</span>
-            </div>
-            <div class="trips__detail">
-              <svg class="trips__label">
-                <use href="./assets/sprite/regular.svg#location"></use>
-              </svg>
-              <span class="trips__value">15.00 lon, -3.75 lat</span>
-            </div>
-            <div class="trips__detail">
-              <svg class="trips__label">
-                <use href="./assets/sprite/regular.svg#calendar"></use>
-              </svg>
-              <span class="trips__value">5/19/28</span>
-            </div>
-            <svg class="trips__arrow">
-            <use href="./assets/sprite/regular.svg#chevron-right"></use>
-          </svg>
-          </li>
-    `;
+    let tripsString = '';
 
+    // Loop over the trips to generate the string
+    trips.forEach((trip) => {
+      tripsString += `
+        <li class="trips__item">
+          <div class="trips__detail">
+            <svg class="trips__label">
+              <use href="./assets/sprite/regular.svg#info"></use>
+            </svg>
+             <span class="trips__value">${trip.name} , ${trip.countryName}</span>
+           </div>
+           <div class="trips__detail">
+            <svg class="trips__label">
+               <use href="./assets/sprite/regular.svg#location"></use>
+             </svg>
+            <span class="trips__value">${trip.coordinates.lat} lat , ${trip.coordinates.lng} lng</span>
+           </div>
+           <div class="trips__detail">
+             <svg class="trips__label">
+              <use href="./assets/sprite/regular.svg#calendar"></use>
+             </svg>
+            <span class="trips__value">${trip.date.toDateString()}</span>
+          </div>
+           <svg class="trips__arrow">
+           <use href="./assets/sprite/regular.svg#chevron-right"></use>
+         </svg>
+        </li>
+            `;
+    });
+
+    // Clear the trips ui
+    this.trips.innerHTML = '';
     // Add trip to trips
-    this.trips.insertAdjacentHTML('afterbegin', tripString);
+    this.trips.insertAdjacentHTML('afterbegin', tripsString);
   }
 
   // Trips click publisher

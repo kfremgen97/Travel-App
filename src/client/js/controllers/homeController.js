@@ -1,7 +1,8 @@
 // Imports
+import tripsModel from '../models/tripsModel';
 import sidebarView from '../views/sidebarView';
 import formView from '../views/formView';
-import tripsViews from '../views/tripsViews';
+import tripsView from '../views/tripsViews';
 import mapView from '../views/mapView';
 import getLocationInfo from '../services/locationService';
 import { getCurrentWeather, getFutureWeather } from '../services/weatherService';
@@ -17,10 +18,10 @@ const formHandler = async function (formData) {
   // Get the date from the form data
   const dateString = formData.get('date');
   // Declare and initialize an emptry trip
-  const trip = {};
+  const newTrip = {};
 
   try {
-    // Render the spinner
+    // Render the form spinner
     formView.renderSpinner();
 
     // Check if locationString is null
@@ -28,41 +29,41 @@ const formHandler = async function (formData) {
     // Check if dateString is null
     if (!dateString) throw new Error('Invalid date');
     // Add the date property
-    trip.date = new Date(dateString.replace('-', '/'));
+    newTrip.date = new Date(dateString.replace('-', '/'));
 
     // Gte the location
     const locationInfo = await getLocationInfo(locationString);
     // Add the properties
-    trip.name = locationInfo.name;
-    trip.countryName = locationInfo.countryName;
-    trip.countryCode = locationInfo.countryCode;
-    trip.coordinates = {
+    newTrip.name = locationInfo.name;
+    newTrip.countryName = locationInfo.countryName;
+    newTrip.countryCode = locationInfo.countryCode;
+    newTrip.coordinates = {
       lat: locationInfo.lat,
       lng: locationInfo.lng,
     };
 
     // Based on the date call either the current weather api or future weather api
-    const daysAway = dateChecker(trip.date);
+    const daysAway = dateChecker(newTrip.date);
     if (daysAway < 7) {
       // Get the current weather
-      const { data: weatherInfo } = await getCurrentWeather(trip.coordinates.lat,
-        trip.coordinates.lng);
+      const { data: weatherInfo } = await getCurrentWeather(newTrip.coordinates.lat,
+        newTrip.coordinates.lng);
       // Add the properties
-      trip.weather = [];
-      trip.weather[0] = {
+      newTrip.weather = [];
+      newTrip.weather[0] = {
         temp: weatherInfo[0].temp,
         description: weatherInfo[0].weather.description,
         date: new Date(weatherInfo[0].datetime.replaceAll('-', '/')),
       };
     } else {
       // Get the future weather
-      const { data: weatherInfo } = await getFutureWeather(trip.coordinates.lat,
-        trip.coordinates.lng);
+      const { data: weatherInfo } = await getFutureWeather(newTrip.coordinates.lat,
+        newTrip.coordinates.lng);
       // Add the properties
-      trip.weather = [];
+      newTrip.weather = [];
       // Loop through the weatherInfo
       weatherInfo.forEach((weather) => {
-        trip.weather.push({
+        newTrip.weather.push({
           temp: weather.temp,
           description: weather.weather.description,
           date: new Date(weather.datetime.replaceAll('-', '/')),
@@ -71,19 +72,25 @@ const formHandler = async function (formData) {
     }
 
     // Get the photo info
-    const { hits: photoInfo } = await getPhotoInfo(trip.name);
+    const { hits: photoInfo } = await getPhotoInfo(newTrip.name);
     // Add the properties
-    trip.imageURL = photoInfo[0].largeImageURL;
-    console.log(trip);
-    // Clear the inputs
+    newTrip.imageURL = photoInfo[0]?.largeImageURL ?? null;
+    console.log(newTrip);
+
+    // Add the trip to the trips model
+    tripsModel.addTrip(newTrip);
+
+    // Clear the form inputs
     formView.clearInputs();
-    // Render submit
+    // Render form submit button
     formView.renderSubmit();
+    // Update the trips ui
+    tripsView.updateTrips(tripsModel.getTrips());
   } catch (error) {
     console.error(error);
-    // Clear the inputs
+    // Clear the form inputs
     formView.clearInputs();
-    // Render submit
+    // Render the form submit
     formView.renderSubmit();
   }
 };
@@ -100,4 +107,4 @@ const backHandler = function () {
 
 sidebarView.addBackPublisher(backHandler);
 formView.addFormPublisher(formHandler);
-tripsViews.addTripsPublisher(tripsHandler);
+tripsView.addTripsPublisher(tripsHandler);
