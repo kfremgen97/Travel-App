@@ -14,7 +14,7 @@ class FormView {
     this.dateInput.value = '';
   }
 
-  // Show spinner in button
+  // Render spinner in button
   renderSpinner() {
     // Disable the button
     this.submitButton.disabled = true;
@@ -32,7 +32,7 @@ class FormView {
     this.submitButton.insertAdjacentHTML('afterbegin', spinnerString);
   }
 
-  // Show submit in button
+  // Render submit in button
   renderSubmit() {
     // Enable the button
     this.submitButton.disabled = false;

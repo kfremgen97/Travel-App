@@ -5,6 +5,7 @@ class ResultsView {
     this.results = document.querySelector('.results');
   }
 
+  // Render the message
   renderMessage() {
     // Message string
     let messageString = '<div class="message">';
@@ -60,7 +61,7 @@ class ResultsView {
     this.results.insertAdjacentHTML('afterbegin', tripsString);
   }
 
-  // Render error
+  // Render the error
   renderError(error) {
     const errorString = `
     <div class="error">
