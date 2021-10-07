@@ -9,20 +9,28 @@
   background-color: $black;
 
   /* sidebar master */ 
+
   &__master {
+    // Set the height to 100% of parent
     height: 100%;
+    // Set the display to grid with 1 column by 2 rows
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: min-content 1fr;
+    // Set the grid gap to 2 rem
     grid-gap: 2rem;
   }
 
   /* sidebar detail */ 
+
   &__detail {
+    // Set the height to 100% of parent
     height: 100%;
+    // Set the display to grid with 1 column by 5 rows
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4,min-content) 1fr;
+    // Set the grid gap to 2 rem
     grid-gap: 2rem;
     }
 }
