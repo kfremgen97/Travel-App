@@ -2,7 +2,7 @@
 import tripsModel from '../models/tripsModel';
 import sidebarView from '../views/sidebarView';
 import formView from '../views/formView';
-import tripsView from '../views/tripsViews';
+import resultsView from '../views/resultsView';
 import mapView from '../views/mapView';
 import getLocationInfo from '../services/locationService';
 import { getCurrentWeather, getFutureWeather } from '../services/weatherService';
@@ -85,13 +85,20 @@ const formHandler = async function (formData) {
     // Render form submit button
     formView.renderSubmit();
     // Update the trips ui
-    tripsView.updateTrips(tripsModel.getTrips());
+    resultsView.renderTrips(tripsModel.getTrips());
   } catch (error) {
-    console.error(error);
     // Clear the form inputs
     formView.clearInputs();
     // Render the form submit
     formView.renderSubmit();
+    // Show the error
+    resultsView.renderError(error);
+    // Update the view again after 5 seconds
+    setTimeout(() => {
+      const trips = tripsModel.getTrips();
+      if (trips.length > 0) resultsView.renderTrips(tripsModel.getTrips());
+      else resultsView.renderMessage();
+    }, 2000);
   }
 };
 
@@ -107,4 +114,4 @@ const backHandler = function () {
 
 sidebarView.addBackPublisher(backHandler);
 formView.addFormPublisher(formHandler);
-tripsView.addTripsPublisher(tripsHandler);
+resultsView.addTripsPublisher(tripsHandler);

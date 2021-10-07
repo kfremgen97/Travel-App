@@ -1,14 +1,27 @@
 // TripsView
-class TripsView {
+class ResultsView {
   // Constructor
   constructor() {
-    this.trips = document.querySelector('.trips');
+    this.results = document.querySelector('.results');
   }
 
-  // Add a trip
-  updateTrips(trips) {
+  renderMessage() {
+    // Message string
+    let messageString = '<div class="message">';
+    messageString += '<h5 class="heading heading--5 heading--primary">Fill out the form above to add a trip...</h5>';
+    messageString += ' </div>';
+
+    // Clear the results ui
+    this.results.innerHTML = '';
+    // Render the trips
+    this.results.insertAdjacentHTML('afterbegin', messageString);
+  }
+
+  // Render the trips
+  renderTrips(trips) {
     // Trip string
-    let tripsString = '';
+    let tripsString = '<h3 class="heading heading--3 heading--white mb--medium">Trips</h3>';
+    tripsString += '<ul class="trips">';
 
     // Loop over the trips to generate the string
     trips.forEach((trip) => {
@@ -39,15 +52,31 @@ class TripsView {
             `;
     });
 
+    tripsString += '</ul>';
+
+    // Clear the results ui
+    this.results.innerHTML = '';
+    // Render the trips
+    this.results.insertAdjacentHTML('afterbegin', tripsString);
+  }
+
+  // Render error
+  renderError(error) {
+    const errorString = `
+    <div class="error">
+      <h5 class="heading heading--5 heading--error"> Error</>
+      <h5 class="heading heading--5 heading--error"> ${error.message} </h5>
+    </div>`;
+
     // Clear the trips ui
-    this.trips.innerHTML = '';
-    // Add trip to trips
-    this.trips.insertAdjacentHTML('afterbegin', tripsString);
+    this.results.innerHTML = '';
+    // Render the error
+    this.results.insertAdjacentHTML('afterbegin', errorString);
   }
 
   // Trips click publisher
   addTripsPublisher(handler) {
-    this.trips.addEventListener('click', (event) => {
+    this.results.addEventListener('click', (event) => {
       // Prevent default
       event.preventDefault();
 
@@ -70,4 +99,4 @@ class TripsView {
 // Export a single instance
 // Remember this will only load once no matter how matter times you import,
 // there will only be one instance with a live conenction to all imports
-export default new TripsView();
+export default new ResultsView();

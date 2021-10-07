@@ -1,0 +1,11 @@
+/* message */ 
+
+.message {
+  // Set the display to flex
+  display: flex;
+  // Set the firection to column
+  flex-direction: column;
+  flex-wrap: wrap;
+  // Align the items in the perpendicular axis in the center
+  align-items: center;
+}

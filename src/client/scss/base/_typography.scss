@@ -17,16 +17,38 @@ body {
   font-weight: 500;
 
   /* heading 1 */ 
+
   &--1 {
     font-size: 4rem;
   }
 
   /* heading 3 */ 
+
   &--3 {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
   
+  /* heading 5 */ 
+
+  &--5 {
+    font-size: 2rem;
+  }
+
+  /* heading primary */ 
+
+  &--primary {
+    color: $primary;
+  }
+
+   /* heading error */ 
+
+   &--error {
+    color: $error;
+  }
+
+
   /* heading white */ 
+
   &--white {
     color: $grey-light;
   }
