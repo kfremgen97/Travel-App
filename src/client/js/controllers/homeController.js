@@ -31,7 +31,7 @@ const formHandler = async function (formData) {
     // Add the date property
     newTrip.date = new Date(dateString.replace('-', '/'));
 
-    // Gte the location
+    // Get the location
     const locationInfo = await getLocationInfo(locationString);
     // Add the properties
     newTrip.name = locationInfo.name;

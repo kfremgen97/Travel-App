@@ -28,12 +28,12 @@
     background-color: $primary;
 
     /* button primary states */ 
-    &:hover,
-    &:active {
+    &:hover:enabled,
+    &:active:enabled {
       background-color: $primary-dark;
     }
 
-    &:focus {
+    &:focus:enabled {
       outline-color: $primary-light;
     }
   }
