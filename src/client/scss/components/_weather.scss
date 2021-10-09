@@ -2,14 +2,23 @@
 
 .weather {
 
-  // Remove list styles and set the voerflow to scroll
-  list-style: none;
+  // Set the height to 100% of parent
+  height: 100%;
+  // Set the overflow to scroll
   overflow: scroll;
 
-  /* weather info */ 
+  /* weather list */ 
 
-  &__info {
-    // Ste the font and backgground color
+  &_list {
+    // Remove list styles and set the voerflow to scroll
+    list-style: none;
+  }
+
+
+  /* weather item */ 
+
+  &__item {
+    // Ste the font and background color
     color: $grey-light;
     background-color: $grey-dark;
     // Add .5 rem broder radius and 1 rem of padding 

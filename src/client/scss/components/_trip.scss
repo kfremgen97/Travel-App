@@ -1,6 +1,15 @@
 /* trip */ 
 
 .trip {
+
+  // Set the display to a grid with 1 column by x rows
+  display:grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: min-content;
+  grid-gap: 2rem;
+  /* trip item */ 
+
+  &__item {
   // Add 1 rem of padding
   padding: 1rem;
   // Set the font and background color
@@ -14,6 +23,7 @@
   grid-auto-rows: min-content;
   // Set the grid gap to .5rem horizontal and 1 rem vertical
   grid-gap: .5rem 1rem;
+  }
 
   /* trip label */ 
 

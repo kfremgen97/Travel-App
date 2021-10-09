@@ -22,8 +22,13 @@ class TripsModel {
     this._trips.splice(0, 0, trip);
   }
 
+  getTrip(id) {
+    // Get and return the trip based on id
+    return this._trips.find((trip) => trip.id === id);
+  }
+
   // Get the trips
-  getTrips() {
+  getAllTrips() {
     return this._trips;
   }
 }

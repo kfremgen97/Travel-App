@@ -1,4 +1,5 @@
 // Imports
+import { v4 as uuidv4 } from 'uuid';
 import tripsModel from '../models/tripsModel';
 import sidebarView from '../views/sidebarView';
 import formView from '../views/formView';
@@ -8,6 +9,7 @@ import getLocationInfo from '../services/locationService';
 import { getCurrentWeather, getFutureWeather } from '../services/weatherService';
 import getPhotoInfo from '../services/photoService';
 import dateChecker from '../utilities/dateChecker';
+import tripView from '../views/tripView';
 
 // Load the map
 mapView.loadMap();
@@ -18,7 +20,9 @@ const formHandler = async function (formData) {
   // Get the date from the form data
   const dateString = formData.get('date');
   // Declare and initialize an emptry trip
-  const newTrip = {};
+  const newTrip = {
+    id: uuidv4(),
+  };
 
   try {
     // Render the form spinner
@@ -85,7 +89,9 @@ const formHandler = async function (formData) {
     // Render form submit button
     formView.renderSubmit();
     // Update the trips ui
-    resultsView.renderTrips(tripsModel.getTrips());
+    const trips = tripsModel.getAllTrips();
+    if (trips.length > 0) resultsView.renderTrips(trips);
+    else resultsView.renderMessage();
   } catch (error) {
     // Clear the form inputs
     formView.clearInputs();
@@ -95,16 +101,26 @@ const formHandler = async function (formData) {
     resultsView.renderError(error);
     // Update the view again after 5 seconds
     setTimeout(() => {
-      const trips = tripsModel.getTrips();
-      if (trips.length > 0) resultsView.renderTrips(tripsModel.getTrips());
+      const trips = tripsModel.getAllTrips();
+      if (trips.length > 0) resultsView.renderTrips(trips);
       else resultsView.renderMessage();
     }, 2000);
   }
 };
 
-const tripsHandler = function () {
+const tripsHandler = function (tripId) {
+  // Print the trips id
+  console.log(tripId);
+  // Get the trip based on id
+  const selectedTrip = tripsModel.getTrip(tripId);
+  // Set the selected trip in the model
+  if (selectedTrip) tripsModel.setSelecteedTrip(selectedTrip);
+  else tripsModel.setSelecteedTrip({});
   // Show detail view
   sidebarView.showDetailView();
+  // Update the detail view based on selected trip
+  tripView.renderTrip(tripsModel.getSelectedTrip());
+  tripView.renderWeather(tripsModel.getSelectedTrip());
 };
 
 const backHandler = function () {

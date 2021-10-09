@@ -27,7 +27,7 @@ class ResultsView {
     // Loop over the trips to generate the string
     trips.forEach((trip) => {
       tripsString += `
-        <li class="trips__item">
+        <li class="trips__item" data-id="${trip.id}">
           <div class="trips__detail">
             <svg class="trips__label">
               <use href="./assets/sprite/regular.svg#info"></use>
@@ -88,11 +88,8 @@ class ResultsView {
       // If tripsItem is null, no trips item was clicked
       if (!tripsItem) return;
 
-      // Else console log the tripsItem
-      console.log(tripsItem);
-
-      // Call the handler
-      handler();
+      // Else  set the trip id to the handler
+      handler(tripsItem.dataset.id);
     });
   }
 }

@@ -1,10 +1,19 @@
 /* trips */ 
 
 .trips {
-  // Remove list styles
-  list-style: none;
 
-    /* trips item */
+  // Set the height to 100% of parent
+  height: 100%;
+  overflow: scroll;
+
+  /* trips list */
+
+  &__list {
+    // Remove list styles
+    list-style: none;
+  }
+
+  /* trips item */
 
   &__item {
     cursor: pointer;

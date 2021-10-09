@@ -29,7 +29,7 @@
     // Set the display to grid with 1 column by 5 rows
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(4,min-content) 1fr;
+    grid-template-rows: repeat(2,min-content) 1fr;
     // Set the grid gap to 2 rem
     grid-gap: 2rem;
     }
