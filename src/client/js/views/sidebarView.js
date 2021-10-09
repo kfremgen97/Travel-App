@@ -13,7 +13,6 @@ class SidebarView {
     this.sidebarMaster.classList.add('hidden');
     // Show the detail view
     this.sidebarDetail.classList.remove('hidden');
-    console.log('yo');
   }
 
   // Show the master view
@@ -22,7 +21,6 @@ class SidebarView {
     this.sidebarDetail.classList.add('hidden');
     // Show the master view
     this.sidebarMaster.classList.remove('hidden');
-    console.log('yo');
   }
 
   // Back button click publisher

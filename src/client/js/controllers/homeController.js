@@ -114,8 +114,8 @@ const tripsHandler = function (tripId) {
   // Get the trip based on id
   const selectedTrip = tripsModel.getTrip(tripId);
   // Set the selected trip in the model
-  if (selectedTrip) tripsModel.setSelecteedTrip(selectedTrip);
-  else tripsModel.setSelecteedTrip({});
+  if (selectedTrip) tripsModel.setSelectedTrip(selectedTrip);
+  else tripsModel.setSelectedTrip({});
   // Show detail view
   sidebarView.showDetailView();
   // Update the detail view based on selected trip
@@ -126,6 +126,9 @@ const tripsHandler = function (tripId) {
 const backHandler = function () {
   // Show master view
   sidebarView.showMasterView();
+  // Clear the selected trip
+  tripsModel.setSelectedTrip();
+  console.log(tripsModel._selectedTrip);
 };
 
 sidebarView.addBackPublisher(backHandler);

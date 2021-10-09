@@ -7,7 +7,7 @@ class TripsModel {
   }
 
   // Update the selected trip
-  setSelecteedTrip(trip) {
+  setSelectedTrip(trip = {}) {
     this._selectedTrip = trip;
   }
 
