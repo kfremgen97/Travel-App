@@ -66,6 +66,8 @@ const createNewTrip = async function (locationString, dateString) {
   // Add the properties
   newTrip.imageURL = photoInfo[0]?.largeImageURL ?? null;
   console.log(newTrip);
+  // Return the trip
+  return newTrip;
 };
 
 const formHandler = async function (formData) {
