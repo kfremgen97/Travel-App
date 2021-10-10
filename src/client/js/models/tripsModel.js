@@ -22,6 +22,14 @@ class TripsModel {
     this._trips.splice(0, 0, trip);
   }
 
+  // Delete a trip
+  deleteTrip(trip) {
+    // Get the trip index based on id
+    const index = this._trips.findIndex((t) => t.id === trip.id);
+    // If the index is > -1 remove it
+    if (index > -1) this._trips.splice(index, 1);
+  }
+
   getTrip(id) {
     // Get and return the trip based on id
     return this._trips.find((trip) => trip.id === id);

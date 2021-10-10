@@ -115,7 +115,7 @@ const tripsHandler = function (tripId) {
   const selectedTrip = tripsModel.getTrip(tripId);
   // Set the selected trip in the model
   if (selectedTrip) tripsModel.setSelectedTrip(selectedTrip);
-  else tripsModel.setSelectedTrip({});
+  else tripsModel.setSelectedTrip();
   // Show detail view
   sidebarView.showDetailView();
   // Update the detail view based on selected trip
@@ -131,6 +131,20 @@ const backHandler = function () {
   console.log(tripsModel._selectedTrip);
 };
 
+const deleteHandler = function () {
+  // Delete the selcted trip
+  tripsModel.deleteTrip(tripsModel.getSelectedTrip());
+  // Set the selected trip back to an empty object
+  tripsModel.setSelectedTrip();
+  // Show the master view
+  sidebarView.showMasterView();
+  // Rerender the trips
+  const trips = tripsModel.getAllTrips();
+  if (trips.length > 0) resultsView.renderTrips(trips);
+  else resultsView.renderMessage();
+};
+
 sidebarView.addBackPublisher(backHandler);
+sidebarView.addDeleteButtonPublisher(deleteHandler);
 formView.addFormPublisher(formHandler);
 resultsView.addTripsPublisher(tripsHandler);

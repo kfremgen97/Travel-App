@@ -5,6 +5,7 @@ class SidebarView {
     this.sidebarMaster = document.querySelector('.sidebar__master');
     this.sidebarDetail = document.querySelector('.sidebar__detail');
     this.backButton = document.querySelector('.button--back');
+    this.deleteButton = document.querySelector('.button--delete');
   }
 
   // Show the detail view
@@ -30,6 +31,16 @@ class SidebarView {
       event.preventDefault();
       // Call the handler
       handler();
+    });
+  }
+
+  // Delete button click publisher
+  addDeleteButtonPublisher(handler) {
+    this.deleteButton.addEventListener('click', (event) => {
+    // Prevent default
+    event.preventDefault();
+    // Call the handler
+    handler();
     });
   }
 }
