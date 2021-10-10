@@ -6,9 +6,11 @@ class TripView {
     this.weather = document.querySelector('.weather');
   }
 
-  renderTrip(trip) {
-    console.log(trip);
-    const tripString = `<div class="trip">
+  // Generate trip
+  _generateTrip(trip) {
+    // Generate and return trip html string
+    return `
+    <div class="trip">
     <img class="photo photo--trip" src="${trip.imageURL ?? ''}" alt="${trip.name}">
     <h3 class="heading heading--3 heading--white">Trip</h3>
     <div class="trip__item">
@@ -25,15 +27,13 @@ class TripView {
       </svg>
       <span class="trip__value">${trip.date.toDateString()}</span>
     </div>
-  </div>`;
-
-    // Clear the ui
-    this.trip.innerHTML = '';
-    // Update the ui
-    this.trip.insertAdjacentHTML('afterbegin', tripString);
+  </div>
+  `;
   }
 
-  renderWeather(trip) {
+  // Generate weather
+  _generateWeather(trip) {
+    // Generate and return weather string
     let weatherString = '<h3 class="heading heading--3 heading--white mb--medium">Weather</h3>';
     weatherString += '<ul class="weather__list">';
     // For each weather element
@@ -57,6 +57,23 @@ class TripView {
     });
     weatherString += '</ul>';
 
+    return weatherString;
+  }
+
+  // Render the trip
+  renderTrip(trip) {
+    // Generate trip string
+    const tripString = this._generateTrip(trip);
+    // Clear the ui
+    this.trip.innerHTML = '';
+    // Update the ui
+    this.trip.insertAdjacentHTML('afterbegin', tripString);
+  }
+
+  // Render the weather
+  renderWeather(trip) {
+    // Generate weather string
+    const weatherString = this._generateWeather(trip);
     // Clear the ui
     this.weather.innerHTML = '';
     // Update the ui

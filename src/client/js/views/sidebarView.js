@@ -37,10 +37,10 @@ class SidebarView {
   // Delete button click publisher
   addDeleteButtonPublisher(handler) {
     this.deleteButton.addEventListener('click', (event) => {
-    // Prevent default
-    event.preventDefault();
-    // Call the handler
-    handler();
+      // Prevent default
+      event.preventDefault();
+      // Call the handler
+      handler();
     });
   }
 }

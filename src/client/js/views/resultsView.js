@@ -5,22 +5,27 @@ class ResultsView {
     this.results = document.querySelector('.results');
   }
 
-  // Render the message
-  renderMessage() {
-    // Message string
-    let messageString = '<div class="message">';
-    messageString += '<h5 class="heading heading--5 heading--primary">Fill out the form above to add a trip...</h5>';
-    messageString += ' </div>';
-
-    // Clear the results ui
-    this.results.innerHTML = '';
-    // Render the trips
-    this.results.insertAdjacentHTML('afterbegin', messageString);
+  // Generate message string
+  _generateMessage() {
+    // Generate and return message string
+    return `
+      <div class="message">
+        <h5 class="heading heading--5 heading--primary">Fill out the form above to add a trip...</h5>
+      </div>
+      `;
   }
 
-  // Render the trips
-  renderTrips(trips) {
-    // Trip string
+  _generateError(error) {
+    return `
+      <div class="error">
+        <h5 class="heading heading--5 heading--error"> Error</>
+        <h5 class="heading heading--5 heading--error"> ${error.message} </h5>
+      </div>
+      `;
+  }
+
+  _generateTrips(trips) {
+    // Generate and return the trips string
     let tripsString = '<h3 class="heading heading--3 heading--white mb--medium">Trips</h3>';
     tripsString += '<ul class="trips">';
 
@@ -50,29 +55,41 @@ class ResultsView {
            <use href="./assets/sprite/regular.svg#chevron-right"></use>
          </svg>
         </li>
-            `;
+        `;
     });
 
     tripsString += '</ul>';
+    return tripsString;
+  }
 
+  // Render the message
+  renderMessage() {
+    // Generate message string
+    const messageString = this._generateMessage();
     // Clear the results ui
     this.results.innerHTML = '';
-    // Render the trips
-    this.results.insertAdjacentHTML('afterbegin', tripsString);
+    // Render the message
+    this.results.insertAdjacentHTML('afterbegin', messageString);
   }
 
   // Render the error
   renderError(error) {
-    const errorString = `
-    <div class="error">
-      <h5 class="heading heading--5 heading--error"> Error</>
-      <h5 class="heading heading--5 heading--error"> ${error.message} </h5>
-    </div>`;
-
+    // Generate error string
+    const errorString = this._generateError(error);
     // Clear the trips ui
     this.results.innerHTML = '';
     // Render the error
     this.results.insertAdjacentHTML('afterbegin', errorString);
+  }
+
+  // Render the trips
+  renderTrips(trips) {
+    // Trip string
+    const tripsString = this._generateTrips(trips);
+    // Clear the results ui
+    this.results.innerHTML = '';
+    // Render the trips
+    this.results.insertAdjacentHTML('afterbegin', tripsString);
   }
 
   // Trips click publisher

@@ -14,7 +14,17 @@ class FormView {
     this.dateInput.value = '';
   }
 
-  // Render spinner in button
+  // Generate spinner
+  _generateSpinner() {
+    // Generate and return spinenr html string
+    return `
+    <svg>
+      <use href="./assets/sprite/regular.svg#spinner"></use>
+    </svg>
+    `;
+  }
+
+  // Render spinner
   renderSpinner() {
     // Disable the button
     this.submitButton.disabled = true;
@@ -22,13 +32,9 @@ class FormView {
     this.submitButton.innerHTML = '';
     // Add the loading modifier to the button class list
     this.submitButton.classList.add('button--loading');
-    // Add the spinner
-    const spinnerString = `
-    <svg>
-    <use href="./assets/sprite/regular.svg#spinner"></use>
-    </svg>
-    `;
-    // Set the submit button
+    // Generate the spinner string
+    const spinnerString = this._generateSpinner();
+    // Update the submit button
     this.submitButton.insertAdjacentHTML('afterbegin', spinnerString);
   }
 
