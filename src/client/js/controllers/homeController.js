@@ -14,15 +14,65 @@ import tripView from '../views/tripView';
 // Load the map
 mapView.loadMap();
 
+const createNewTrip = async function (locationString, dateString) {
+  // Declare and initialize a new trip
+  const newTrip = {
+    id: uuidv4(),
+    date: new Date(dateString.replace('-', '/')),
+  };
+
+  // Get the location
+  const locationInfo = await getLocationInfo(locationString);
+  // Add the properties
+  newTrip.name = locationInfo.name;
+  newTrip.countryName = locationInfo.countryName;
+  newTrip.countryCode = locationInfo.countryCode;
+  newTrip.coordinates = {
+    lat: locationInfo.lat,
+    lng: locationInfo.lng,
+  };
+
+  // Based on the date call either the current weather api or future weather api
+  const daysAway = dateChecker(newTrip.date);
+  if (daysAway < 7) {
+    // Get the current weather
+    const { data: weatherInfo } = await getCurrentWeather(newTrip.coordinates.lat,
+      newTrip.coordinates.lng);
+    // Add the properties
+    newTrip.weather = [];
+    newTrip.weather[0] = {
+      temp: weatherInfo[0].temp,
+      description: weatherInfo[0].weather.description,
+      date: new Date(weatherInfo[0].datetime.replaceAll('-', '/')),
+    };
+  } else {
+    // Get the future weather
+    const { data: weatherInfo } = await getFutureWeather(newTrip.coordinates.lat,
+      newTrip.coordinates.lng);
+    // Add the properties
+    newTrip.weather = [];
+    // Loop through the weatherInfo
+    weatherInfo.forEach((weather) => {
+      newTrip.weather.push({
+        temp: weather.temp,
+        description: weather.weather.description,
+        date: new Date(weather.datetime.replaceAll('-', '/')),
+      });
+    });
+  }
+
+  // Get the photo info
+  const { hits: photoInfo } = await getPhotoInfo(newTrip.name);
+  // Add the properties
+  newTrip.imageURL = photoInfo[0]?.largeImageURL ?? null;
+  console.log(newTrip);
+};
+
 const formHandler = async function (formData) {
   // Get the location from the form data
   const locationString = formData.get('location');
   // Get the date from the form data
   const dateString = formData.get('date');
-  // Declare and initialize an emptry trip
-  const newTrip = {
-    id: uuidv4(),
-  };
 
   try {
     // Render the form spinner
@@ -32,57 +82,11 @@ const formHandler = async function (formData) {
     if (!locationString) throw new Error('Invalid location');
     // Check if dateString is null
     if (!dateString) throw new Error('Invalid date');
-    // Add the date property
-    newTrip.date = new Date(dateString.replace('-', '/'));
 
-    // Get the location
-    const locationInfo = await getLocationInfo(locationString);
-    // Add the properties
-    newTrip.name = locationInfo.name;
-    newTrip.countryName = locationInfo.countryName;
-    newTrip.countryCode = locationInfo.countryCode;
-    newTrip.coordinates = {
-      lat: locationInfo.lat,
-      lng: locationInfo.lng,
-    };
-
-    // Based on the date call either the current weather api or future weather api
-    const daysAway = dateChecker(newTrip.date);
-    if (daysAway < 7) {
-      // Get the current weather
-      const { data: weatherInfo } = await getCurrentWeather(newTrip.coordinates.lat,
-        newTrip.coordinates.lng);
-      // Add the properties
-      newTrip.weather = [];
-      newTrip.weather[0] = {
-        temp: weatherInfo[0].temp,
-        description: weatherInfo[0].weather.description,
-        date: new Date(weatherInfo[0].datetime.replaceAll('-', '/')),
-      };
-    } else {
-      // Get the future weather
-      const { data: weatherInfo } = await getFutureWeather(newTrip.coordinates.lat,
-        newTrip.coordinates.lng);
-      // Add the properties
-      newTrip.weather = [];
-      // Loop through the weatherInfo
-      weatherInfo.forEach((weather) => {
-        newTrip.weather.push({
-          temp: weather.temp,
-          description: weather.weather.description,
-          date: new Date(weather.datetime.replaceAll('-', '/')),
-        });
-      });
-    }
-
-    // Get the photo info
-    const { hits: photoInfo } = await getPhotoInfo(newTrip.name);
-    // Add the properties
-    newTrip.imageURL = photoInfo[0]?.largeImageURL ?? null;
-    console.log(newTrip);
-
+    // Create the new trip
+    const trip = await createNewTrip(locationString, dateString);
     // Add the trip to the trips model
-    tripsModel.addTrip(newTrip);
+    tripsModel.addTrip(trip);
 
     // Clear the form inputs
     formView.clearInputs();
