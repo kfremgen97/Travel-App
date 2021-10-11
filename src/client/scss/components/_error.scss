@@ -1,6 +1,8 @@
 /* error */ 
 
  .error {
+  // Set the height
+  height: 100%;
   // Set the display to flex
   display: flex;
   // Set the firection to column
@@ -8,4 +10,6 @@
   flex-wrap: wrap;
   // Align the items in the perpendicular axis in the center
   align-items: center;
+  // Justify the content in the center along the main axis
+  justify-content: center;
  }

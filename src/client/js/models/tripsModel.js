@@ -55,7 +55,6 @@ class TripsModel {
     // Get the trips from local storage
     let trips = localStorage.getItem('trips');
     trips = JSON.parse(trips);
-    console.log(trips);
 
     // If trips is null
     if (!trips) return;
