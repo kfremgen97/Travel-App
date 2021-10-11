@@ -3,6 +3,8 @@
 // Api components
 export const BASE_URL = 'http://localhost:8080';
 export const MID_URL = 'api';
+// key
+export const KEY_URL = 'key';
 // location
 export const LOCATION_URL = 'location';
 // weather

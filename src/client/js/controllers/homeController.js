@@ -5,14 +5,12 @@ import sidebarView from '../views/sidebarView';
 import formView from '../views/formView';
 import resultsView from '../views/resultsView';
 import mapView from '../views/mapView';
+import getMapKey from '../services/mapService';
 import getLocationInfo from '../services/locationService';
 import { getCurrentWeather, getFutureWeather } from '../services/weatherService';
 import getPhotoInfo from '../services/photoService';
 import dateChecker from '../utilities/dateChecker';
 import tripView from '../views/tripView';
-
-// Load the map
-mapView.loadMap();
 
 const createNewTrip = async function (locationString, dateString) {
   // Declare and initialize a new trip
@@ -150,7 +148,18 @@ const deleteHandler = function () {
   else resultsView.renderMessage();
 };
 
-const loadTrips = function () {
+const _loadMap = async function () {
+  try {
+    // Get the map key
+    const keyData = await getMapKey();
+    // Load the map
+    mapView.loadMap(keyData.key);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const _loadTrips = function () {
   // Get all the trips from local storage
   tripsModel.readAllTrips();
   // Render the works out
@@ -159,11 +168,22 @@ const loadTrips = function () {
   else resultsView.renderMessage();
 };
 
+const loadApplication = async function () {
+  try {
+    // Load the map
+    await _loadMap();
+    // Load the trips from storage
+    await _loadTrips();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 // Event listeners
 sidebarView.addBackPublisher(backHandler);
 sidebarView.addDeleteButtonPublisher(deleteHandler);
 formView.addFormPublisher(formHandler);
 resultsView.addTripsPublisher(tripsHandler);
 
-// Load the trips
-loadTrips();
+// Load the application
+loadApplication();

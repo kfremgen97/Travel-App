@@ -8,19 +8,23 @@ class MapView {
     // Map view element
     this.mapView = document.querySelector('#map');
     // Map loader object
-    this.loader = new Loader({
-      apiKey: '',
-      version: 'weekly',
-    });
+    this.loader = {};
     // map object
     this.mapObject = {};
   }
 
   // Load the map
-  loadMap() {
+  loadMap(apiKey) {
+    // Set the loader
+    this.loader = new Loader({
+      apiKey,
+      version: 'weekly',
+    });
+
+    // Load the map
     this.loader.load().then(() => {
       // eslint-disable-next-line no-undef
-      this.map = new google.maps.Map(this.mapView, {
+      this.mapObject = new google.maps.Map(this.mapView, {
         center: { lat: -34.397, lng: 150.644 },
         zoom: 8,
       });

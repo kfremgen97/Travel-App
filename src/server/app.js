@@ -33,6 +33,7 @@ app.get('/api/key', (req, res) => {
   // Get the request params keyName
   const { keyName } = req.query;
   if (keyName === 'map') res.send({ description: 'Google map api key', key: process.env.GOOGLE_MAP_API_KEY });
+  else res.send({ error: 'Unable to get api key' });
 });
 
 // Geonames route

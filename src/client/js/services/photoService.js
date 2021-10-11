@@ -17,7 +17,9 @@ const getPhotoInfo = function (location) {
     })
     .then((data) => {
       console.log(data);
-      // return the data
+      // Check if data has error
+      if (data.error) throw new Error(data.error);
+      // Return the data
       return data;
     })
     .catch((error) => {
