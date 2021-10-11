@@ -150,7 +150,20 @@ const deleteHandler = function () {
   else resultsView.renderMessage();
 };
 
+const loadTrips = function () {
+  // Get all the trips from local storage
+  tripsModel.readAllTrips();
+  // Render the works out
+  const trips = tripsModel.getAllTrips();
+  if (trips.length > 0) resultsView.renderTrips(trips);
+  else resultsView.renderMessage();
+};
+
+// Event listeners
 sidebarView.addBackPublisher(backHandler);
 sidebarView.addDeleteButtonPublisher(deleteHandler);
 formView.addFormPublisher(formHandler);
 resultsView.addTripsPublisher(tripsHandler);
+
+// Load the trips
+loadTrips();
