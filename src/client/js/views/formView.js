@@ -4,14 +4,16 @@ class FormView {
   constructor() {
     this.form = document.querySelector('.form');
     this.locationInput = document.querySelector('.form__input--location');
-    this.dateInput = document.querySelector('.form__input--date');
+    this.startDateInput = document.querySelector('.form__input--start');
+    this.endDateInput = document.querySelector('.form__input--end');
     this.submitButton = document.querySelector('.button--trip');
   }
 
   // Clear the form inputs
   clearInputs() {
     this.locationInput.value = '';
-    this.dateInput.value = '';
+    this.startDateInput.value = '';
+    this.endDateInput.value = '';
   }
 
   // Generate spinner

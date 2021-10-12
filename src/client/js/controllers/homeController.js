@@ -70,32 +70,38 @@ const createNewTrip = async function (locationString, dateString) {
   return newTrip;
 };
 
-const checkFormInputs = function (locationString, dateString) {
+const checkFormInputs = function (locationString, startDateString, endDateString) {
   // Check if locationString is null
   if (!locationString) throw new Error('Invalid location');
+
   // Check if dateString is null
-  if (!dateString) throw new Error('Invalid date');
+  if (!startDateString || !endDateString) throw new Error('Invalid date');
+
+  // Gte the miliiseconds
+  const startDateSeconds = new Date(startDateString.replace('-', '/')).getTime();
+  const endDateSeconds = new Date(endDateString.replaceAll('-', '/')).getTime();
   // Check if date string is not in the past
-  if (dateChecker(new Date(dateString.replace('-', '/')).getTime()) < 0) {
-    throw new Error('Invalid date');
-  }
+  if (dateChecker(startDateSeconds) < 0 || dateChecker(endDateSeconds) < 0) throw new Error('Dates can not be in the past');
+  // Check to make sure start date is before end date
+  if (dateChecker(endDateSeconds, startDateSeconds) < 0) throw new Error('End date must be after start date');
 };
 
 const formHandler = async function (formData) {
   // Get the location from the form data
   const locationString = formData.get('location');
   // Get the date from the form data
-  const dateString = formData.get('date');
+  const startDateString = formData.get('startDate');
+  const endDateString = formData.get('endDate');
 
   try {
     // Render the form spinner
     formView.renderSpinner();
 
     // Check the form inputs
-    checkFormInputs(locationString, dateString);
+    checkFormInputs(locationString, startDateString, endDateString);
 
     // Create the new trip
-    const trip = await createNewTrip(locationString, dateString);
+    const trip = await createNewTrip(locationString, startDateString, endDateString);
     // Add the trip to the trips model
     tripsModel.addTrip(trip);
     // Set it as the selected trip
@@ -129,7 +135,6 @@ const formHandler = async function (formData) {
       if (trips.length > 0) {
         resultsView.renderTrips(trips);
         mapView.renderMarkers(trips);
-        mapView.setCoordinates(tripsModel.getSelectedTrip());
       } else {
         resultsView.renderMessage();
         mapView.ClearMarkers();
