@@ -50,7 +50,7 @@ class TripView {
       weatherString += `
       <li class="weather__item">
         <svg class="weather__label">
-          <use href="./assets/sprite/regular.svg#temperature-high"></use>
+          <use href="./assets/sprite/regular.svg#thermometer-full"></use>
         </svg>
         <span class="weather__value">${weather.temp}&#8451</span>
         <svg class="weather__label">
