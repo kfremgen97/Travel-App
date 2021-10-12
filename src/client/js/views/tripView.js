@@ -8,10 +8,20 @@ class TripView {
 
   // Generate trip
   _generateTrip(trip) {
+
+    // See if imageURL is null or not
+    let photoString;
+
+    if (trip.imageURL) {
+      photoString = `<img class="photo photo--trip" src="${trip.imageURL}" alt="${trip.name}"></img>`;
+    } else {
+      photoString = `<div class="photo photo--trip">
+      </div>`;
+    }
+
     // Generate and return trip html string
     return `
-    <div class="trip">
-    <img class="photo photo--trip" src="${trip.imageURL ?? ''}" alt="${trip.name}">
+    ${photoString}
     <h3 class="heading heading--3 heading--white">Trip</h3>
     <div class="trip__item">
       <svg class="trip__label">
@@ -27,7 +37,6 @@ class TripView {
       </svg>
       <span class="trip__value">${new Date(trip.date).toDateString()}</span>
     </div>
-  </div>
   `;
   }
 

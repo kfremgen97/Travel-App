@@ -9,6 +9,11 @@
   // Set the size proeprties
   height: 15rem;
   width: 20rem;
+  // Set the background properties
+  background-color: $primary;
+  background-image: url('../assets/img/placeholder.svg');
+  background-size: cover;
+  background-position: center;
 
   /* photo trip */ 
   

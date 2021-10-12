@@ -43,7 +43,7 @@ class MapView {
       lng: Number(selectedTrip.coordinates.lng),
     };
     // Set the map coordinate center
-    this.mapObject.setCenter(coordinates);
+    this.mapObject.panTo(coordinates);
     // Set the map view
     this.mapObject.setZoom(8);
   }
@@ -66,6 +66,8 @@ class MapView {
         position: coordinates,
         map: this.mapObject,
         title: trip.name,
+        // eslint-disable-next-line no-undef
+        animation: google.maps.Animation.DROP,
       });
       // Add the marker to the array
       this.markers.push(marker);
