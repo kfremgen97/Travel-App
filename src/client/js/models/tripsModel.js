@@ -61,11 +61,11 @@ class TripsModel {
 
     // Loop through the trips
     trips.forEach((tripFromStorage) => {
-      // Create a new trip object formt he storage trip
+      // Create a new trip object from the storage trip
       const trip = { ...tripFromStorage };
       // Create the new date object
       const date = new Date(trip.date.replaceAll('-', '/'));
-      // Set the trip date property
+      // // Set the trip date property
       trip.date = date;
       // Add the trip to the trips proeprty  array
       this._trips.push(trip);

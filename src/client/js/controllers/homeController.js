@@ -87,15 +87,23 @@ const formHandler = async function (formData) {
     const trip = await createNewTrip(locationString, dateString);
     // Add the trip to the trips model
     tripsModel.addTrip(trip);
+    // Set it as the selected trip
+    tripsModel.setSelectedTrip(trip);
 
     // Clear the form inputs
     formView.clearInputs();
     // Render form submit button
     formView.renderSubmit();
-    // Update the trips ui
+    // Update the trips and map ui
     const trips = tripsModel.getAllTrips();
-    if (trips.length > 0) resultsView.renderTrips(trips);
-    else resultsView.renderMessage();
+    if (trips.length > 0) {
+      resultsView.renderTrips(trips);
+      mapView.renderMarkers(trips);
+      mapView.setCoordinates(tripsModel.getSelectedTrip());
+    } else {
+      resultsView.renderMessage();
+      mapView.ClearMarkers();
+    }
   } catch (error) {
     // Clear the form inputs
     formView.clearInputs();
@@ -105,9 +113,16 @@ const formHandler = async function (formData) {
     resultsView.renderError(error);
     // Update the view again after 5 seconds
     setTimeout(() => {
+      // Update the trips and map ui
       const trips = tripsModel.getAllTrips();
-      if (trips.length > 0) resultsView.renderTrips(trips);
-      else resultsView.renderMessage();
+      if (trips.length > 0) {
+        resultsView.renderTrips(trips);
+        mapView.renderMarkers(trips);
+        mapView.setCoordinates(tripsModel.getSelectedTrip());
+      } else {
+        resultsView.renderMessage();
+        mapView.ClearMarkers();
+      }
     }, 2000);
   }
 };
@@ -125,6 +140,8 @@ const tripsHandler = function (tripId) {
   // Update the detail view based on selected trip
   tripView.renderTrip(tripsModel.getSelectedTrip());
   tripView.renderWeather(tripsModel.getSelectedTrip());
+  // Render the map view
+  mapView.setCoordinates(tripsModel.getSelectedTrip());
 };
 
 const backHandler = function () {
@@ -144,16 +161,24 @@ const deleteHandler = function () {
   sidebarView.showMasterView();
   // Rerender the trips
   const trips = tripsModel.getAllTrips();
-  if (trips.length > 0) resultsView.renderTrips(trips);
-  else resultsView.renderMessage();
+  if (trips.length > 0) {
+    resultsView.renderTrips(trips);
+    mapView.renderMarkers(trips);
+  }else {
+    resultsView.renderMessage();
+    // Clear the markers
+    mapView.clearMarkers();
+  }
 };
 
 const _loadMap = async function () {
   try {
     // Get the map key
     const keyData = await getMapKey();
+    // Get all the trips
+    const trips = tripsModel.getAllTrips();
     // Load the map
-    mapView.loadMap(keyData.key);
+    mapView.loadMap(keyData.key, trips);
   } catch (error) {
     console.error(error);
   }
@@ -170,10 +195,10 @@ const _loadTrips = function () {
 
 const loadApplication = async function () {
   try {
+    // Load the trips from storage
+    _loadTrips();
     // Load the map
     await _loadMap();
-    // Load the trips from storage
-    await _loadTrips();
   } catch (error) {
     console.error(error);
   }
