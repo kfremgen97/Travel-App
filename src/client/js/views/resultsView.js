@@ -49,7 +49,7 @@ class ResultsView {
              <svg class="trips__label">
               <use href="./assets/sprite/regular.svg#calendar"></use>
              </svg>
-            <span class="trips__value">${trip.date.toDateString()}</span>
+            <span class="trips__value">${new Date(trip.date).toDateString()}</span>
           </div>
            <svg class="trips__arrow">
            <use href="./assets/sprite/regular.svg#chevron-right"></use>

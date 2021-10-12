@@ -25,7 +25,7 @@ class TripView {
       <svg class="trip__label">
         <use href="./assets/sprite/regular.svg#calendar"></use>
       </svg>
-      <span class="trip__value">${trip.date.toDateString()}</span>
+      <span class="trip__value">${new Date(trip.date).toDateString()}</span>
     </div>
   </div>
   `;
@@ -51,7 +51,7 @@ class TripView {
         <svg class="weather__label">
           <use href="./assets/sprite/regular.svg#calendar"></use>
         </svg>
-        <span class="weather__value">${weather.date.toDateString()}</span>
+        <span class="weather__value">${new Date(weather.date).toDateString()}</span>
       </li>
       `;
     });

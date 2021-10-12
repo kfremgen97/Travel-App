@@ -16,7 +16,7 @@ const createNewTrip = async function (locationString, dateString) {
   // Declare and initialize a new trip
   const newTrip = {
     id: uuidv4(),
-    date: new Date(dateString.replace('-', '/')),
+    date: new Date(dateString.replace('-', '/')).getTime(),
   };
 
   // Get the location
@@ -32,7 +32,9 @@ const createNewTrip = async function (locationString, dateString) {
 
   // Based on the date call either the current weather api or future weather api
   const daysAway = dateChecker(newTrip.date);
-  if (daysAway < 7) {
+  if (daysAway < 0) {
+    throw new Error('Invalid date');
+  } else if (daysAway <= 7) {
     // Get the current weather
     const { data: weatherInfo } = await getCurrentWeather(newTrip.coordinates.lat,
       newTrip.coordinates.lng);
@@ -41,7 +43,7 @@ const createNewTrip = async function (locationString, dateString) {
     newTrip.weather[0] = {
       temp: weatherInfo[0].temp,
       description: weatherInfo[0].weather.description,
-      date: new Date(weatherInfo[0].datetime.replaceAll('-', '/')),
+      date: new Date(weatherInfo[0].datetime.replaceAll('-', '/')).getTime(),
     };
   } else {
     // Get the future weather
@@ -54,7 +56,7 @@ const createNewTrip = async function (locationString, dateString) {
       newTrip.weather.push({
         temp: weather.temp,
         description: weather.weather.description,
-        date: new Date(weather.datetime.replaceAll('-', '/')),
+        date: new Date(weather.datetime.replaceAll('-', '/')).getTime(),
       });
     });
   }
@@ -68,6 +70,17 @@ const createNewTrip = async function (locationString, dateString) {
   return newTrip;
 };
 
+const checkFormInputs = function (locationString, dateString) {
+  // Check if locationString is null
+  if (!locationString) throw new Error('Invalid location');
+  // Check if dateString is null
+  if (!dateString) throw new Error('Invalid date');
+  // Check if date string is not in the past
+  if (dateChecker(new Date(dateString.replace('-', '/')).getTime()) < 0) {
+    throw new Error('Invalid date');
+  }
+};
+
 const formHandler = async function (formData) {
   // Get the location from the form data
   const locationString = formData.get('location');
@@ -78,10 +91,8 @@ const formHandler = async function (formData) {
     // Render the form spinner
     formView.renderSpinner();
 
-    // Check if locationString is null
-    if (!locationString) throw new Error('Invalid location');
-    // Check if dateString is null
-    if (!dateString) throw new Error('Invalid date');
+    // Check the form inputs
+    checkFormInputs(locationString, dateString);
 
     // Create the new trip
     const trip = await createNewTrip(locationString, dateString);
