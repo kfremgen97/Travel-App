@@ -25,17 +25,17 @@ class TripView {
     <h3 class="heading heading--3 heading--white">Trip</h3>
     <div class="trip__item">
       <svg class="trip__label">
-        <use href="./assets/sprite/regular.svg#info"></use>
+        <use href="./assets/sprite/regular.svg#location"></use>
       </svg>
       <span class="trip__value">${trip.name}, ${trip.countryName}</span>
       <svg class="trip__label">
-        <use href="./assets/sprite/regular.svg#location"></use>
+        <use href="./assets/sprite/regular.svg#plane-departure"></use>
       </svg>
-      <span class="trip__value">${trip.coordinates.lat} lar,${trip.coordinates.lng} lng</span>
+      <span class="trip__value">${new Date(trip.startDate).toDateString()}</span>
       <svg class="trip__label">
-        <use href="./assets/sprite/regular.svg#calendar"></use>
-      </svg>
-      <span class="trip__value">${new Date(trip.date).toDateString()}</span>
+      <use href="./assets/sprite/regular.svg#plane-arrival"></use>
+    </svg>
+    <span class="trip__value">${new Date(trip.endDate).toDateString()}</span>
     </div>
   `;
   }
@@ -43,7 +43,7 @@ class TripView {
   // Generate weather
   _generateWeather(trip) {
     // Generate and return weather string
-    let weatherString = '<h3 class="heading heading--3 heading--white mb--medium">Weather</h3>';
+    let weatherString = '<h3 class="heading heading--3 heading--white mb--small">Weather</h3>';
     weatherString += '<ul class="weather__list">';
     // For each weather element
     trip.weather.forEach((weather) => {
