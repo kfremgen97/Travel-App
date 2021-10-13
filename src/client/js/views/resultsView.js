@@ -26,7 +26,7 @@ class ResultsView {
 
   _generateTrips(trips) {
     // Generate and return the trips string
-    let tripsString = '<h3 class="heading heading--3 heading--white mb--medium">Trips</h3>';
+    let tripsString = '<h3 class="heading heading--3 heading--white mb--small">Trips</h3>';
     tripsString += '<ul class="trips">';
 
     // Loop over the trips to generate the string
@@ -35,21 +35,21 @@ class ResultsView {
         <li class="trips__item" data-id="${trip.id}">
           <div class="trips__detail">
             <svg class="trips__label">
-              <use href="./assets/sprite/regular.svg#info"></use>
+              <use href="./assets/sprite/regular.svg#location"></use>
             </svg>
              <span class="trips__value">${trip.name} , ${trip.countryName}</span>
            </div>
            <div class="trips__detail">
-            <svg class="trips__label">
-               <use href="./assets/sprite/regular.svg#location"></use>
-             </svg>
-            <span class="trips__value">${trip.coordinates.lat} lat , ${trip.coordinates.lng} lng</span>
+            <span class="trips__label--word">Lat</span>
+            <span class="trips__value">${trip.coordinates.lat}</span>
+            <span class="trips__label--word">Lng</span>
+            <span class="trips__value">${trip.coordinates.lng}</span>
            </div>
            <div class="trips__detail">
              <svg class="trips__label">
               <use href="./assets/sprite/regular.svg#calendar"></use>
              </svg>
-            <span class="trips__value">${new Date(trip.date).toDateString()}</span>
+            <span class="trips__value">${new Date(trip.startDate).toDateString()} - ${new Date(trip.endDate).toDateString()} </span>
           </div>
            <svg class="trips__arrow">
            <use href="./assets/sprite/regular.svg#chevron-right"></use>

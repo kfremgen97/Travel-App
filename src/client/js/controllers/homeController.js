@@ -12,11 +12,12 @@ import getPhotoInfo from '../services/photoService';
 import dateChecker from '../utilities/dateChecker';
 import tripView from '../views/tripView';
 
-const createNewTrip = async function (locationString, dateString) {
+const createNewTrip = async function (locationString, startDateString, endDateString) {
   // Declare and initialize a new trip
   const newTrip = {
     id: uuidv4(),
-    date: new Date(dateString.replace('-', '/')).getTime(),
+    startDate: new Date(startDateString.replace('-', '/')).getTime(),
+    endDate: new Date(endDateString.replace('-', '/')).getTime(),
   };
 
   // Get the location
@@ -180,7 +181,7 @@ const deleteHandler = function () {
   if (trips.length > 0) {
     resultsView.renderTrips(trips);
     mapView.renderMarkers(trips);
-  }else {
+  } else {
     resultsView.renderMessage();
     // Clear the markers
     mapView.clearMarkers();

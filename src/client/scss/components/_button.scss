@@ -108,4 +108,12 @@
       outline-color: $error-light;
     }
   }
+
+  /* button trip */ 
+
+  &--trip {
+    // Set the grid columns
+    grid-column: 1/-1;
+   // justify-self: center;
+  }
 }

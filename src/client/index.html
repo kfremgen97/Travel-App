@@ -34,10 +34,25 @@
     <div class="sidebar__master">
       <!-- trip form-->
       <form class="form form--trip">
-        <input type="text" id="location" class="form__input form__input--location mb--small" name="location"
+        <label for="location" class="form__label">
+          <svg class="form__icon">
+            <use href="./assets/sprite/regular.svg#location"></use>
+          </svg>
+        </label>
+        <input type="text" id="location" class="form__input form__input--location" name="location"
           placeholder="location..." required>
-        <input type="date" id="end-date" class="form__input form__input--start mb--small" name="startDate" required>
-        <input type="date" id="start-date" class="form__input form__input--end mb--small" name="endDate" required>
+          <label for="location" class="form__label">
+            <svg class="form__icon">
+              <use href="./assets/sprite/regular.svg#plane-departure"></use>
+            </svg>
+          </label>
+        <input type="date" id="end-date" class="form__input form__input--start" name="startDate" required>
+        <label class="form__label" for="location">
+          <svg class="form__icon">
+            <use href="./assets/sprite/regular.svg#plane-arrival"></use>
+          </svg>
+        </label>
+        <input type="date" id="start-date" class="form__input form__input--end" name="endDate" required>
         <button class="button button--primary button--trip">Submit</button>
       </form>
 
@@ -53,75 +68,29 @@
         <!--<div class="trips">
           <h3 class="heading heading--3 heading--white mb--medium">Trips</h3>
           <ul class="trips__list">
-            <li class="trips__item" data-id="857cf3ab-72fa-47d7-a116-f002aa84bb1d">
-              <div class="trips__detail">
-                <svg class="trips__label">
-                  <use href="./assets/sprite/regular.svg#info"></use>
-                </svg>
-                <span class="trips__value">New York, USA</span>
-              </div>
-              <div class="trips__detail">
-                <svg class="trips__label">
-                  <use href="./assets/sprite/regular.svg#location"></use>
-                </svg>
-                <span class="trips__value">15.00 lon, -3.75 lat</span>
-              </div>
-              <div class="trips__detail">
-                <svg class="trips__label">
-                  <use href="./assets/sprite/regular.svg#calendar"></use>
-                </svg>
-                <span class="trips__value">5/19/27</span>
-              </div>
-              <svg class="trips__arrow">
-                <use href="./assets/sprite/regular.svg#chevron-right"></use>
-              </svg>
-            </li>
-            <li class="trips__item" data-id="805a6c40-e5f2-4e6b-9012-676a3b4a7b95">
-              <div class="trips__detail">
-                <svg class="trips__label">
-                  <use href="./assets/sprite/regular.svg#info"></use>
-                </svg>
-                <span class="trips__value">New York, USA</span>
-              </div>
-              <div class="trips__detail">
-                <svg class="trips__label">
-                  <use href="./assets/sprite/regular.svg#location"></use>
-                </svg>
-                <span class="trips__value">15.00 lon, -3.75 lat</span>
-              </div>
-              <div class="trips__detail">
-                <svg class="trips__label">
-                  <use href="./assets/sprite/regular.svg#calendar"></use>
-                </svg>
-                <span class="trips__value">5/19/27</span>
-              </div>
-              <svg class="trips__arrow">
-                <use href="./assets/sprite/regular.svg#chevron-right"></use>
-              </svg>
-            </li>
-            <li class="trips__item" data-id="68d1304a-5934-4303-a968-2fc9fc5c3e4a">
-              <div class="trips__detail">
-                <svg class="trips__label">
-                  <use href="./assets/sprite/regular.svg#info"></use>
-                </svg>
-                <span class="trips__value">New York, USA</span>
-              </div>
-              <div class="trips__detail">
-                <svg class="trips__label">
-                  <use href="./assets/sprite/regular.svg#location"></use>
-                </svg>
-                <span class="trips__value">15.00 lon, -3.75 lat</span>
-              </div>
-              <div class="trips__detail">
-                <svg class="trips__label">
-                  <use href="./assets/sprite/regular.svg#calendar"></use>
-                </svg>
-                <span class="trips__value">5/19/27</span>
-              </div>
-              <svg class="trips__arrow">
-                <use href="./assets/sprite/regular.svg#chevron-right"></use>
-              </svg>
-            </li>
+           <li class="trips__item" data-id="1c2cb50b-1c8c-402d-b0fb-4f1dde08b447">
+          <div class="trips__detail">
+            <svg class="trips__label">
+              <use href="./assets/sprite/regular.svg#location"></use>
+            </svg>
+             <span class="trips__value">New York , United States</span>
+           </div>
+           <div class="trips__detail">
+            <span class="trips__label--word">Lat</span>
+            <span class="trips__value">40.71427</span>
+            <span class="trips__label--word">Lng</span>
+            <span class="trips__value">-74.00597</span>
+           </div>
+           <div class="trips__detail">
+             <svg class="trips__label">
+              <use href="./assets/sprite/regular.svg#calendar"></use>
+             </svg>
+            <span class="trips__value">Thu Oct 14 2021 - Thu Oct 14 2021 </span>
+          </div>
+           <svg class="trips__arrow">
+           <use href="./assets/sprite/regular.svg#chevron-right"></use>
+         </svg>
+        </li>
           </ul>
         </div>-->
         </div>

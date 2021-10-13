@@ -36,7 +36,7 @@
 
     &:not(:last-of-type) {
       // Add a bottom margin
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
     }
   }
 
@@ -60,12 +60,31 @@
     fill: $primary;
     // Add a margin to the right
     margin-right: .5rem;
+
+    /* trips label word */ 
+
+    &--word {
+      // Set the display to inline block
+      display: inline-block;
+      // Set teh font properties
+      font-size: inherit;
+      font-family: inherit;
+      font-weight: inherit;
+      // Set the color
+      color: $primary;
+      // Add a margin to the right
+      margin-right: .5rem;
+    }
   }
 
   /* trips value */ 
 
   &__value {
     display: inline-block;
+
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
   }
 
   /* trips arrow */ 

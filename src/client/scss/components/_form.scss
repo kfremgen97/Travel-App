@@ -1,8 +1,10 @@
 /* form */ 
 
 .form {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  grid-template-rows: repeat(3,min-content);
+  grid-gap: 1rem 1rem;
 
   /* form input */ 
 
@@ -37,4 +39,17 @@
       color: $grey-dark;
     }
   } 
+
+     /* form label */ 
+
+     &__label {
+      width: 2rem;
+
+      svg {
+        display: inline-block;
+        height: 2rem;
+        width: 2rem;
+        fill: $primary;
+      }
+    }
 }
