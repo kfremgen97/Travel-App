@@ -40,17 +40,17 @@ class ResultsView {
              <span class="trips__value">${trip.name} , ${trip.countryName}</span>
            </div>
            <div class="trips__detail">
-            <span class="trips__label--word">Lat</span>
-            <span class="trips__value">${trip.coordinates.lat}</span>
-            <span class="trips__label--word">Lng</span>
-            <span class="trips__value">${trip.coordinates.lng}</span>
-           </div>
-           <div class="trips__detail">
              <svg class="trips__label">
-              <use href="./assets/sprite/regular.svg#calendar"></use>
+              <use href="./assets/sprite/regular.svg#plane-departure"></use>
              </svg>
-            <span class="trips__value">${new Date(trip.startDate).toDateString()} - ${new Date(trip.endDate).toDateString()} </span>
+            <span class="trips__value">${new Date(trip.startDate).toDateString()}</span>
           </div>
+          <div class="trips__detail">
+          <svg class="trips__label">
+           <use href="./assets/sprite/regular.svg#plane-arrival"></use>
+          </svg>
+         <span class="trips__value">${new Date(trip.endDate).toDateString()}</span>
+       </div>
            <svg class="trips__arrow">
            <use href="./assets/sprite/regular.svg#chevron-right"></use>
          </svg>
