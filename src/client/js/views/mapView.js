@@ -32,6 +32,10 @@ class MapView {
       });
       // Set the markers on the map
       this.renderMarkers(trips);
+    }).catch((error) => {
+      console.error(error);
+      // Display the error
+      this.renderError(error);
     });
   }
 
@@ -81,6 +85,25 @@ class MapView {
       // Remove the marker by setting the map to null
       marker.setMap(null);
     });
+  }
+
+  _generateError(error) {
+    return `
+      <div class="error">
+        <h5 class="heading heading--5 heading--error"> Error</>
+        <h5 class="heading heading--5 heading--error"> ${error.message} </h5>
+      </div>
+      `;
+  }
+
+  // Render an error
+  renderError(error) {
+    // Generate error string
+    const errorString = this._generateError(error);
+    // Clear the trips ui
+    this.mapView.innerHTML = '';
+    // Render the error
+    this.mapView.insertAdjacentHTML('afterbegin', errorString);
   }
 }
 
