@@ -1,5 +1,5 @@
 const dateChecker = function (firstDate, secondDate = Date.now()) {
-  // If userMilliseconds less than currentMilliseconds date is in pass, return -1
+  // If firstDate less than secondDate return -1
   if (firstDate < secondDate) return -1;
   // Return the difference between the milliseconds
   // divided by the numebr of milliseconds in the day to get the difference in days

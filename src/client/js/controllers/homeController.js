@@ -12,6 +12,7 @@ import getPhotoInfo from '../services/photoService';
 import dateChecker from '../utilities/dateChecker';
 import tripView from '../views/tripView';
 
+// Create a new trip
 const createNewTrip = async function (locationString, startDateString, endDateString) {
   // Declare and initialize a new trip
   const newTrip = {
@@ -32,7 +33,7 @@ const createNewTrip = async function (locationString, startDateString, endDateSt
   };
 
   // Based on the date call either the current weather api or future weather api
-  const daysAway = dateChecker(newTrip.date);
+  const daysAway = dateChecker(newTrip.startDate);
   if (daysAway < 0) {
     throw new Error('Invalid date');
   } else if (daysAway <= 7) {
@@ -71,6 +72,7 @@ const createNewTrip = async function (locationString, startDateString, endDateSt
   return newTrip;
 };
 
+// Check the form inputs
 const checkFormInputs = function (locationString, startDateString, endDateString) {
   // Check if locationString is null
   if (!locationString) throw new Error('Invalid location');
@@ -87,6 +89,34 @@ const checkFormInputs = function (locationString, startDateString, endDateString
   if (dateChecker(endDateSeconds, startDateSeconds) < 0) throw new Error('End date must be after start date');
 };
 
+// Update the form ui
+const updateFormUI = function (enabled = true) {
+  if (enabled) {
+    // Clear the form inputs
+    formView.clearInputs();
+    // Render form submit button
+    formView.renderSubmit();
+  } else {
+    // Render the spinenr button
+    formView.renderSpinner();
+  }
+};
+
+// Update the trips and map ui
+const updateTripsMapUI = function (trips, selectedTrip) {
+  // If the trips length is greater than 0
+  if (trips.length > 0) {
+    // Update the sidebar
+    resultsView.renderTrips(trips);
+    // Updaet the map
+    mapView.setCoordinates(selectedTrip);
+    mapView.renderMarkers(trips);
+  } else {
+    resultsView.renderMessage();
+    mapView.ClearMarkers();
+  }
+};
+
 const formHandler = async function (formData) {
   // Get the location from the form data
   const locationString = formData.get('location');
@@ -95,8 +125,8 @@ const formHandler = async function (formData) {
   const endDateString = formData.get('endDate');
 
   try {
-    // Render the form spinner
-    formView.renderSpinner();
+    // Update form ui to not be enabled
+    updateFormUI(false);
 
     // Check the form inputs
     checkFormInputs(locationString, startDateString, endDateString);
@@ -108,38 +138,19 @@ const formHandler = async function (formData) {
     // Set it as the selected trip
     tripsModel.setSelectedTrip(trip);
 
-    // Clear the form inputs
-    formView.clearInputs();
-    // Render form submit button
-    formView.renderSubmit();
+    // Update form ui to be enabled
+    updateFormUI();
     // Update the trips and map ui
-    const trips = tripsModel.getAllTrips();
-    if (trips.length > 0) {
-      resultsView.renderTrips(trips);
-      mapView.renderMarkers(trips);
-      mapView.setCoordinates(tripsModel.getSelectedTrip());
-    } else {
-      resultsView.renderMessage();
-      mapView.ClearMarkers();
-    }
+    updateTripsMapUI(tripsModel.getAllTrips(), tripsModel.getSelectedTrip());
   } catch (error) {
-    // Clear the form inputs
-    formView.clearInputs();
-    // Render the form submit
-    formView.renderSubmit();
+    // Update form ui to be enabled
+    updateFormUI();
     // Show the error
     resultsView.renderError(error);
     // Update the view again after 5 seconds
     setTimeout(() => {
       // Update the trips and map ui
-      const trips = tripsModel.getAllTrips();
-      if (trips.length > 0) {
-        resultsView.renderTrips(trips);
-        mapView.renderMarkers(trips);
-      } else {
-        resultsView.renderMessage();
-        mapView.ClearMarkers();
-      }
+      updateTripsMapUI(tripsModel.getAllTrips(), tripsModel.getSelectedTrip());
     }, 2000);
   }
 };
