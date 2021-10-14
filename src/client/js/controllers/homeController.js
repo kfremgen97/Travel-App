@@ -104,17 +104,19 @@ const updateFormUI = function (enabled = true) {
 
 // Update the trips and map ui
 const updateTripsMapUI = function (trips, selectedTrip) {
-  // If the trips length is greater than 0
-  if (trips.length > 0) {
-    // Update the sidebar
-    resultsView.renderTrips(trips);
-    // Updaet the map
-    mapView.setCoordinates(selectedTrip);
-    mapView.renderMarkers(trips);
-  } else {
+  // If trips is empty show message
+  if (trips.length <= 0) {
     resultsView.renderMessage();
     mapView.ClearMarkers();
+    return;
   }
+
+  // If the trips length is greater than 0
+  // Update the sidebar
+  resultsView.renderTrips(trips);
+  // Update the map
+  mapView.renderMarkers(trips);
+  if (Object.keys(selectedTrip).length) mapView.setCoordinates(selectedTrip);
 };
 
 // Update trip and weather ui
@@ -190,7 +192,6 @@ const backHandler = function () {
   sidebarView.showMasterView();
   // Clear the selected trip
   tripsModel.setSelectedTrip();
-  console.log(tripsModel._selectedTrip);
 };
 
 const deleteHandler = function () {
@@ -201,15 +202,7 @@ const deleteHandler = function () {
   // Show the master view
   sidebarView.showMasterView();
   // Rerender the trips
-  const trips = tripsModel.getAllTrips();
-  if (trips.length > 0) {
-    resultsView.renderTrips(trips);
-    mapView.renderMarkers(trips);
-  } else {
-    resultsView.renderMessage();
-    // Clear the markers
-    mapView.clearMarkers();
-  }
+  updateTripsMapUI(tripsModel.getAllTrips(), tripsModel.getSelectedTrip());
 };
 
 const _loadMap = async function () {
