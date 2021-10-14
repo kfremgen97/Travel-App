@@ -117,6 +117,13 @@ const updateTripsMapUI = function (trips, selectedTrip) {
   }
 };
 
+// Update trip and weather ui
+const updateTripWeatherUI = function(selectedTrip) {
+  // Update the trip and weather view based on selected trip
+  tripView.renderTrip(selectedTrip);
+  tripView.renderWeather(selectedTrip);
+};
+
 const formHandler = async function (formData) {
   // Get the location from the form data
   const locationString = formData.get('location');
@@ -160,14 +167,20 @@ const tripsHandler = function (tripId) {
   console.log(tripId);
   // Get the trip based on id
   const selectedTrip = tripsModel.getTrip(tripId);
+
+  // If selected tirp is undefiend set to an empty object return
+  if (!selectedTrip) {
+    tripsModel.setSelectedTrip();
+    return;
+  }
+
   // Set the selected trip in the model
-  if (selectedTrip) tripsModel.setSelectedTrip(selectedTrip);
-  else tripsModel.setSelectedTrip();
+  tripsModel.setSelectedTrip(selectedTrip);
+
   // Show detail view
   sidebarView.showDetailView();
   // Update the detail view based on selected trip
-  tripView.renderTrip(tripsModel.getSelectedTrip());
-  tripView.renderWeather(tripsModel.getSelectedTrip());
+  updateTripWeatherUI(tripsModel.getSelectedTrip());
   // Render the map view
   mapView.setCoordinates(tripsModel.getSelectedTrip());
 };

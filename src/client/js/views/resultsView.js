@@ -10,7 +10,7 @@ class ResultsView {
     // Generate and return message string
     return `
       <div class="message">
-        <h5 class="heading heading--5 heading--primary align--center"">Fill out the form above to add a trip</h5>
+        <h5 class="heading heading--5 heading--primary"">Fill out the form above to add a trip</h5>
       </div>
       `;
   }
@@ -18,8 +18,8 @@ class ResultsView {
   _generateError(error) {
     return `
       <div class="error">
-        <h5 class="heading heading--5 heading--error align--center"> Error</>
-        <h5 class="heading heading--5 heading--error align--center"> ${error.message} </h5>
+        <h5 class="heading heading--5 heading--error"> Error</>
+        <h5 class="heading heading--5 heading--error"> ${error.message} </h5>
       </div>
       `;
   }
@@ -99,7 +99,7 @@ class ResultsView {
       event.preventDefault();
 
       // Get the the trips item
-      // Find the cloestest parent with The class name of trips__item starting from the event target
+      // Find the closest parent with The class name of trips__item starting from the event target
       const tripsItem = event.target.closest('.trips__item');
 
       // If tripsItem is null, no trips item was clicked
