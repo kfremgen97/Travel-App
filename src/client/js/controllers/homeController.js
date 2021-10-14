@@ -116,7 +116,8 @@ const updateTripsMapUI = function (trips, selectedTrip) {
   resultsView.renderTrips(trips);
   // Update the map
   mapView.renderMarkers(trips);
-  if (Object.keys(selectedTrip).length) mapView.setCoordinates(selectedTrip);
+  // Check if selectedTrip is not an empty object
+  if (Object.keys(selectedTrip).length > 0) mapView.setCoordinates(selectedTrip);
 };
 
 // Update trip and weather ui
@@ -205,7 +206,7 @@ const deleteHandler = function () {
   updateTripsMapUI(tripsModel.getAllTrips(), tripsModel.getSelectedTrip());
 };
 
-const _loadMap = async function () {
+const loadMap = async function () {
   try {
     // Get the map key
     const keyData = await getMapKey();
@@ -218,7 +219,7 @@ const _loadMap = async function () {
   }
 };
 
-const _loadTrips = function () {
+const loadTrips = function () {
   // Get all the trips from local storage
   tripsModel.readAllTrips();
   // Render the works out
@@ -230,9 +231,9 @@ const _loadTrips = function () {
 const loadApplication = async function () {
   try {
     // Load the trips from storage
-    _loadTrips();
+    loadTrips();
     // Load the map
-    await _loadMap();
+    await loadMap();
   } catch (error) {
     console.error(error);
   }
