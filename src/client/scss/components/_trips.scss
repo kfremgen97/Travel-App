@@ -60,21 +60,6 @@
     fill: $primary;
     // Add a margin to the right
     margin-right: .5rem;
-
-    /* trips label word */ 
-
-    &--word {
-      // Set the display to inline block
-      display: inline-block;
-      // Set teh font properties
-      font-size: inherit;
-      font-family: inherit;
-      font-weight: inherit;
-      // Set the color
-      color: $primary;
-      // Add a margin to the right
-      margin-right: .5rem;
-    }
   }
 
   /* trips value */ 
@@ -91,7 +76,7 @@
 
   &__arrow {
     // Set the display to block
-    display: block;
+    display: inline-block;
     // Set the size properties
     height: 2rem;
     width: 2rem;

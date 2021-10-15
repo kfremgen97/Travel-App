@@ -4,7 +4,7 @@
   // Set the display to grid
   display: grid;
   // Create a 4 by 4 grid
-  grid-template-columns: 30vw repeat(3,1fr);
+  grid-template-columns: 40vw repeat(3,1fr);
   grid-template-rows: min-content repeat(3,1fr);
   // Set the grid areas
   grid-template-areas: 'header header header header'

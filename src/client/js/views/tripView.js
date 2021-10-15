@@ -8,7 +8,6 @@ class TripView {
 
   // Generate trip
   _generateTrip(trip) {
-
     // See if imageURL is null or not
     let photoString;
 

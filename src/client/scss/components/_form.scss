@@ -1,14 +1,17 @@
 /* form */ 
 
 .form {
+  // Create a grid with 2 columns and 3 rows
   display: grid;
   grid-template-columns: min-content 1fr;
   grid-template-rows: repeat(3,min-content);
-  grid-gap: 1rem 1rem;
+  grid-gap: 1rem;
 
   /* form input */ 
 
   &__input {
+    // Set the display to an inline-block
+    display: inline-block;
     // Set the font style
     font-family: inherit;
     font-size: inherit;
@@ -43,6 +46,8 @@
      /* form label */ 
 
      &__label {
+      // Set the display to an inline-block
+      display: inline-block;
       width: 2rem;
 
       svg {

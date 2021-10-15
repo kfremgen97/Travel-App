@@ -88,7 +88,7 @@
     // Set the background to transparent
     background-color: transparent;
 
-    /* svg on the back button */ 
+    /* svg on the delete button */ 
     
     svg {
       display: inline-block;
@@ -114,6 +114,5 @@
   &--trip {
     // Set the grid columns
     grid-column: 1/-1;
-   // justify-self: center;
   }
 }
