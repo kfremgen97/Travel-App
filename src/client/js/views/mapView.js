@@ -34,7 +34,7 @@ class MapView {
     this.loader.load().then(() => {
       // eslint-disable-next-line no-undef
       this.mapObject = new google.maps.Map(this.mapView, {
-        center: { lat: -34.397, lng: 150.644 },
+        center: { lat: 40.730610, lng: -73.935242 },
         zoom: 8,
       });
 
@@ -44,6 +44,9 @@ class MapView {
 
       // Set the markers on the map
       this.renderMarkers(trips);
+
+      // Get the user location
+      locationHandler();
     }).catch((error) => {
       console.error(error);
       // Display the error
