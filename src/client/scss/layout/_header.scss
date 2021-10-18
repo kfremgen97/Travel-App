@@ -1,6 +1,10 @@
 /* header */ 
 
 .header {
+  // Set the position to relative, this si just to set the z index
+  position: relative;
+  // Give it the highest z index for an element on the page
+  z-index: 20;
   // Set the grid area
   grid-area: header;
   // Add padding 1 rem vertically and 2 rem horizontally

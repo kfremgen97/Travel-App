@@ -11,7 +11,7 @@
   font-size: inherit;
   font-weight: inherit;
   // Set the padding
-  padding: 1rem 3rem;
+  padding: 1rem 2rem;
   // Set the border properties
   border: none;
   border-radius: .5rem;
@@ -134,4 +134,63 @@
       outline-color: $secondary-light;
     }
   }
+
+  /* button bars */ 
+
+  &--bars {
+     // Set the padding
+     padding: 0;
+     // Set the background to transparent
+     background-color: transparent;
+ 
+     /* svg on the bars button */ 
+     
+     svg {
+       display: inline-block;
+       height: 3rem;
+       width: 3rem;
+       fill: $primary;
+     }
+
+    /* button bars states */ 
+
+    &:hover svg,
+    &:active svg{
+      fill: $primary-dark;
+    }
+
+    &:focus{
+      outline-color: $primary-light;
+    }
+  }
+
+    /* button bx */ 
+
+    &--x {
+      // Set the padding
+      padding: 0;
+      // Set the background to transparent
+      background-color: transparent;
+  
+      /* svg on the bars button */ 
+      
+      svg {
+        display: inline-block;
+        height: 3rem;
+        width: 3rem;
+        fill: $error;
+      }
+
+    /* button x states */ 
+
+    &:hover svg,
+    &:active svg{
+      fill: $error-dark;
+    }
+
+    &:focus{
+      outline-color: $error-light;
+    }
+   }
+
 }

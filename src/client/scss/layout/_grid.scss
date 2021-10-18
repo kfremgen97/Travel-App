@@ -5,7 +5,7 @@
   display: grid;
   // Create a 4 by 4 grid
   grid-template-columns: 40vw repeat(3,1fr);
-  grid-template-rows: min-content repeat(3,1fr);
+  grid-template-rows: 8rem repeat(3,1fr);
   // Set the grid areas
   grid-template-areas: 'header header header header'
                         'sidebar main main main'
@@ -13,4 +13,16 @@
                         'sidebar main main main';
   // Set the height of the grid
   height: 100vh;
+
+  /* media query for grid */ 
+
+  @media only screen and (max-width: $tablet) {
+    // Set the grid columns
+    grid-template-columns: repeat(4,1fr);
+    // Set the grid areas
+    grid-template-areas: 'header header header header'
+                      'main main main main'
+                      'main main main main'
+                      'main main main main';
+  }
 }

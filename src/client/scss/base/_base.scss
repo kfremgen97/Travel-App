@@ -17,4 +17,12 @@ html {
   font-size: 62.5%;
   // Set the box-sizing to border box, this will cause all child elements to inherit this as specified above in *
   box-sizing: border-box;
+
+
+  /* media query for root element */
+  
+  @media  only screen and (max-width:$tablet) {
+    // Set the font size to 8px
+    font-size: 50%;
+  }
 }
