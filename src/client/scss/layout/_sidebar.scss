@@ -7,6 +7,8 @@
   padding: 2rem;
   // Set the background color
   background-color: $black;
+  // Set the transiiton proeprty
+  transition: all .2s;
 
   /* sidebar master */ 
 
@@ -37,14 +39,18 @@
     /* media query for sidebar */ 
 
     @media only screen and (max-width: $tablet) {
+      // display to hidden
+      display: hidden;
+      // Set the height to 0
+      height: 0;
+      // Set the opacity to zero
+      opacity: 0;
       // Set the grid area to its default
       grid-area: auto;
       // Position the element fixed
       position: fixed;
       // Set the z index to 10 so its above everything besides the header
       z-index: 10;
-      // Calculate the height 100vh - 8 rem for the header
-      height: calc(100vh - 8rem);
       // Set the width
       width: 100vw;
       // Set the positions of eleemnt

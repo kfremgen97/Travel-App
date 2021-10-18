@@ -1,16 +1,18 @@
 // Imports
 import { v4 as uuidv4 } from 'uuid';
 import tripsModel from '../models/tripsModel';
+import headerView from '../views/headerView';
+import mapView from '../views/mapView';
 import sidebarView from '../views/sidebarView';
 import formView from '../views/formView';
 import resultsView from '../views/resultsView';
-import mapView from '../views/mapView';
+import tripView from '../views/tripView';
 import getMapKey from '../services/mapService';
 import getLocationInfo from '../services/locationService';
 import { getCurrentWeather, getFutureWeather } from '../services/weatherService';
 import getPhotoInfo from '../services/photoService';
 import dateChecker from '../utilities/dateChecker';
-import tripView from '../views/tripView';
+
 
 // Create a new trip
 const createNewTrip = async function (locationString, startDateString, endDateString) {
@@ -206,8 +208,22 @@ const deleteHandler = function () {
   updateTripsMapUI(tripsModel.getAllTrips(), tripsModel.getSelectedTrip());
 };
 
-const locationHandler = function () {
+const openHandler = function () {
+  // Change the buttons
+  headerView.toggleOpenButton();
+  headerView.toggleCloseButton();
+  // Show the sidebar
+  sidebarView.showSidebar();
+};
 
+const closeHandler = function () {
+  // Change the buttons
+  headerView.toggleCloseButton();
+  headerView.toggleOpenButton();
+  // Hide the sidebar
+  sidebarView.hideSidebar();
+};
+const locationHandler = function () {
   // Checks if the geolocation interface exist and
   // Prompt the user to allow to use the interface
   if (navigator.geolocation) {
@@ -257,6 +273,8 @@ const loadApplication = async function () {
 };
 
 // Event listeners
+headerView.addOpenPublisher(openHandler);
+headerView.addClosePublisher(closeHandler);
 sidebarView.addBackPublisher(backHandler);
 sidebarView.addDeleteButtonPublisher(deleteHandler);
 formView.addFormPublisher(formHandler);

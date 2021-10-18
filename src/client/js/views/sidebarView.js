@@ -2,10 +2,23 @@
 class SidebarView {
   // Constructor
   constructor() {
+    this.sidebar = document.querySelector('.sidebar');
     this.sidebarMaster = document.querySelector('.sidebar__master');
     this.sidebarDetail = document.querySelector('.sidebar__detail');
     this.backButton = document.querySelector('.button--back');
     this.deleteButton = document.querySelector('.button--delete');
+  }
+
+  // Show the sidebar
+  showSidebar() {
+    this.sidebar.classList.add('show');
+    this.sidebar.classList.add('show--sidebar');
+  }
+
+  // Hide the sidebar
+  hideSidebar() {
+    this.sidebar.classList.remove('show--sidebar');
+    this.sidebar.classList.remove('show');
   }
 
   // Show the detail view
