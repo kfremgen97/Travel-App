@@ -11,14 +11,12 @@ class SidebarView {
 
   // Show the sidebar
   showSidebar() {
-    this.sidebar.classList.add('show');
     this.sidebar.classList.add('show--sidebar');
   }
 
   // Hide the sidebar
   hideSidebar() {
     this.sidebar.classList.remove('show--sidebar');
-    this.sidebar.classList.remove('show');
   }
 
   // Show the detail view

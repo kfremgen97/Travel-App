@@ -9,6 +9,15 @@ class FormView {
     this.submitButton = document.querySelector('.button--trip');
   }
 
+  // Show the form
+  showForm() {
+    this.form.classList.add('show--form');
+  }
+
+  hideForm() {
+    this.form.classList.remove('show--form');
+  }
+
   // Clear the form inputs
   clearInputs() {
     this.locationInput.value = '';

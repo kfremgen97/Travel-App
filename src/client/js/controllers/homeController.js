@@ -214,15 +214,20 @@ const openHandler = function () {
   headerView.toggleCloseButton();
   // Show the sidebar
   sidebarView.showSidebar();
+  // Show the form
+  formView.showForm();
 };
 
 const closeHandler = function () {
   // Change the buttons
   headerView.toggleCloseButton();
   headerView.toggleOpenButton();
+  // Hide the form
+  formView.hideForm();
   // Hide the sidebar
   sidebarView.hideSidebar();
 };
+
 const locationHandler = function () {
   // Checks if the geolocation interface exist and
   // Prompt the user to allow to use the interface

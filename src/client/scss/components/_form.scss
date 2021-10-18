@@ -57,4 +57,12 @@
         fill: $primary;
       }
     }
+
+
+    /* media query for form */ 
+
+    @media only screen and (max-width: $tablet) {
+      // display to  none
+      display: none;
+    }
 }

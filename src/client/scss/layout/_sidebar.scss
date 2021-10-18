@@ -40,7 +40,7 @@
 
     @media only screen and (max-width: $tablet) {
       // display to hidden
-      display: hidden;
+      visibility: hidden;
       // Set the height to 0
       height: 0;
       // Set the opacity to zero
@@ -54,7 +54,7 @@
       // Set the width
       width: 100vw;
       // Set the positions of eleemnt
-      top: 8rem;
+      top: -8rem;
       left: 0;
     }
 }

@@ -63,12 +63,15 @@
 
 /* show */ 
 
-.show {
-  display: block;
-  opacity: 1;
+.show--form{
+  display: grid;
 }
 
 .show--sidebar {
+  visibility: visible;
+  opacity: 1;
   // Calculate the height 100vh - 8 rem for the header
   height: calc(100vh - 8rem);
+  // Set the top position
+  top: 8rem;
 }
