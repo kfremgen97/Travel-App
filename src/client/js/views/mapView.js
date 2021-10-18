@@ -16,7 +16,7 @@ class MapView {
   }
 
   // Load the map
-  loadMap(apiKey, trips) {
+  loadMap(apiKey, trips, locationHandler) {
     // Set the loader
     this.loader = new Loader({
       apiKey,
@@ -28,6 +28,7 @@ class MapView {
     locationButton.textContent = 'Current Location';
     locationButton.classList.add('button');
     locationButton.classList.add('button--map');
+    locationButton.addEventListener('click', locationHandler);
 
     // Load the map
     this.loader.load().then(() => {
@@ -50,13 +51,21 @@ class MapView {
     });
   }
 
-  // Set the mapView
-  setCoordinates(selectedTrip) {
+  // Set the mapView baed on selected trip
+  setSelectedTripCoordinates(selectedTrip) {
     // Get the coordinates of the trip
     const coordinates = {
       lat: Number(selectedTrip.coordinates.lat),
       lng: Number(selectedTrip.coordinates.lng),
     };
+    // Set the map coordinate center
+    this.mapObject.panTo(coordinates);
+    // Set the map view
+    this.mapObject.setZoom(8);
+  }
+
+  // Set the map view based on the user coordinates
+  setUserCoordinates(coordinates) {
     // Set the map coordinate center
     this.mapObject.panTo(coordinates);
     // Set the map view
@@ -83,7 +92,7 @@ class MapView {
         fillOpacity: 1,
         strokeWeight: 0,
         scale: 0.1, //size of the marker, careful! this scale also affects anchor and labelOrigin
-        anchor: new google.maps.Point(185,500), //position of the icon, careful! this is affected by scale
+        anchor: new google.maps.Point(185, 500), //position of the icon, careful! this is affected by scale
       };
 
       // Add the marker to the map view

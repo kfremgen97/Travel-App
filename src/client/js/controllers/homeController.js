@@ -107,7 +107,7 @@ const updateTripsMapUI = function (trips, selectedTrip) {
   // If trips is empty show message
   if (trips.length <= 0) {
     resultsView.renderMessage();
-    mapView.ClearMarkers();
+    mapView.clearMarkers();
     return;
   }
 
@@ -117,11 +117,11 @@ const updateTripsMapUI = function (trips, selectedTrip) {
   // Update the map
   mapView.renderMarkers(trips);
   // Check if selectedTrip is not an empty object
-  if (Object.keys(selectedTrip).length > 0) mapView.setCoordinates(selectedTrip);
+  if (Object.keys(selectedTrip).length > 0) mapView.setSelectedTripCoordinates(selectedTrip);
 };
 
 // Update trip and weather ui
-const updateTripWeatherUI = function(selectedTrip) {
+const updateTripWeatherUI = function (selectedTrip) {
   // Update the trip and weather view based on selected trip
   tripView.renderTrip(selectedTrip);
   tripView.renderWeather(selectedTrip);
@@ -185,7 +185,7 @@ const tripsHandler = function (tripId) {
   // Update the detail view based on selected trip
   updateTripWeatherUI(tripsModel.getSelectedTrip());
   // Render the map view
-  mapView.setCoordinates(tripsModel.getSelectedTrip());
+  mapView.setSelectedTripCoordinates(tripsModel.getSelectedTrip());
 };
 
 const backHandler = function () {
@@ -206,6 +206,23 @@ const deleteHandler = function () {
   updateTripsMapUI(tripsModel.getAllTrips(), tripsModel.getSelectedTrip());
 };
 
+const locationHandler = function () {
+
+  // Checks if the geolocation interface exist and
+  // Prompt the user to allow to use the interface
+  if (navigator.geolocation) {
+    // Get the user location
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+      // Set the user location
+      tripsModel.setLocation(latitude, longitude);
+      mapView.setUserCoordinates(tripsModel.getLocation());
+    }, (error) => {
+      alert(error.message);
+    });
+  }
+};
+
 const loadMap = async function () {
   try {
     // Get the map key
@@ -213,7 +230,7 @@ const loadMap = async function () {
     // Get all the trips
     const trips = tripsModel.getAllTrips();
     // Load the map
-    mapView.loadMap(keyData.key, trips);
+    mapView.loadMap(keyData.key, trips, locationHandler);
   } catch (error) {
     console.error(error);
   }

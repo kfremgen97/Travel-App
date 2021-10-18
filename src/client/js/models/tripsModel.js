@@ -2,8 +2,20 @@
 class TripsModel {
   // Constructor
   constructor() {
+    this._location = {};
     this._selectedTrip = {};
     this._trips = [];
+  }
+
+  // Set the user lcoation
+  setLocation(lat, lng) {
+    this._location.lat = lat;
+    this._location.lng = lng;
+  }
+
+  // Get the user lcoation
+  getLocation() {
+    return this._location;
   }
 
   // Update the selected trip
