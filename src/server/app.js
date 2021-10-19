@@ -20,12 +20,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Set up middle ware that only parses json and looks at request with Content-Type to be json
 app.use(bodyParser.json());
 
-// Basic get route
+// // Basic get route
+// app.get('/', (req, res) => {
+//   res.send({
+//     application: 'Travel App',
+//     description: 'A travel app that obtains a desired trip location and date from the user. Then displays the weather and an image of the location using information obtained from external APIs.',
+//   });
+// });
+
+// Serve files
+app.use(express.static('dist'));
+
+// Root page
 app.get('/', (req, res) => {
-  res.send({
-    application: 'Travel App',
-    description: 'A travel app that obtains a desired trip location and date from the user. Then displays the weather and an image of the location using information obtained from external APIs.',
-  });
+  res.sendFile('index.html');
 });
 
 // Goggle maps api key

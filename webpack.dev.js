@@ -52,7 +52,7 @@ module.exports = {
     rules: [
       {
         // The test property identifies which file or files should be transformed.
-        test: /.js$/,
+        test: /\.js$/,
         // Exclude node modules
         exclude: /node_modules/,
         // The use property indicates which loader should be used to do the transforming.
@@ -64,7 +64,7 @@ module.exports = {
       use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
-        test: /.scss$/,
+        test: /\.scss$/,
         // sass-loader convert the scss to css
         // css-loader reads the content of css file and returns its content 
         // MiniCssExtract-loader takes the css and injects it into the css file specified by the plugin instance
