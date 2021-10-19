@@ -6,12 +6,14 @@ class HeaderView {
     this.closeButton = document.querySelector('.button--x');
   }
 
-  toggleOpenButton() {
-    this.openButton.classList.toggle('hidden');
+  showOpenButton() {
+    this.closeButton.classList.remove('show--header-button');
+    this.openButton.classList.remove('hidden');
   }
 
-  toggleCloseButton() {
-    this.closeButton.classList.toggle('hidden');
+  showCloseButton() {
+    this.openButton.classList.add('hidden');
+    this.closeButton.classList.add('show--header-button');
   }
 
   addOpenPublisher(handler) {

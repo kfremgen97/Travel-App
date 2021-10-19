@@ -138,6 +138,7 @@
   /* button bars */ 
 
   &--bars {
+      display: none;
      // Set the padding
      padding: 0;
      // Set the background to transparent
@@ -162,11 +163,19 @@
     &:focus{
       outline-color: $primary-light;
     }
+
+    /* media queries */ 
+    @media only screen and (max-width:$tablet){
+      // Set the display to flex 
+      display: flex;
+    }
   }
 
     /* button bx */ 
 
     &--x {
+      // Display none
+      display: none;
       // Set the padding
       padding: 0;
       // Set the background to transparent
@@ -191,6 +200,7 @@
     &:focus{
       outline-color: $error-light;
     }
+
    }
 
 }

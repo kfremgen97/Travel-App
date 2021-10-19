@@ -210,8 +210,7 @@ const deleteHandler = function () {
 
 const openHandler = function () {
   // Change the buttons
-  headerView.toggleOpenButton();
-  headerView.toggleCloseButton();
+  headerView.showCloseButton();
   // Show the sidebar
   sidebarView.showSidebar();
   // Show the form
@@ -220,8 +219,7 @@ const openHandler = function () {
 
 const closeHandler = function () {
   // Change the buttons
-  headerView.toggleCloseButton();
-  headerView.toggleOpenButton();
+  headerView.showOpenButton();
   // Hide the form
   formView.hideForm();
   // Hide the sidebar

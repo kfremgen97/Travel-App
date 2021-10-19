@@ -34,6 +34,7 @@ class MapView {
     this.loader.load().then(() => {
       // eslint-disable-next-line no-undef
       this.mapObject = new google.maps.Map(this.mapView, {
+        mapTypeControl: false,
         center: { lat: 40.730610, lng: -73.935242 },
         zoom: 8,
       });
@@ -91,11 +92,11 @@ class MapView {
       // Create the icon
       const icon = {
         path: 'M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z', //SVG path of awesomefont marker
-        fillColor: '#7048e8', //color of the marker
+        fillColor: '#7048e8', // color of the marker
         fillOpacity: 1,
         strokeWeight: 0,
-        scale: 0.1, //size of the marker, careful! this scale also affects anchor and labelOrigin
-        anchor: new google.maps.Point(185, 500), //position of the icon, careful! this is affected by scale
+        scale: 0.1, // size of the marker, careful! this scale also affects anchor and labelOrigin
+        anchor: new google.maps.Point(185, 500), // position of the icon, careful! this is affected by scale
       };
 
       // Add the marker to the map view

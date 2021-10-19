@@ -63,7 +63,11 @@
 
 /* show */ 
 
-.show--form{
+.show--header-button {
+  display: flex;
+}
+
+.show--form {
   display: grid;
 }
 
