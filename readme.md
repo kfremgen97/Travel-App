@@ -32,7 +32,7 @@ Below are the steps to run the project:
 
 2. Install required dependencies via ( npm install )
 
-3. Build the project via (npm run webpack-build-prod)
+3. Build the project via (npm run webpack-prod)
     - This allows for offline usage via service workers if your browser allows
 
 4. After the project is built start the server via ( npm run server-start )
