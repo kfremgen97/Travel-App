@@ -4,7 +4,9 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const fetch = require('node-fetch');
-
+const locationService = require('./services/locationService');
+const weatherService = require('./services/weatherService');
+const photoService = require('./services/photoService');
 // Configure enviornment variables
 dotenv.config();
 
@@ -45,87 +47,60 @@ app.get('/api/key', (req, res) => {
 });
 
 // Geonames route
-app.get('/api/location', (req, res) => {
-  const url = `http://api.geonames.org/searchJSON?q=${encodeURIComponent(req.query.location)}&maxRows=10&username=${process.env.GEONAMES_USERNAME}`;
-  fetch(url)
-    .then((response) => {
-      if (!response.ok) throw new Error('Unable to get location information');
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      if (data?.status?.message) throw new Error(data.status.message);
-      res.send(data);
-    })
-    .catch((error) => {
-      console.error(error);
-      res.send({
-        error: error.message,
-      });
+app.get('/api/location', async (req, res) => {
+  try {
+    // Get the location info
+    const locationInfo = await locationService.getLocationInfo(
+      req.query.location, process.env.GEONAMES_USERNAME,
+    );
+    res.send(locationInfo);
+  } catch (error) {
+    res.send({
+      error: error.message,
     });
+  }
 });
 
 // Weatherbit current route
-app.get('/api/weather/current', (req, res) => {
-  const url = `https://api.weatherbit.io/v2.0/current?key=${process.env.WEATHERBIT_API_KEY}&lat=${req.query.lat}&lon=${req.query.lng}`;
-  fetch(url)
-    .then((response) => {
-      console.log(response.status);
-      if (!response.ok) throw new Error('Unable to get location weather');
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      if (data.error) throw new Error(data.error);
-      res.send(data);
-    })
-    .catch((error) => {
-      console.error(error);
-      res.send({
-        error: error.message,
-      });
+app.get('/api/weather/current', async (req, res) => {
+  try {
+    // Get the weather info
+    const weatherInfo = await weatherService.getCurrentWeather(
+      process.env.WEATHERBIT_API_KEY,req.query.lat,req.query.lng,
+    );
+    res.send(weatherInfo);
+  } catch (error) {
+    res.send({
+      error: error.message,
     });
+  }
 });
 
 // Weatherbit future route
-app.get('/api/weather/future', (req, res) => {
-  const url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHERBIT_API_KEY}&lat=${req.query.lat}&lon=${req.query.lng}`;
-  fetch(url)
-    .then((response) => {
-      if (!response.ok) throw new Error('Unable to get location weather');
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      if (data.error) throw new Error(data.error);
-      res.send(data);
-    })
-    .catch((error) => {
-      console.error(error);
-      res.send({
-        error: error.message,
-      });
+app.get('/api/weather/future', async (req, res) => {
+  try {
+    // Get the weather info
+    const weatherInfo = await weatherService.getFutureWeather(
+      process.env.WEATHERBIT_API_KEY,req.query.lat,req.query.lng,
+    );
+    res.send(weatherInfo);
+  } catch (error) {
+    res.send({
+      error: error.message,
     });
+  }
 });
 
 // Pixabay route
-app.get('/api/photo', (req, res) => {
-  const url = `https://pixabay.com/api?key=${process.env.PIXABAY_API_KEY}&q=${encodeURIComponent(req.query.location)}`;
-  fetch(url)
-    .then((response) => {
-      if (!response.ok) throw new Error('Unable to get location photo');
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      res.send(data);
-    })
-    .catch((error) => {
-      console.error(error);
-      res.send({
-        error: error.message,
-      });
+app.get('/api/photo', async (req, res) => {
+  try {
+    const photoInfo = await photoService.getPhoto(process.env.PIXABAY_API_KEY, req.query.location);
+    res.send(photoInfo);
+  } catch (error) {
+    res.send({
+      error: error.message,
     });
+  }
 });
 
 // Binds and listens for connections on the specified host and port

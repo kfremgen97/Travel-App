@@ -13,7 +13,6 @@ import { getCurrentWeather, getFutureWeather } from '../services/weatherService'
 import getPhotoInfo from '../services/photoService';
 import dateChecker from '../utilities/dateChecker';
 
-
 // Create a new trip
 const createNewTrip = async function (locationString, startDateString, endDateString) {
   // Declare and initialize a new trip
