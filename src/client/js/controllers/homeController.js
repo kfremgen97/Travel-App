@@ -35,10 +35,8 @@ const createNewTrip = async function (locationString, startDateString, endDateSt
   };
 
   // Based on the date call either the current weather api or future weather api
-  const daysAway = dateChecker(newTrip.startDate);
-  if (daysAway < 0) {
-    throw new Error('Invalid date');
-  } else if (daysAway <= 7) {
+  const daysAway = dateChecker(Date.now(), newTrip.startDate);
+  if (daysAway >= 0 && daysAway <= 7) {
     // Get the current weather
     const { data: weatherInfo } = await getCurrentWeather(newTrip.coordinates.lat,
       newTrip.coordinates.lng);
@@ -86,9 +84,9 @@ const checkFormInputs = function (locationString, startDateString, endDateString
   const startDateSeconds = new Date(startDateString.replace('-', '/')).getTime();
   const endDateSeconds = new Date(endDateString.replaceAll('-', '/')).getTime();
   // Check if date string is not in the past
-  if (dateChecker(startDateSeconds) < 0 || dateChecker(endDateSeconds) < 0) throw new Error('Dates can not be in the past');
+  if (dateChecker(Date.now(), startDateSeconds) < 0 || dateChecker(Date.now(), endDateSeconds) < 0) throw new Error('Dates can not be in the past');
   // Check to make sure start date is before end date
-  if (dateChecker(endDateSeconds, startDateSeconds) < 0) throw new Error('End date must be after start date');
+  if (dateChecker(startDateSeconds, endDateSeconds) < 0) throw new Error('End date must be after start date');
 };
 
 // Update the form ui
