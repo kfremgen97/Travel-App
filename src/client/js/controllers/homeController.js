@@ -239,6 +239,15 @@ const locationHandler = function () {
   }
 };
 
+const loadTrips = function () {
+  // Get all the trips from local storage
+  tripsModel.readAllTrips();
+  // Render the trips
+  const trips = tripsModel.getAllTrips();
+  if (trips.length > 0) resultsView.renderTrips(trips);
+  else resultsView.renderMessage();
+};
+
 const loadMap = async function () {
   try {
     // Get the map key
@@ -246,19 +255,12 @@ const loadMap = async function () {
     // Get all the trips
     const trips = tripsModel.getAllTrips();
     // Load the map
-    mapView.loadMap(keyData.key, trips, locationHandler);
+    mapView.loadMap(keyData.key, trips);
   } catch (error) {
     console.error(error);
+    // Throw the error
+    throw error;
   }
-};
-
-const loadTrips = function () {
-  // Get all the trips from local storage
-  tripsModel.readAllTrips();
-  // Render the works out
-  const trips = tripsModel.getAllTrips();
-  if (trips.length > 0) resultsView.renderTrips(trips);
-  else resultsView.renderMessage();
 };
 
 const loadApplication = async function () {
@@ -269,6 +271,7 @@ const loadApplication = async function () {
     await loadMap();
   } catch (error) {
     console.error(error);
+    mapView.renderError(error);
   }
 };
 

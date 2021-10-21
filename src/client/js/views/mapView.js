@@ -1,5 +1,5 @@
 // Imports
-import { Loader } from '@googlemaps/js-api-loader';
+import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
 
 // Map view
 class MapView {
@@ -7,8 +7,6 @@ class MapView {
   constructor() {
     // Map view element
     this.mapView = document.querySelector('#map');
-    // Map loader object
-    this.loader = {};
     // Map object
     this.mapObject = {};
     // Array of marker objects
@@ -16,64 +14,42 @@ class MapView {
   }
 
   // Load the map
-  loadMap(apiKey, trips, locationHandler) {
-    // Set the loader
-    this.loader = new Loader({
-      apiKey,
-      version: 'weekly',
+  loadMap(apiKey, trips) {
+    mapboxgl.accessToken = apiKey;
+    this.mapObject = new mapboxgl.Map({
+      container: 'map', // container ID
+      style: 'mapbox://styles/mapbox/streets-v11', // style URL
+      center: [-74.5, 40], // starting position [lng, lat]
+      zoom: 8, // starting zoom
     });
 
-    // Create a locaton button
-    const locationButton = document.createElement('button');
-    locationButton.textContent = 'Current Location';
-    locationButton.classList.add('button');
-    locationButton.classList.add('button--map');
-    locationButton.addEventListener('click', locationHandler);
-
-    // Load the map
-    this.loader.load().then(() => {
-      // eslint-disable-next-line no-undef
-      this.mapObject = new google.maps.Map(this.mapView, {
-        mapTypeControl: false,
-        center: { lat: 40.730610, lng: -73.935242 },
-        zoom: 8,
-      });
-
-      // Add current location button
-      // eslint-disable-next-line no-undef
-      this.mapObject.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
-
-      // Set the markers on the map
-      this.renderMarkers(trips);
-
-      // Get the user location
-      locationHandler();
-    }).catch((error) => {
-      console.error(error);
-      // Display the error
-      this.renderError(error);
-    });
+    // Render the markers
+    this.renderMarkers(trips);
   }
 
   // Set the mapView baed on selected trip
   setSelectedTripCoordinates(selectedTrip) {
     // Get the coordinates of the trip
-    const coordinates = {
-      lat: Number(selectedTrip.coordinates.lat),
-      lng: Number(selectedTrip.coordinates.lng),
-    };
+    const coordinates = [Number(selectedTrip.coordinates.lng),
+        Number(selectedTrip.coordinates.lat),
+      ];
+
+    console.log(coordinates);
     // Set the map coordinate center
-    this.mapObject.panTo(coordinates);
-    // Set the map view
-    this.mapObject.setZoom(8);
+    this.mapObject.flyTo({
+      center: coordinates,
+      essential: true,
+    });
   }
 
   // Set the map view based on the user coordinates
   setUserCoordinates(coordinates) {
+    console.log(coordinates);
     // Set the map coordinate center
-    this.mapObject.panTo(coordinates);
-    // Set the map view
-    this.mapObject.setZoom(8);
+    this.mapObject.flyTo({
+      center: coordinates,
+      essential: true,
+    });
   }
 
   // Render the markers
@@ -83,33 +59,11 @@ class MapView {
 
     // Loop through the trips
     trips.forEach((trip) => {
-      // Get the coordinates of the trip
-      const coordinates = {
-        lat: Number(trip.coordinates.lat),
-        lng: Number(trip.coordinates.lng),
-      };
-
-      // Create the icon
-      const icon = {
-        path: 'M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z', //SVG path of awesomefont marker
-        fillColor: '#7048e8', // color of the marker
-        fillOpacity: 1,
-        strokeWeight: 0,
-        scale: 0.1, // size of the marker, careful! this scale also affects anchor and labelOrigin
-        anchor: new google.maps.Point(185, 500), // position of the icon, careful! this is affected by scale
-      };
-
-      // Add the marker to the map view
-      // eslint-disable-next-line no-undef
-      const marker = new google.maps.Marker({
-        position: coordinates,
-        icon,
-        map: this.mapObject,
-        title: trip.name,
-        // eslint-disable-next-line no-undef
-        animation: google.maps.Animation.DROP,
-      });
-      // Add the marker to the array
+      // Create a default Marker and add it to the map
+      const marker = new mapboxgl.Marker({ color: '#7048e8' })
+        .setLngLat([trip.coordinates.lng, trip.coordinates.lat])
+        .addTo(this.mapObject);
+      // Add the marker to the markers
       this.markers.push(marker);
     });
   }
@@ -119,7 +73,10 @@ class MapView {
     // Loop through the markers
     this.markers.forEach((marker) => {
       // Remove the marker by setting the map to null
-      marker.setMap(null);
+      marker.remove();
+
+    // Set the markers to empty array
+    this.markers = [];
     });
   }
 

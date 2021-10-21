@@ -30,10 +30,9 @@ Below are the steps to run the project:
     - Create a [Pixabay](https://pixabay.com/api/docs/)  account
       - Add your api key as a variable
         - PIXABAY_API_KEY = ******* your api key ********** 
-    - Create a [Google Maps](https://developers.google.com/maps) account
-      - Enable Maps Javascript API
+    - Create a [Mapbox](https://www.mapbox.com/) account
       - Add your api key as a variable 
-        - GOOGLE_MAP_API_KEY  = ******* your api key **********
+        - MAP_BOX_API_KEY  = ******* your api key **********
 
 2. Install required dependencies via ( npm install )
 
