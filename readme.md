@@ -21,14 +21,19 @@ There are a numebr of steps required to get the project running after cloning or
 Below are the steps to run the project:
 
 1. Add a .env file
-    - Create a [Geonames](http://www.geonames.org/export/web-services.html) account and add your username as a variable
-      - GEONAMES_USERNAME = ******* your username ********** 
-    - Create a [Weatherbit](https://www.weatherbit.io/account/create) account and add your api key as a variable
-      - WEATHERBIT_API_KEY = ******* your api key ********** 
-    - Create a [Pixabay](https://pixabay.com/api/docs/)  account and add your api key as a variable
-      - PIXABAY_API_KEY = ******* your api key ********** 
-    - Create a [Google Maps](https://developers.google.com/maps) account and add your api key as a variable
-      - GOOGLE_MAP_API_KEY  = ******* your api key ********** 
+    - Create a [Geonames](http://www.geonames.org/export/web-services.html) account 
+      - Add your username as a variable
+        - GEONAMES_USERNAME = ******* your username ********** 
+    - Create a [Weatherbit](https://www.weatherbit.io/account/create) account 
+      - Add your api key as a variable
+        - WEATHERBIT_API_KEY = ******* your api key ********** 
+    - Create a [Pixabay](https://pixabay.com/api/docs/)  account
+      - Add your api key as a variable
+        - PIXABAY_API_KEY = ******* your api key ********** 
+    - Create a [Google Maps](https://developers.google.com/maps) account
+      - Enable Maps Javascript API
+      - Add your api key as a variable 
+        - GOOGLE_MAP_API_KEY  = ******* your api key **********
 
 2. Install required dependencies via ( npm install )
 
@@ -37,3 +42,9 @@ Below are the steps to run the project:
 
 4. After the project is built start the server via ( npm run server-start )
 
+### Testing the project
+
+To run the project make sure the server is not running as supertest will automatically start the server.
+
+Below are the steps to test the project:
+- Run the command(npm run jest-test)
