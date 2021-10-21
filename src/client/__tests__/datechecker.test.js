@@ -1,7 +1,9 @@
 // Imports
 import dateChecker from '../js/utilities/dateChecker';
 
+// Datechecker suite
 describe('Date Checker', () => {
+
   // Test 1: Make sure there can be no date in the past
   test('Invalid past date', () => {
     // Number of milliseconds for 1/1/20 12:oopm

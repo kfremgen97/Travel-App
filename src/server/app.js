@@ -3,7 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
-const fetch = require('node-fetch');
 const locationService = require('./services/locationService');
 const weatherService = require('./services/weatherService');
 const photoService = require('./services/photoService');
@@ -32,6 +31,11 @@ app.use(bodyParser.json());
 
 // Serve files
 app.use(express.static('dist'));
+
+// Test
+app.get('/api/test', (req, res) => {
+  res.status(200).send('Test complete');
+});
 
 // Root page
 app.get('/', (req, res) => {
@@ -66,7 +70,7 @@ app.get('/api/weather/current', async (req, res) => {
   try {
     // Get the weather info
     const weatherInfo = await weatherService.getCurrentWeather(
-      process.env.WEATHERBIT_API_KEY,req.query.lat,req.query.lng,
+      process.env.WEATHERBIT_API_KEY, req.query.lat, req.query.lng,
     );
     res.send(weatherInfo);
   } catch (error) {
@@ -103,8 +107,13 @@ app.get('/api/photo', async (req, res) => {
   }
 });
 
+const server = app.createServer()
+
 // Binds and listens for connections on the specified host and port
 app.listen(8080, () => {
   console.log('Starting express server');
   console.log('Listening on port: 8080');
 });
+
+// Export app
+module.exports = app;
