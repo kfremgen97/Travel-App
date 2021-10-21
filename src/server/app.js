@@ -107,8 +107,6 @@ app.get('/api/photo', async (req, res) => {
   }
 });
 
-const server = app.createServer()
-
 // Binds and listens for connections on the specified host and port
 app.listen(8080, () => {
   console.log('Starting express server');
