@@ -223,19 +223,20 @@ const closeHandler = function () {
   sidebarView.hideSidebar();
 };
 
-const locationHandler = function () {
-  // Checks if the geolocation interface exist and
-  // Prompt the user to allow to use the interface
-  if (navigator.geolocation) {
-    // Get the user location
-    navigator.geolocation.getCurrentPosition((position) => {
-      const { latitude, longitude } = position.coords;
-      // Set the user location
-      tripsModel.setLocation(latitude, longitude);
-      mapView.setUserCoordinates(tripsModel.getLocation());
-    }, (error) => {
-      alert(error.message);
-    });
+const getUserLocation = async function () {
+  try {
+    // Checks if the geolocation interface exist and
+    // Prompt the user to allow to use the interface
+    if (navigator.geolocation) {
+      // Get the user location
+      const position = await navigator.geolocation.getCurrentPosition();
+      return position.coords;
+    }
+  } catch (error) {
+    return {
+      latitude: 40.712776,
+      longitude: -74.005974,
+    };
   }
 };
 
@@ -252,10 +253,13 @@ const loadMap = async function () {
   try {
     // Get the map key
     const keyData = await getMapKey();
+    // Get the user location
+    const userLocation = await getUserLocation();
+    console.log(userLocation);
     // Get all the trips
     const trips = tripsModel.getAllTrips();
     // Load the map
-    mapView.loadMap(keyData.key, trips);
+    mapView.loadMap(keyData.key, userLocation, trips);
   } catch (error) {
     console.error(error);
     // Throw the error

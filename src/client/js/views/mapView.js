@@ -14,14 +14,23 @@ class MapView {
   }
 
   // Load the map
-  loadMap(apiKey, trips) {
+  loadMap(apiKey,userLocation, trips) {
     mapboxgl.accessToken = apiKey;
     this.mapObject = new mapboxgl.Map({
       container: 'map', // container ID
       style: 'mapbox://styles/mapbox/streets-v11', // style URL
-      center: [-74.5, 40], // starting position [lng, lat]
+      center: [userLocation.longitude, userLocation.latitude], // starting position [lng, lat]
       zoom: 8, // starting zoom
     });
+
+    // Add geolocate control to the map.
+    this.mapObject.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true,
+        },
+      }),
+    );
 
     // Render the markers
     this.renderMarkers(trips);
