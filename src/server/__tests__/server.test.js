@@ -45,4 +45,9 @@ describe('API testing', () => {
         expect(response.body).toBeDefined();
       });
   });
+
+  // Close the server
+  afterAll(() => {
+    app.close();
+  });
 });

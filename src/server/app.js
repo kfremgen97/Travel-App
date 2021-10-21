@@ -108,10 +108,10 @@ app.get('/api/photo', async (req, res) => {
 });
 
 // Binds and listens for connections on the specified host and port
-app.listen(8080, () => {
+const server = app.listen(8080, () => {
   console.log('Starting express server');
   console.log('Listening on port: 8080');
 });
 
 // Export app
-module.exports = app;
+module.exports = server;
