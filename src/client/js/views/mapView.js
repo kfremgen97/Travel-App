@@ -32,6 +32,9 @@ class MapView {
       }),
     );
 
+    // Add full screen
+    this.mapObject.addControl(new mapboxgl.FullscreenControl());
+
     // Render the markers
     this.renderMarkers(trips);
   }
