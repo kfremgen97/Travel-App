@@ -45,9 +45,6 @@ class MapView {
 
       // Set the markers on the map
       this.renderMarkers(trips);
-
-      // Get the user location
-      locationHandler();
     }).catch((error) => {
       console.error(error);
       // Display the error
@@ -55,21 +52,8 @@ class MapView {
     });
   }
 
-  // Set the mapView baed on selected trip
-  setSelectedTripCoordinates(selectedTrip) {
-    // Get the coordinates of the trip
-    const coordinates = {
-      lat: Number(selectedTrip.coordinates.lat),
-      lng: Number(selectedTrip.coordinates.lng),
-    };
-    // Set the map coordinate center
-    this.mapObject.panTo(coordinates);
-    // Set the map view
-    this.mapObject.setZoom(8);
-  }
-
-  // Set the map view based on the user coordinates
-  setUserCoordinates(coordinates) {
+  // Set the map view based on the  coordinates
+  setMapView(coordinates) {
     // Set the map coordinate center
     this.mapObject.panTo(coordinates);
     // Set the map view
@@ -89,21 +73,10 @@ class MapView {
         lng: Number(trip.coordinates.lng),
       };
 
-      // Create the icon
-      const icon = {
-        path: 'M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z', //SVG path of awesomefont marker
-        fillColor: '#7048e8', // color of the marker
-        fillOpacity: 1,
-        strokeWeight: 0,
-        scale: 0.1, // size of the marker, careful! this scale also affects anchor and labelOrigin
-        anchor: new google.maps.Point(185, 500), // position of the icon, careful! this is affected by scale
-      };
-
       // Add the marker to the map view
       // eslint-disable-next-line no-undef
       const marker = new google.maps.Marker({
         position: coordinates,
-        icon,
         map: this.mapObject,
         title: trip.name,
         // eslint-disable-next-line no-undef

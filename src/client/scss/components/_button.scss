@@ -116,25 +116,6 @@
     grid-column: 1/-1;
   }
 
-  /* button map */
-
-  &--map {
-    //Set the button colors
-    color: $grey-light;
-    background-color: $secondary;
-
-    /* button map states */ 
-
-    &:hover, 
-    &:active {
-      background-color: $secondary-dark;
-    }
-
-    &:focus {
-      outline-color: $secondary-light;
-    }
-  }
-
   /* button bars */ 
 
   &--bars {

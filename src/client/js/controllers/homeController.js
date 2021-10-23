@@ -29,8 +29,8 @@ const createNewTrip = async function (locationString, startDateString, endDateSt
   newTrip.countryName = locationInfo.countryName;
   newTrip.countryCode = locationInfo.countryCode;
   newTrip.coordinates = {
-    lat: locationInfo.lat,
-    lng: locationInfo.lng,
+    lat: Number(locationInfo.lat),
+    lng: Number(locationInfo.lng),
   };
 
   // Based on the date call either the current weather api or future weather api
@@ -79,7 +79,7 @@ const checkFormInputs = function (locationString, startDateString, endDateString
   // Check if dateString is null
   if (!startDateString || !endDateString) throw new Error('Invalid date');
 
-  // Gte the miliiseconds
+  // Get the milliseconds
   const startDateSeconds = new Date(startDateString.replace('-', '/')).getTime();
   const endDateSeconds = new Date(endDateString.replaceAll('-', '/')).getTime();
   // Check if date string is not in the past
@@ -96,7 +96,7 @@ const updateFormUI = function (enabled = true) {
     // Render form submit button
     formView.renderSubmit();
   } else {
-    // Render the spinenr button
+    // Render the spinner button
     formView.renderSpinner();
   }
 };
@@ -116,7 +116,7 @@ const updateTripsMapUI = function (trips, selectedTrip) {
   // Update the map
   mapView.renderMarkers(trips);
   // Check if selectedTrip is not an empty object
-  if (Object.keys(selectedTrip).length > 0) mapView.setSelectedTripCoordinates(selectedTrip);
+  if (Object.keys(selectedTrip).length > 0) mapView.setMapView(selectedTrip.coordinates);
 };
 
 // Update trip and weather ui
@@ -169,7 +169,7 @@ const tripsHandler = function (tripId) {
   console.log(tripId);
   // Get the trip based on id
   const selectedTrip = tripsModel.getTrip(tripId);
-
+  console.log(selectedTrip.coordinates);
   // If selected tirp is undefiend set to an empty object return
   if (!selectedTrip) {
     tripsModel.setSelectedTrip();
@@ -182,9 +182,9 @@ const tripsHandler = function (tripId) {
   // Show detail view
   sidebarView.showDetailView();
   // Update the detail view based on selected trip
-  updateTripWeatherUI(tripsModel.getSelectedTrip());
+  updateTripWeatherUI(selectedTrip);
   // Render the map view
-  mapView.setSelectedTripCoordinates(tripsModel.getSelectedTrip());
+  mapView.setMapView(selectedTrip.coordinates);
 };
 
 const backHandler = function () {
