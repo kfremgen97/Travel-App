@@ -1,6 +1,7 @@
 // Imports
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 import tripsModel from '../models/tripsModel';
+import locationModel from "../models/locationModel";
 import headerView from '../views/headerView';
 import mapView from '../views/mapView';
 import sidebarView from '../views/sidebarView';
@@ -9,7 +10,7 @@ import resultsView from '../views/resultsView';
 import tripView from '../views/tripView';
 import getMapKey from '../services/mapService';
 import getLocationInfo from '../services/locationService';
-import { getCurrentWeather, getFutureWeather } from '../services/weatherService';
+import {getCurrentWeather, getFutureWeather} from '../services/weatherService';
 import getPhotoInfo from '../services/photoService';
 import dateChecker from '../utilities/dateChecker';
 
@@ -37,7 +38,7 @@ const createNewTrip = async function (locationString, startDateString, endDateSt
   const daysAway = dateChecker(Date.now(), newTrip.startDate);
   if (daysAway >= 0 && daysAway <= 7) {
     // Get the current weather
-    const { data: weatherInfo } = await getCurrentWeather(newTrip.coordinates.lat,
+    const {data: weatherInfo} = await getCurrentWeather(newTrip.coordinates.lat,
       newTrip.coordinates.lng);
     // Add the properties
     newTrip.weather = [];
@@ -48,7 +49,7 @@ const createNewTrip = async function (locationString, startDateString, endDateSt
     };
   } else {
     // Get the future weather
-    const { data: weatherInfo } = await getFutureWeather(newTrip.coordinates.lat,
+    const {data: weatherInfo} = await getFutureWeather(newTrip.coordinates.lat,
       newTrip.coordinates.lng);
     // Add the properties
     newTrip.weather = [];
@@ -63,7 +64,7 @@ const createNewTrip = async function (locationString, startDateString, endDateSt
   }
 
   // Get the photo info
-  const { hits: photoInfo } = await getPhotoInfo(newTrip.name);
+  const {hits: photoInfo} = await getPhotoInfo(newTrip.name);
   // Add the properties
   newTrip.imageURL = photoInfo[0]?.largeImageURL ?? null;
   console.log(newTrip);
@@ -223,19 +224,32 @@ const closeHandler = function () {
   sidebarView.hideSidebar();
 };
 
-const locationHandler = function () {
-  // Checks if the geolocation interface exist and
-  // Prompt the user to allow to use the interface
-  if (navigator.geolocation) {
-    // Get the user location
-    navigator.geolocation.getCurrentPosition((position) => {
-      const { latitude, longitude } = position.coords;
-      // Set the user location
-      tripsModel.setLocation(latitude, longitude);
-      mapView.setUserCoordinates(tripsModel.getLocation());
-    }, (error) => {
-      alert(error.message);
-    });
+const getUserLocation = function () {
+  return new Promise((resolve, reject) => {
+    if (navigator.geolocation) {
+      // Get the user location
+      navigator.geolocation.getCurrentPosition((position) => {
+        resolve({lat: position.coords.latitude, lng: position.coords.longitude});
+      }, (error) => {
+        reject(error);
+      });
+    } else {
+      reject(new Error('Unable to get user location'));
+    }
+  });
+};
+
+const locationHandler = async function () {
+  // Get the user location
+  try {
+    const {lat, lng} = await getUserLocation();
+    // Set the user location
+    locationModel.setLocation(lat, lng);
+    // Set the map view
+    mapView.setMapView(locationModel.getLocation());
+  } catch (error) {
+    locationModel.setLocation(null, null);
+    alert(error.message);
   }
 };
 
@@ -243,33 +257,49 @@ const loadMap = async function () {
   try {
     // Get the map key
     const keyData = await getMapKey();
+    // Load the map
+    await mapView.loadMap(keyData.key, locationHandler);
     // Get all the trips
     const trips = tripsModel.getAllTrips();
-    // Load the map
-    mapView.loadMap(keyData.key, trips, locationHandler);
+    // Render the markers
+    mapView.renderMarkers(trips);
+
+    // Render the user coordinate son the map
+    try {
+      // Set the coordinates
+      const coordinates = await getUserLocation();
+      locationModel.setLocation(coordinates.lat, coordinates.lng);
+      // Set the map view
+      mapView.setMapView(coordinates);
+    } catch (error) {
+      locationModel.setLocation(null, null);
+    }
   } catch (error) {
     console.error(error);
+    this.mapView.renderError(error);
   }
 };
 
 const loadTrips = function () {
-  // Get all the trips from local storage
-  tripsModel.readAllTrips();
-  // Render the works out
-  const trips = tripsModel.getAllTrips();
-  if (trips.length > 0) resultsView.renderTrips(trips);
-  else resultsView.renderMessage();
+  try {
+    // Get all the trips from local storage
+    tripsModel.readAllTrips();
+    // Render the works out
+    const trips = tripsModel.getAllTrips();
+    if (trips?.length > 0) resultsView.renderTrips(trips);
+    else resultsView.renderMessage();
+  } catch (error) {
+    console.erorr(error);
+    // Render the error
+    resultsView.renderError(error);
+  }
 };
 
 const loadApplication = async function () {
-  try {
-    // Load the trips from storage
-    loadTrips();
-    // Load the map
-    await loadMap();
-  } catch (error) {
-    console.error(error);
-  }
+  // Load the trips from storage
+  loadTrips();
+  // Load the map
+  await loadMap();
 };
 
 // Event listeners

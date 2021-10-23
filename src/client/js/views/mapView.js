@@ -16,7 +16,7 @@ class MapView {
   }
 
   // Load the map
-  loadMap(apiKey, trips, locationHandler) {
+  loadMap(apiKey, locationHandler) {
     // Set the loader
     this.loader = new Loader({
       apiKey,
@@ -31,24 +31,20 @@ class MapView {
     locationButton.addEventListener('click', locationHandler);
 
     // Load the map
-    this.loader.load().then(() => {
+    return this.loader.load().then(() => {
       // eslint-disable-next-line no-undef
       this.mapObject = new google.maps.Map(this.mapView, {
         mapTypeControl: false,
-        center: { lat: 40.730610, lng: -73.935242 },
+        center: { lat:	40.730610, lng: -73.935242 },
         zoom: 8,
       });
 
       // Add current location button
       // eslint-disable-next-line no-undef
       this.mapObject.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
-
-      // Set the markers on the map
-      this.renderMarkers(trips);
     }).catch((error) => {
-      console.error(error);
-      // Display the error
-      this.renderError(error);
+      // Throw the error
+      throw error;
     });
   }
 
