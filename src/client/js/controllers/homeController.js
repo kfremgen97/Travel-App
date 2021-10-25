@@ -1,7 +1,7 @@
 // Imports
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import tripsModel from '../models/tripsModel';
-import locationModel from "../models/locationModel";
+import locationModel from '../models/locationModel';
 import headerView from '../views/headerView';
 import mapView from '../views/mapView';
 import sidebarView from '../views/sidebarView';
@@ -10,7 +10,7 @@ import resultsView from '../views/resultsView';
 import tripView from '../views/tripView';
 import getMapKey from '../services/mapService';
 import getLocationInfo from '../services/locationService';
-import {getCurrentWeather, getFutureWeather} from '../services/weatherService';
+import { getCurrentWeather, getFutureWeather } from '../services/weatherService';
 import getPhotoInfo from '../services/photoService';
 import dateChecker from '../utilities/dateChecker';
 
@@ -115,7 +115,7 @@ const tripsHandler = function (tripId) {
   // Get the trip based on id
   const selectedTrip = tripsModel.getTrip(tripId);
   console.log(selectedTrip.coordinates);
-  // If selected tirp is undefiend set to an empty object return
+  // If selected trip is undefined set to an empty object return
   if (!selectedTrip) {
     tripsModel.setSelectedTrip();
     return;
@@ -128,9 +128,11 @@ const tripsHandler = function (tripId) {
   sidebarView.showDetailView();
   // Update the detail view based on selected trip
   updateTripWeatherUI(selectedTrip);
-  // Check if screen width is less than 900px and show sidebar view
+  // Check if screen width is less than 900px
   if (window.innerWidth <= 900) {
+    // Show the sidebar view
     sidebarView.showSidebar();
+    // Show the close button
     headerView.showCloseButton();
   }
   // Render the map view
@@ -180,6 +182,8 @@ const formHandler = async function (formData) {
     // Update the trips and map ui
     updateTripsMapUI(tripsModel.getAllTrips(), tripsModel.getSelectedTrip());
   } catch (error) {
+    // Set the selected trip
+    tripsModel.setSelectedTrip();
     // Update form ui to be enabled
     updateFormUI();
     // Show the error
@@ -248,7 +252,7 @@ const getUserLocation = function () {
 const locationHandler = async function () {
   // Get the user location
   try {
-    const { lat, lng } = await getUserLocation();
+    const {lat, lng} = await getUserLocation();
     // Set the user location
     locationModel.setLocation(lat, lng);
     // Set the map view

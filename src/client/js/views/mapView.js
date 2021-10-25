@@ -35,7 +35,7 @@ class MapView {
       // eslint-disable-next-line no-undef
       this.mapObject = new google.maps.Map(this.mapView, {
         mapTypeControl: false,
-        center: { lat:	40.730610, lng: -73.935242 },
+        center: { lat: 40.730610, lng: -73.935242 },
         zoom: 8,
       });
 
@@ -57,7 +57,7 @@ class MapView {
   }
 
   // Render the markers
-  renderMarkers(trips,tripsHandler) {
+  renderMarkers(trips, tripsHandler) {
     // Clear the markers
     this.clearMarkers();
 
