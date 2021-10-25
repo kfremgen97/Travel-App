@@ -5,7 +5,7 @@
 node_modules
 
 # environment
-.env 
+# .env
 
 # distribution folder
 dist
