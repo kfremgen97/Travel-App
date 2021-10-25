@@ -16,7 +16,18 @@ Trip functionality:
 
 ## Getting the project running
 
-There are a numebr of steps required to get the project running after cloning or downloading the project.
+There are a number of steps required to get the project running after cloning or downloading the project.
+
+### Udacity viewer
+
+1. Install required dependencies via ( npm install )
+
+2. Build the project via (npm run webpack-prod)
+    - This allows for offline usage via service workers if your browser allows
+
+3. After the project is built start the server via ( npm run server-start )
+
+### Normal viewer
 
 Below are the steps to run the project:
 
@@ -41,6 +52,7 @@ Below are the steps to run the project:
     - This allows for offline usage via service workers if your browser allows
 
 4. After the project is built start the server via ( npm run server-start )
+
 
 ### Testing the project
 
