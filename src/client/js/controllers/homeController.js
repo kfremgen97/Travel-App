@@ -250,12 +250,14 @@ const getUserLocation = function () {
 };
 
 const locationHandler = async function () {
+  // Render spinner
+  mapView.renderSpinner();
   // Get the user location
   try {
     const { lat, lng } = await getUserLocation();
     // Set the user location
     locationModel.setLocation(lat, lng);
-    // Set the suer lcoation marker
+    // Set the suer location marker
     mapView.renderUserLocation(lat, lng);
     // Set the map view
     mapView.setMapView(locationModel.getLocation());
@@ -263,6 +265,9 @@ const locationHandler = async function () {
     locationModel.setLocation(null, null);
     mapView.clearUserLocation();
     alert(error.message);
+  } finally {
+    // Render submit
+    mapView.renderSubmit();
   }
 };
 
@@ -279,6 +284,7 @@ const loadMap = async function () {
 
     // Render the user coordinate son the map
     try {
+      mapView.renderSpinner();
       // Set the coordinates
       const coordinates = await getUserLocation();
       locationModel.setLocation(coordinates.lat, coordinates.lng);
@@ -288,6 +294,8 @@ const loadMap = async function () {
       mapView.setMapView(coordinates);
     } catch (error) {
       locationModel.setLocation(null, null);
+    } finally {
+      mapView.renderSubmit();
     }
   } catch (error) {
     console.error(error);

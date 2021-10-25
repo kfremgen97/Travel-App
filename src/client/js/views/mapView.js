@@ -7,6 +7,8 @@ class MapView {
   constructor() {
     // Map view element
     this.mapView = document.querySelector('#map');
+    // Map button
+    this.mapButton = {};
     // Map loader object
     this.loader = {};
     // Map object
@@ -26,11 +28,11 @@ class MapView {
     });
 
     // Create a location button
-    const locationButton = document.createElement('button');
-    locationButton.textContent = 'Current Location';
-    locationButton.classList.add('button');
-    locationButton.classList.add('button--map');
-    locationButton.addEventListener('click', locationHandler);
+    this.mapButton = document.createElement('button');
+    this.mapButton.textContent = 'Current Location';
+    this.mapButton.classList.add('button');
+    this.mapButton.classList.add('button--map');
+    this.mapButton.addEventListener('click', locationHandler);
 
     // Load the map
     return this.loader.load().then(() => {
@@ -43,7 +45,7 @@ class MapView {
 
       // Add current location button
       // eslint-disable-next-line no-undef
-      this.mapObject.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+      this.mapObject.controls[google.maps.ControlPosition.TOP_CENTER].push(this.mapButton);
     }).catch((error) => {
       // Throw the error
       throw error;
@@ -149,6 +151,16 @@ class MapView {
       `;
   }
 
+  // Generate spinner
+  _generateSpinner() {
+    // Generate and return spinenr html string
+    return `
+    <svg>
+      <use href="./assets/sprite/regular.svg#spinner"></use>
+    </svg>
+    `;
+  }
+
   // Render an error
   renderError(error) {
     // Generate error string
@@ -157,6 +169,31 @@ class MapView {
     this.mapView.innerHTML = '';
     // Render the error
     this.mapView.insertAdjacentHTML('afterbegin', errorString);
+  }
+
+  renderSpinner() {
+    // Disable the button
+    this.mapButton.disabled = true;
+    // Clear the submit button
+    this.mapButton.innerHTML = '';
+    // Add the loading modifier to the button class list
+    this.mapButton.classList.add('button--loading');
+    // Generate the spinner string
+    const spinnerString = this._generateSpinner();
+    // Update the submit button
+    this.mapButton.insertAdjacentHTML('afterbegin', spinnerString);
+  }
+
+  // Render submit in button
+  renderSubmit() {
+    // Enable the button
+    this.mapButton.disabled = false;
+    // Clear the submit button
+    this.mapButton.innerHTML = '';
+    // Remove the loading modifier to the button class list
+    this.mapButton.classList.remove('button--loading');
+    // Add the submit message
+    this.mapButton.textContent = 'User Location';
   }
 }
 
