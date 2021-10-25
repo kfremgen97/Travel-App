@@ -252,13 +252,16 @@ const getUserLocation = function () {
 const locationHandler = async function () {
   // Get the user location
   try {
-    const {lat, lng} = await getUserLocation();
+    const { lat, lng } = await getUserLocation();
     // Set the user location
     locationModel.setLocation(lat, lng);
+    // Set the suer lcoation marker
+    mapView.renderUserLocation(lat, lng);
     // Set the map view
     mapView.setMapView(locationModel.getLocation());
   } catch (error) {
     locationModel.setLocation(null, null);
+    mapView.clearUserLocation();
     alert(error.message);
   }
 };
@@ -279,6 +282,8 @@ const loadMap = async function () {
       // Set the coordinates
       const coordinates = await getUserLocation();
       locationModel.setLocation(coordinates.lat, coordinates.lng);
+      // Set the user location
+      mapView.renderUserLocation(coordinates.lat, coordinates.lng);
       // Set the map view
       mapView.setMapView(coordinates);
     } catch (error) {

@@ -13,6 +13,8 @@ class MapView {
     this.mapObject = {};
     // Array of marker objects
     this.markers = [];
+    // User marker
+    this.userMarker = {};
   }
 
   // Load the map
@@ -102,6 +104,40 @@ class MapView {
       // Remove the marker by setting the map to null
       marker.setMap(null);
     });
+  }
+
+  // Render user location
+  renderUserLocation(lat, lng){
+
+    // Clear the user marker
+    this.clearUserLocation();
+    // Add the marker to the map view
+    // eslint-disable-next-line no-undef
+    const marker = new google.maps.Marker({
+      position: { lat, lng },
+      map: this.mapObject,
+      title: 'User Location',
+      icon: {
+        // eslint-disable-next-line no-undef
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 5,
+        fillOpacity: 1,
+        fillColor: '#f8f9fa',
+        strokeColor: '#7048e8',
+      },
+      // eslint-disable-next-line no-undef
+      animation: google.maps.Animation.DROP,
+    });
+
+    this.userMarker = marker;
+  }
+
+  // Clear user location
+  clearUserLocation() {
+    if (Object.keys(this.userMarker).length > 0) {
+      this.userMarker.setMap(null);
+      this.userMarker = {};
+    }
   }
 
   _generateError(error) {
