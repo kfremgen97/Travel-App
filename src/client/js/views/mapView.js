@@ -23,7 +23,7 @@ class MapView {
       version: 'weekly',
     });
 
-    // Create a locaton button
+    // Create a location button
     const locationButton = document.createElement('button');
     locationButton.textContent = 'Current Location';
     locationButton.classList.add('button');
@@ -57,7 +57,7 @@ class MapView {
   }
 
   // Render the markers
-  renderMarkers(trips) {
+  renderMarkers(trips,tripsHandler) {
     // Clear the markers
     this.clearMarkers();
 
@@ -78,6 +78,18 @@ class MapView {
         // eslint-disable-next-line no-undef
         animation: google.maps.Animation.DROP,
       });
+
+      // Add a custom property
+      marker.tripId = trip.id;
+
+      // Add an event listener
+      marker.addListener('click', () => {
+        // Get the trip id
+        const { tripId } = marker;
+        // Call the handler
+        tripsHandler(tripId);
+      });
+
       // Add the marker to the array
       this.markers.push(marker);
     });

@@ -102,67 +102,11 @@ const updateFormUI = function (enabled = true) {
   }
 };
 
-// Update the trips and map ui
-const updateTripsMapUI = function (trips, selectedTrip) {
-  // If trips is empty show message
-  if (trips.length <= 0) {
-    resultsView.renderMessage();
-    mapView.clearMarkers();
-    return;
-  }
-
-  // If the trips length is greater than 0
-  // Update the sidebar
-  resultsView.renderTrips(trips);
-  // Update the map
-  mapView.renderMarkers(trips);
-  // Check if selectedTrip is not an empty object
-  if (Object.keys(selectedTrip).length > 0) mapView.setMapView(selectedTrip.coordinates);
-};
-
 // Update trip and weather ui
 const updateTripWeatherUI = function (selectedTrip) {
   // Update the trip and weather view based on selected trip
   tripView.renderTrip(selectedTrip);
   tripView.renderWeather(selectedTrip);
-};
-
-const formHandler = async function (formData) {
-  // Get the location from the form data
-  const locationString = formData.get('location');
-  // Get the date from the form data
-  const startDateString = formData.get('startDate');
-  const endDateString = formData.get('endDate');
-
-  try {
-    // Update form ui to not be enabled
-    updateFormUI(false);
-
-    // Check the form inputs
-    checkFormInputs(locationString, startDateString, endDateString);
-
-    // Create the new trip
-    const trip = await createNewTrip(locationString, startDateString, endDateString);
-    // Add the trip to the trips model
-    tripsModel.addTrip(trip);
-    // Set it as the selected trip
-    tripsModel.setSelectedTrip(trip);
-
-    // Update form ui to be enabled
-    updateFormUI();
-    // Update the trips and map ui
-    updateTripsMapUI(tripsModel.getAllTrips(), tripsModel.getSelectedTrip());
-  } catch (error) {
-    // Update form ui to be enabled
-    updateFormUI();
-    // Show the error
-    resultsView.renderError(error);
-    // Update the view again after 5 seconds
-    setTimeout(() => {
-      // Update the trips and map ui
-      updateTripsMapUI(tripsModel.getAllTrips(), tripsModel.getSelectedTrip());
-    }, 2000);
-  }
 };
 
 const tripsHandler = function (tripId) {
@@ -184,11 +128,73 @@ const tripsHandler = function (tripId) {
   sidebarView.showDetailView();
   // Update the detail view based on selected trip
   updateTripWeatherUI(selectedTrip);
+  // Check if screen width is less than 900px and show sidebar view
+  if (window.innerWidth <= 900) {
+    sidebarView.showSidebar();
+    headerView.showCloseButton();
+  }
   // Render the map view
   mapView.setMapView(selectedTrip.coordinates);
 };
 
+// Update the trips and map ui
+const updateTripsMapUI = function (trips, selectedTrip) {
+  // If trips is empty show message
+  if (trips.length <= 0) {
+    resultsView.renderMessage();
+    mapView.clearMarkers();
+    return;
+  }
+
+  // If the trips length is greater than 0
+  // Update the sidebar
+  resultsView.renderTrips(trips);
+  // Update the map
+  mapView.renderMarkers(trips, tripsHandler);
+  // Check if selectedTrip is not an empty object
+  if (Object.keys(selectedTrip).length > 0) mapView.setMapView(selectedTrip.coordinates);
+};
+
+const formHandler = async function (formData) {
+  // Get the location from the form data
+  const locationString = formData.get('location');
+  // Get the date from the form data
+  const startDateString = formData.get('startDate');
+  const endDateString = formData.get('endDate');
+
+  try {
+    // Update form ui to not be enabled
+    updateFormUI(false);
+
+    // Check the form inputs
+    checkFormInputs(locationString, startDateString, endDateString);
+
+    // Create the new trip
+    const trip = await createNewTrip(locationString, startDateString, endDateString);
+    // Add the trip to the trips model
+    tripsModel.addTrip(trip);
+    // Set the selected trip
+    tripsModel.setSelectedTrip(trip);
+    // Update form ui to be enabled
+    updateFormUI();
+    // Update the trips and map ui
+    updateTripsMapUI(tripsModel.getAllTrips(), tripsModel.getSelectedTrip());
+  } catch (error) {
+    // Update form ui to be enabled
+    updateFormUI();
+    // Show the error
+    resultsView.renderError(error);
+    // Update the view again after 5 seconds
+    setTimeout(() => {
+      // Update the trips and map ui
+      updateTripsMapUI(tripsModel.getAllTrips(), tripsModel.getSelectedTrip());
+    }, 2000);
+  }
+};
+
 const backHandler = function () {
+  // Show the form
+  formView.showForm();
   // Show master view
   sidebarView.showMasterView();
   // Clear the selected trip
@@ -242,7 +248,7 @@ const getUserLocation = function () {
 const locationHandler = async function () {
   // Get the user location
   try {
-    const {lat, lng} = await getUserLocation();
+    const { lat, lng } = await getUserLocation();
     // Set the user location
     locationModel.setLocation(lat, lng);
     // Set the map view
@@ -262,7 +268,7 @@ const loadMap = async function () {
     // Get all the trips
     const trips = tripsModel.getAllTrips();
     // Render the markers
-    mapView.renderMarkers(trips);
+    mapView.renderMarkers(trips, tripsHandler);
 
     // Render the user coordinate son the map
     try {
