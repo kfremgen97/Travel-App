@@ -27,6 +27,9 @@ There are a number of steps required to get the project running after cloning or
 
 3. After the project is built start the server via ( npm run server-start )
 
+**This does not work anymore.**
+**Follow steps below.**
+
 ### Normal viewer
 
 Below are the steps to run the project:
